@@ -21,15 +21,25 @@ python manage.py runserver
 
 Open http://127.0.0.1:8000/admin/ and sign in with the superuser you created.
 
-## API (development)
+## API
 
-1. Log in through the browsable API: http://127.0.0.1:8000/api-auth/login/
-2. Open http://127.0.0.1:8000/api/tasks/
+Get a token, then send it with every request:
+
+```http
+POST /api/auth/token/
+Content-Type: application/json
+
+{"username": "alice", "password": "<password>"}
+```
+
+Response: `{"token": "<40-character token>"}`. Header for every task request: `Authorization: Token <token>`.
+Requests without a token get `401`; other users' tasks return `404`.
 
 | Method | Path | Purpose |
 |---|---|---|
-| GET | `/api/tasks/` | List tasks |
+| POST | `/api/auth/token/` | Exchange username + password for a token |
+| GET | `/api/tasks/` | List **your** tasks |
 | POST | `/api/tasks/` | Create a task (owner is set by the server) |
-| GET | `/api/tasks/{id}/` | Retrieve one task |
-| PUT / PATCH | `/api/tasks/{id}/` | Replace / partially update a task |
-| DELETE | `/api/tasks/{id}/` | Delete a task |
+| GET | `/api/tasks/{id}/` | Retrieve one of your tasks |
+| PUT / PATCH | `/api/tasks/{id}/` | Replace / partially update one of your tasks |
+| DELETE | `/api/tasks/{id}/` | Delete one of your tasks |

@@ -87,10 +87,11 @@ STATIC_URL = "static/"
 #                   "staticfiles": {"BACKEND": "whitenoise.storage.CompressedStaticFilesStorage"}}
 # HINT: days/day-05/hints.md#task-2
 # YOUR CODE HERE
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Django REST Framework
-# Day 3: every endpoint requires an authenticated user (GIVEN below).
+# Every endpoint requires an authenticated user (token or browsable-API login).
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.TokenAuthentication",
