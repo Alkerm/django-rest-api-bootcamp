@@ -1,0 +1,10 @@
+# Shared environment for ALL exercises in this repository (days/day-0X/exercise).
+# Your own project (task-management-api) has its own requirements.txt.
+# Versions tested by the instructor team - install with:  python -m pip install -r requirements.txt
+Django==5.2.17
+djangorestframework==3.16.1
+psycopg[binary]==3.3.6
+dj-database-url==3.1.2
+gunicorn==26.2.0
+whitenoise==6.12.0
+requests==2.34.2

@@ -1,0 +1,92 @@
+[
+  {
+    "model": "catalog.author",
+    "pk": 1,
+    "fields": {
+      "name": "Robert C. Martin",
+      "country": "United States"
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 2,
+    "fields": {
+      "name": "Martin Fowler",
+      "country": "United Kingdom"
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 3,
+    "fields": {
+      "name": "Muhammad ibn Musa al-Khwarizmi",
+      "country": "Abbasid Caliphate (Baghdad)"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 1,
+    "fields": {
+      "title": "Clean Code",
+      "isbn": "9780000000011",
+      "published_year": 2008,
+      "available_copies": 3,
+      "author": 1
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 2,
+    "fields": {
+      "title": "The Clean Coder",
+      "isbn": "9780000000028",
+      "published_year": 2011,
+      "available_copies": 0,
+      "author": 1
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 3,
+    "fields": {
+      "title": "Clean Architecture",
+      "isbn": "9780000000035",
+      "published_year": 2017,
+      "available_copies": 2,
+      "author": 1
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 4,
+    "fields": {
+      "title": "Refactoring",
+      "isbn": "9780000000042",
+      "published_year": 1999,
+      "available_copies": 4,
+      "author": 2
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 5,
+    "fields": {
+      "title": "Patterns of Enterprise Application Architecture",
+      "isbn": "9780000000059",
+      "published_year": 2002,
+      "available_copies": 1,
+      "author": 2
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 6,
+    "fields": {
+      "title": "The Compendious Book on Calculation by Completion and Balancing",
+      "isbn": "9780000000066",
+      "published_year": 820,
+      "available_copies": 0,
+      "author": 3
+    }
+  }
+]

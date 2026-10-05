@@ -1,0 +1,154 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "username": "alice",
+      "password": "pbkdf2_sha256$1000000$U5zqQAU22doEtxlt44xgB9$irWIX/GBleydExxc4WRwSIiV5QL2bCufW/w0tJiwq2U=",
+      "is_active": true,
+      "date_joined": "2026-10-01T08:00:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "username": "bob",
+      "password": "pbkdf2_sha256$1000000$3uQvqtG2myPJuy62ayl8DI$Tbmqrua67Qk74fjeh8jhny4o/Q1vFO3XWUdbt+PM9tg=",
+      "is_active": true,
+      "date_joined": "2026-10-01T08:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 1,
+    "fields": {
+      "name": "Robert C. Martin",
+      "country": "United States"
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 2,
+    "fields": {
+      "name": "Martin Fowler",
+      "country": "United Kingdom"
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 3,
+    "fields": {
+      "name": "Muhammad ibn Musa al-Khwarizmi",
+      "country": "Abbasid Caliphate (Baghdad)"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 1,
+    "fields": {
+      "title": "Clean Code",
+      "isbn": "9780000000011",
+      "published_year": 2008,
+      "available_copies": 3,
+      "author": 1,
+      "created_at": "2026-10-01T09:01:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 2,
+    "fields": {
+      "title": "The Clean Coder",
+      "isbn": "9780000000028",
+      "published_year": 2011,
+      "available_copies": 0,
+      "author": 1,
+      "created_at": "2026-10-01T09:02:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 3,
+    "fields": {
+      "title": "Clean Architecture",
+      "isbn": "9780000000035",
+      "published_year": 2017,
+      "available_copies": 2,
+      "author": 1,
+      "created_at": "2026-10-01T09:03:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 4,
+    "fields": {
+      "title": "Refactoring",
+      "isbn": "9780000000042",
+      "published_year": 1999,
+      "available_copies": 4,
+      "author": 2,
+      "created_at": "2026-10-01T09:04:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 5,
+    "fields": {
+      "title": "Patterns of Enterprise Application Architecture",
+      "isbn": "9780000000059",
+      "published_year": 2002,
+      "available_copies": 1,
+      "author": 2,
+      "created_at": "2026-10-01T09:05:00Z"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 6,
+    "fields": {
+      "title": "The Compendious Book on Calculation by Completion and Balancing",
+      "isbn": "9780000000066",
+      "published_year": 820,
+      "available_copies": 0,
+      "author": 3,
+      "created_at": "2026-10-01T09:06:00Z"
+    }
+  },
+  {
+    "model": "catalog.readinglistitem",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "book": 1,
+      "status": "READING",
+      "target_date": "2026-12-31",
+      "notes": "Chapter 3 next",
+      "created_at": "2026-10-02T09:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.readinglistitem",
+    "pk": 2,
+    "fields": {
+      "user": 1,
+      "book": 4,
+      "status": "WANT_TO_READ",
+      "target_date": null,
+      "notes": "",
+      "created_at": "2026-10-02T09:05:00Z"
+    }
+  },
+  {
+    "model": "catalog.readinglistitem",
+    "pk": 3,
+    "fields": {
+      "user": 2,
+      "book": 3,
+      "status": "FINISHED",
+      "target_date": null,
+      "notes": "Great overview",
+      "created_at": "2026-10-02T09:10:00Z"
+    }
+  }
+]
