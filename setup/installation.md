@@ -110,7 +110,7 @@ own environment on Day 1.)
 
 ```powershell
 # Windows PowerShell
-git clone <bootcamp-repository-url>
+git clone https://github.com/Alkerm/django-rest-api-bootcamp.git
 cd django-rest-api-bootcamp
 py -m venv .venv
 .venv\Scripts\Activate.ps1
@@ -121,7 +121,7 @@ python -m django --version          # 5.2.x
 
 ```bash
 # macOS
-git clone <bootcamp-repository-url>
+git clone https://github.com/Alkerm/django-rest-api-bootcamp.git
 cd django-rest-api-bootcamp
 python3 -m venv .venv
 source .venv/bin/activate
