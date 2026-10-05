@@ -4,6 +4,9 @@
 final README, and the live demonstration.
 **Exit check:** the public HTTPS URL works, data persists, all required evidence is submitted, and the live demo passes.
 
+> **Today the project comes first.** The Day 5 exercise is optional (the instructor demonstrates it). Start here
+> right after the explanation block. Deployment takes longer than you think.
+
 ## Where to start
 
 - **Finished Day 4?** Continue in your own repository. Copy `smoke_test.py` from
@@ -64,7 +67,10 @@ automatically.
 | Smoke-test output (10/10) | copy the terminal output (no tokens or passwords in it) |
 | Completed Definition of Done checklist | [`project/project-brief.md`](../../project/project-brief.md#definition-of-done) |
 
-## 6. Live demonstration (~5 minutes, at a review station)
+## 6. Live demonstration (~5 minutes, at one of the 2-3 review stations)
+
+Join the queue of any free station as soon as your smoke test passes; the stations run in parallel, so do not wait
+until the end of the session.
 
 Wake the service up a minute before. Then show, **on the live URL**:
 

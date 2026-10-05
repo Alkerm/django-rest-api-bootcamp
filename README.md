@@ -26,7 +26,7 @@ complete and deployed.
 | [2](days/day-02/README.md) | Mon, Oct 12 | Core API | Book CRUD API with serializer, viewset, router | Complete CRUD at `/api/tasks/` |
 | [3](days/day-03/README.md) | Tue, Oct 13 | Security | Personal reading list: tokens, ownership, validation | Token login, per-user isolation, validation |
 | [4](days/day-04/README.md) | Wed, Oct 14 | Quality | Write 8 API tests, settings from environment | ≥ 8 tests, README, env config, deploy rehearsal |
-| [5](days/day-05/README.md) | Thu, Oct 15 | Publish | `DATABASE_URL`, static files, smoke test | Live HTTPS deployment, smoke test, demo |
+| [5](days/day-05/README.md) | Thu, Oct 15 | Publish | *optional*: `DATABASE_URL`, static files, smoke test | Live HTTPS deployment, smoke test, demo |
 
 Daily session: **3-3.5 hours**, made up of 45-60 min explanation and demo, a 10 min break, and 2-2.25 h hands-on.
 
@@ -80,6 +80,9 @@ pass                    # placeholder that keeps the file runnable until you rep
 ```
 
 - `Task 1`, `Task 2`, … are exercise tasks. `P1`, `P2`, … are project TODOs.
+- **Core vs stretch:** exercise tasks marked **STRETCH (optional)** are extra practice for fast finishers. Do the
+  core tasks, then the **project milestone** (that is what is assessed), and come back to stretch tasks if time is left.
+  On Day 4 the project's tests are labelled **REQUIRED** (8 in total) or **STRETCH**.
 - Lines marked **GIVEN** are complete. Read them, because they are often the pattern for your TODO.
 - Each exercise starts with **Before you start** (commands, database state, sample data) and lists the expected
   input, database change, and output next to every task.

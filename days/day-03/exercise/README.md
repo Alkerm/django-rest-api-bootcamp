@@ -4,8 +4,8 @@
 |---|---|
 | **What you will practice** | Enabling DRF token authentication · protecting endpoints · filtering a queryset by `request.user` · setting the owner on the server · field validation with clear error messages |
 | **Where to start** | This folder: `days/day-03/exercise/`. Files: `config/settings.py` + `config/urls.py` (Task 1) → `catalog/views.py` (Task 2) → `catalog/serializers.py` (Task 3) |
-| **Result to produce** | Alice and Bob each get a token, each sees and changes **only their own** reading list, invalid input returns `400` with field errors, and `python manage.py test` → **Ran 11 tests ... OK** |
-| **Time** | ~50 minutes |
+| **Result to produce** | **Core (Tasks 1-2):** Alice and Bob each get a token and each sees and changes **only their own** reading list; `python manage.py test -k task1 -k task2` → **Ran 6 tests ... OK**. **Stretch (Task 3):** validation errors; all 11 tests pass |
+| **Time** | ~35 minutes for the core; Task 3 only if you finish early (the project repeats validation) |
 | **Hints** | [`../hints.md`](../hints.md) · worked example: [`../example/`](../example/) |
 
 ---
@@ -59,7 +59,7 @@ Use **Postman** (recommended) or the browsable API. In Postman create an environ
 | `GET /api/books/` with header `Authorization: Token <alice's token>` | `200` + 6 books | none |
 
 **Acceptance criteria**
-- [ ] The `test_task1_*` tests pass.
+- [ ] `python manage.py test -k task1` → the 3 Task 1 tests pass.
 
 ---
 
@@ -90,12 +90,14 @@ book id) · `status` one of `WANT_TO_READ` (default) / `READING` / `FINISHED` ·
 | bob: `POST /api/reading-list/` `{"book": 1, "user": 1}` | `500` IntegrityError (no user) | `201`, `"user": "bob"` (the `"user": 1` in the body is ignored) | new row id 4 with `user_id = 2` |
 
 **Acceptance criteria**
-- [ ] The `test_task2_*` tests pass.
+- [ ] `python manage.py test -k task2` → the 3 Task 2 tests pass.
 - [ ] You can explain why bob gets **404** (not 403) for alice's item.
 
 ---
 
-## Task 3: Validation rules
+## Task 3 (STRETCH, optional): Validation rules
+
+> The project milestone practises the same idea (P7-P8), so skip this task if time is short and come back later.
 
 **File:** `catalog/serializers.py`. Find `TODO Task 3a` (`validate_target_date`) and `TODO Task 3b` (`validate_book`).
 
@@ -116,7 +118,7 @@ book id) · `status` one of `WANT_TO_READ` (default) / `READING` / `FINISHED` ·
 | `POST /api/reading-list/` `{"book": 2, "status": "DONE"}` | `400` `{"status": ["\"DONE\" is not a valid choice."]}` (built-in, no code needed) | none |
 
 **Acceptance criteria**
-- [ ] `python manage.py test` → `Ran 11 tests ... OK`.
+- [ ] `python manage.py test` → `Ran 11 tests ... OK` (all tasks, including this stretch).
 
 ---
 

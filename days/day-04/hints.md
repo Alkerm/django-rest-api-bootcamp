@@ -49,7 +49,7 @@ def test_other_users_item_returns_404(self):
 
 | Symptom | Cause |
 |---|---|
-| test still shows as `skipped` | the `self.skipTest(...)` line is still there: delete it |
+| test still shows as `skipped` | the `self.skipTest(...)` line is still there: delete it (fine for STRETCH tests you skip on purpose) |
 | `KeyError: 'token'` | the login failed: check the password used in `setUp` |
 | `401` where you expected `200` | you forgot `self.use_token(...)` in this test (each test starts logged out) |
 | `AssertionError: 'READING' != 'FINISHED'` after a PATCH | call `refresh_from_db()` before reading the object |

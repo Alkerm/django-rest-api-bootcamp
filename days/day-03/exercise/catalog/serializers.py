@@ -35,7 +35,7 @@ class ReadingListItemSerializer(serializers.ModelSerializer):
         # The (user, book) uniqueness is checked in validate_book() below - that gives a clear field error.
         validators = []
 
-    # TODO [Day 3 · Task 3a]: Reject a target_date in the past.
+    # TODO [Day 3 · Task 3a · STRETCH (optional)]: Reject a target_date in the past.
     #   - Method name: validate_target_date(self, value)
     #   - None (no date) is allowed. Today is allowed. Yesterday is not.
     #   - "Today" = timezone.localdate()
@@ -43,7 +43,7 @@ class ReadingListItemSerializer(serializers.ModelSerializer):
     # HINT: days/day-03/hints.md#task-3  |  Example: days/day-03/example/serializers.py
     # YOUR CODE HERE
 
-    # TODO [Day 3 · Task 3b]: Reject a book that is ALREADY on the current user's reading list.
+    # TODO [Day 3 · Task 3b · STRETCH (optional)]: Reject a book that is ALREADY on the current user's reading list.
     #   - Method name: validate_book(self, value)          (value is a Book instance)
     #   - The current user: self.context["request"].user   (DRF passes the request to the serializer)
     #   - When UPDATING (self.instance is not None), exclude the item being edited: .exclude(pk=self.instance.pk)

@@ -4,7 +4,7 @@
 |---|---|
 | **What you will practice** | Defining a Django model with a relationship · creating and applying migrations · loading sample data · registering models in the admin · reading and writing data with the ORM |
 | **Where to start** | This folder: `days/day-01/exercise/`. Files: `catalog/models.py` → `catalog/admin.py` → `orm_practice.py` |
-| **Result to produce** | A migrated SQLite database with 3 authors and 6 books, a working admin for both models, and `orm_practice.py` reporting **5/5 passed** |
+| **Result to produce** | **Core:** a migrated SQLite database with 3 authors and 6 books, a working admin for both models, and ORM functions 1-3 passing. **Stretch:** functions 4-5 (`5/5 passed`) |
 | **Time** | ~45 minutes |
 | **Hints** | [`../hints.md`](../hints.md) · worked example: [`../example/`](../example/) |
 
@@ -149,20 +149,21 @@ states its expected result. Stop the server (Ctrl+C) or use a second terminal, t
 python orm_practice.py
 ```
 
-| # | Function | ORM skill | Input | Expected output |
-|---|---|---|---|---|
-| 1 | `count_books()` | `.count()` | none | `6` |
-| 2 | `titles_by_author(name)` | filter across a ForeignKey (`author__name`) + `order_by` | `"Martin Fowler"` | `["Patterns of Enterprise Application Architecture", "Refactoring"]` |
-| 3 | `count_published_after(year)` | `__gt` lookup | `2005` | `3` |
-| 4 | `available_titles()` | `__gt` lookup + `values_list` | none | 4 titles A-Z (see docstring) |
-| 5 | `create_update_delete_book()` | `create()`, `save()`, `delete()` | none | `(1, 6)` |
+| # | Function | Level | ORM skill | Input | Expected output |
+|---|---|---|---|---|---|
+| 1 | `count_books()` | **core** | `.count()` | none | `6` |
+| 2 | `titles_by_author(name)` | **core** | filter across a ForeignKey (`author__name`) + `order_by` | `"Martin Fowler"` | `["Patterns of Enterprise Application Architecture", "Refactoring"]` |
+| 3 | `count_published_after(year)` | **core** | `__gt` lookup | `2005` | `3` |
+| 4 | `available_titles()` | stretch | `__gt` lookup + `values_list` | none | 4 titles A-Z (see docstring) |
+| 5 | `create_update_delete_book()` | stretch | `create()`, `save()`, `delete()` | none | `(1, 6)` |
 
 **Database change in #5:** a temporary row is inserted (7 books), updated (`available_copies` 2 → 1), and deleted
 (6 books again). After the script, the table is exactly as listed in Task 2.
 
 **Acceptance criteria**
 - [ ] Admin shows both models with the requested columns, filter, and search.
-- [ ] `python orm_practice.py` prints `5/5 passed`.
+- [ ] Core: `python orm_practice.py` shows PASS for functions 1-3.
+- [ ] *Stretch:* `5/5 passed`.
 
 ---
 

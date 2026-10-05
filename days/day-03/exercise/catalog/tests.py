@@ -3,7 +3,9 @@ Day 3 exercise - ACCEPTANCE CHECKS (given - do not edit).
 
 Run:  python manage.py test
 They use a temporary database loaded with the sample data (alice, bob, books, reading-list items),
-so they never change your db.sqlite3. When every task is done:  Ran 11 tests ... OK
+so they never change your db.sqlite3.
+  Core (Tasks 1-2):          python manage.py test -k task1 -k task2   ->  Ran 6 tests ... OK
+  Everything (+ stretch 3):  python manage.py test                     ->  Ran 11 tests ... OK
 """
 from datetime import timedelta
 

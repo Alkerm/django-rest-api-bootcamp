@@ -12,11 +12,14 @@ By the end of the session, you can secure the API with tokens, isolate each user
 |---|---|---|---|
 | 1. Explanation + live demo | 45-60 min | the instructor explains and builds in front of you | [`slides.md`](slides.md) · [`example/`](example/) |
 | Break / Q&A | 10 min | none | none |
-| 2. Exercise | ~50 min | practise today's concept on a small Library API | [`exercise/README.md`](exercise/README.md) |
-| 3. Project milestone | ~70 min | apply the same concept to **your** Task Management API | [`project-milestone.md`](project-milestone.md) |
+| 2. Exercise | ~35 min core | practise today's concept on a small Library API: **core** tasks first, **stretch** only if time is left | [`exercise/README.md`](exercise/README.md) |
+| 3. Project milestone | ~85 min | apply the same concept to **your** Task Management API | [`project-milestone.md`](project-milestone.md) |
 | Exit check | 5-10 min | show the working result to a mentor | bottom of the milestone page |
 
 About 30% of the session is explanation; at least 70% is hands-on work.
+
+**Priority rule:** the **project milestone** is what you are assessed on. If time is short, finish the exercise's
+*core* tasks, move to the project, and come back to *stretch* tasks later.
 
 ## What the instructor explains
 

@@ -4,8 +4,8 @@
 |---|---|
 | **What you will practice** | Writing `APITestCase` tests (arrange → act → assert) · testing success **and** failure cases · checking the database inside a test · reading a failing test · moving settings to environment variables · documenting them in `.env.example` |
 | **Where to start** | This folder: `days/day-04/exercise/`. Files: `catalog/tests.py` (Task 1) → `config/settings.py` + `.env.example` (Task 2) → `catalog/views.py` (Task 3, a temporary experiment) |
-| **Result to produce** | `python manage.py test` → **Ran 9 tests ... OK** with **no skipped tests**, settings that change when environment variables change, and a placeholder-only `.env.example` |
-| **Time** | ~60 minutes |
+| **Result to produce** | **Core:** the 4 REQUIRED tests pass, settings change with environment variables, and `.env.example` holds placeholders only. **Stretch:** the 4 STRETCH tests and Task 3 |
+| **Time** | ~45 minutes for the core; stretch only if you finish early (the project milestone comes first) |
 | **Hints** | [`../hints.md`](../hints.md) · worked example: [`../example/`](../example/) |
 
 ---
@@ -33,8 +33,8 @@ python manage.py test                         # -> Ran 9 tests ... OK (skipped=8
 
 ## Task 1: Write the tests
 
-**File:** `catalog/tests.py`. One test is complete (`test_no_token_returns_401`). Replace each
-`self.skipTest(...)` line in the 8 `TODO [Day 4 · Task 1-n]` tests with real code.
+**File:** `catalog/tests.py`. One test is complete (`test_no_token_returns_401`). Each other test is marked
+**REQUIRED** (core: do these 4) or **STRETCH** (optional). Replace the test's `self.skipTest(...)` line with real code.
 
 **Test data created by `setUp()`** (new for every test; ids are not predictable, so always use the attributes):
 
@@ -50,20 +50,21 @@ python manage.py test                         # -> Ran 9 tests ... OK (skipped=8
 
 **What each test must prove**
 
-| # | Test | Act (request) | Assert (response) | Assert (database) |
-|---|---|---|---|---|
-| 1 | `test_token_login_returns_token` | POST `/api/auth/token/` with alice's credentials | `200`, `token` == `self.alice_token.key` | none |
-| 2 | `test_list_shows_only_my_items` | alice: GET list | `200`, ids == `[alice_item.id]` | none |
-| 3 | `test_create_sets_user_from_token` | bob: POST `{"book": book_1.id, "user": alice.id}` | `201`, `user` == `"bob"` | new row's `user` is bob |
-| 4 | `test_other_users_item_returns_404` | bob: GET alice's item | `404` | none |
-| 5 | `test_other_user_cannot_delete_my_item` | bob: DELETE alice's item | `404` | alice's item still exists |
-| 6 | `test_past_target_date_returns_400` | alice: POST book_2 with yesterday's date | `400`, `target_date` in errors | none |
-| 7 | `test_duplicate_book_returns_400` | alice: POST book_1 again | `400`, `book` in errors | alice still has 1 item |
-| 8 | `test_patch_updates_only_status` | alice: PATCH `{"status": "FINISHED"}` | `200` | status `FINISHED`, book unchanged |
+| # | Test | Level | Act (request) | Assert (response) | Assert (database) |
+|---|---|---|---|---|---|
+| 1 | `test_token_login_returns_token` | **REQUIRED** | POST `/api/auth/token/` with alice's credentials | `200`, `token` == `self.alice_token.key` | none |
+| 2 | `test_list_shows_only_my_items` | **REQUIRED** | alice: GET list | `200`, ids == `[alice_item.id]` | none |
+| 3 | `test_create_sets_user_from_token` | stretch | bob: POST `{"book": book_1.id, "user": alice.id}` | `201`, `user` == `"bob"` | new row's `user` is bob |
+| 4 | `test_other_users_item_returns_404` | **REQUIRED** | bob: GET alice's item | `404` | none |
+| 5 | `test_other_user_cannot_delete_my_item` | stretch | bob: DELETE alice's item | `404` | alice's item still exists |
+| 6 | `test_past_target_date_returns_400` | **REQUIRED** | alice: POST book_2 with yesterday's date | `400`, `target_date` in errors | none |
+| 7 | `test_duplicate_book_returns_400` | stretch | alice: POST book_1 again | `400`, `book` in errors | alice still has 1 item |
+| 8 | `test_patch_updates_only_status` | stretch | alice: PATCH `{"status": "FINISHED"}` | `200` | status `FINISHED`, book unchanged |
 
 **Acceptance criteria**
-- [ ] `python manage.py test` → `Ran 9 tests ... OK` and **no** `skipped=` in the summary.
-- [ ] Every test checks the status code; tests 3, 5, 7, 8 also check the database.
+- [ ] **Core:** `python manage.py test` → `OK (skipped=4)`. The 4 skipped are the STRETCH tests.
+- [ ] Every test you wrote checks the status code. Stretch tests 3, 5, 7, 8 also check the database.
+- [ ] *Stretch:* `Ran 9 tests ... OK` with no `skipped=`.
 
 ---
 
@@ -116,7 +117,7 @@ Then complete `.env.example`: one line per variable with a comment and a **place
 
 ---
 
-## Task 3: Watch a test catch a security bug (experiment, then undo)
+## Task 3 (STRETCH, optional): Watch a test catch a security bug (experiment, then undo)
 
 **File:** `catalog/views.py`. This task shows **why** tests matter.
 
@@ -126,7 +127,7 @@ Then complete `.env.example`: one line per variable with a comment and a **place
 3. Write down **which tests fail** and the **first assertion message** of one failure (`AssertionError: ...`).
 4. **Restore** the original line and confirm all tests pass again.
 
-**Expected result:** tests 2, 4 and 5 fail, because the API leaks other users' data. Fix the application, never the
+**Expected result:** tests 2 and 4 fail (and 5, if you wrote it), because the API leaks other users' data. Fix the application, never the
 test's expectation.
 
 **Acceptance criteria**

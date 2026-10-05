@@ -18,18 +18,20 @@ from the environment, and a deployment rehearsal.
 | TODO | File | What | Hint |
 |---|---|---|---|
 | P1 | `tasks/tests.py` | read `setUp`, `authenticate()` and the complete example test (no code) | none |
-| P2 | `tasks/tests.py` | write the tests that call `self.skipTest(...)`, starting with the two marked *build together with the instructor* | [hints#p2](hints.md#p2) |
+| P2 | `tasks/tests.py` | write the 7 tests marked **REQUIRED**, starting with the two marked *build together with the instructor*. The 7 **STRETCH** tests are optional | [hints#p2](hints.md#p2) |
 | P3 | `config/settings.py` | `SECRET_KEY`, `DEBUG`, `ALLOWED_HOSTS` from environment variables | [hints#p3](hints.md#p3) |
 | P4 | `.env.example` | document the three variables with placeholders | [hints#p4](hints.md#p4) |
 | P5 | `requirements.txt` | add `psycopg[binary]`, `dj-database-url`, `gunicorn`, `whitenoise` and install them | [hints#p5](hints.md#p5) |
 | P6 | `README.md` | complete every `_TODO_` section | [hints#p6](hints.md#p6) |
 
-**Required test coverage** (at least 8 meaningful tests, **none skipped**): unauthenticated access · token login ·
+**Required test coverage** = the example + the 7 REQUIRED tests (8 in total): unauthenticated access · token login ·
 create + owner assignment · own-only list · cross-user access · update · delete · validation.
 
 ```bash
-python manage.py test          # goal: "Ran 15 tests ... OK" with no "skipped="
+python manage.py test          # goal: "OK (skipped=7)": only STRETCH tests may still be skipped
 ```
+
+Finish the README (P6) and the partner review **before** any STRETCH test.
 
 When a test fails, **fix the application, not the expected result**.
 
@@ -70,7 +72,7 @@ git push
 ## Exit check
 
 - [ ] Tests cover unauthenticated access, create/owner, own-only list, cross-user access, update, delete, validation.
-- [ ] At least 8 meaningful tests pass, with none of the required tests skipped.
+- [ ] At least 8 meaningful tests pass (the example + 7 REQUIRED); only STRETCH tests may be skipped.
 - [ ] A partner set up the project from the README without your help.
 - [ ] The README documents authentication and every required endpoint with examples.
 - [ ] Settings read secrets from the environment; `.env.example` has placeholders only.

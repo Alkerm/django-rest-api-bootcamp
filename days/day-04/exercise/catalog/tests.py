@@ -16,8 +16,9 @@ DATA CREATED BY setUp() (fresh for every test)
                      self.bob_item   -> bob   + book_2, status WANT_TO_READ
     Never hard-code ids like 1 or 2: use self.alice_item.id, self.book_2.id, ...
 
-GOAL: at least 8 passing tests and "skipped=0". Each test = ARRANGE (setUp) -> ACT (one request) -> ASSERT.
-Replace every `self.skipTest(...)` line with the real test.
+GOAL: the 4 REQUIRED tests pass (plus the example).  4 STRETCH tests are optional extra practice.
+Each test = ARRANGE (setUp) -> ACT (one request) -> ASSERT.
+Replace the `self.skipTest(...)` line of a test with the real test body.
 """
 from datetime import timedelta
 
@@ -62,50 +63,50 @@ class ReadingListAPITests(APITestCase):
 
     # ------------------------------------------------------------------ YOUR TESTS
     def test_token_login_returns_token(self):
-        # TODO [Day 4 · Task 1-1]: POST {"username": "alice", "password": "alice-test-pass"} to "/api/auth/token/".
+        # TODO [Day 4 · Task 1-1 · REQUIRED]: POST {"username": "alice", "password": "alice-test-pass"} to "/api/auth/token/".
         #   Expected: 200 and response.data["token"] == self.alice_token.key
         # HINT: days/day-04/hints.md#task-1
         # YOUR CODE HERE
-        self.skipTest("TODO [Day 4 · Task 1-1]")
+        self.skipTest("REQUIRED - Day 4 · Task 1: write this test")
 
     def test_list_shows_only_my_items(self):
-        # TODO [Day 4 · Task 1-2]: As alice, GET the list.
+        # TODO [Day 4 · Task 1-2 · REQUIRED]: As alice, GET the list.
         #   Expected: 200 and the list contains ONLY alice's item id (bob's item is not there).
         # YOUR CODE HERE
-        self.skipTest("TODO [Day 4 · Task 1-2]")
+        self.skipTest("REQUIRED - Day 4 · Task 1: write this test")
 
     def test_create_sets_user_from_token(self):
-        # TODO [Day 4 · Task 1-3]: As bob, POST {"book": self.book_1.id, "user": self.alice.id}.
+        # TODO [Day 4 · Task 1-3 · STRETCH (optional)]: As bob, POST {"book": self.book_1.id, "user": self.alice.id}.
         #   Expected: 201, response "user" is "bob", and the new row in the DATABASE belongs to bob.
         # YOUR CODE HERE
-        self.skipTest("TODO [Day 4 · Task 1-3]")
+        self.skipTest("STRETCH (optional) - Day 4 · Task 1: write this test")
 
     def test_other_users_item_returns_404(self):
-        # TODO [Day 4 · Task 1-4]: As bob, GET alice's item (self.alice_item_url). Expected: 404.
+        # TODO [Day 4 · Task 1-4 · REQUIRED]: As bob, GET alice's item (self.alice_item_url). Expected: 404.
         # YOUR CODE HERE
-        self.skipTest("TODO [Day 4 · Task 1-4]")
+        self.skipTest("REQUIRED - Day 4 · Task 1: write this test")
 
     def test_other_user_cannot_delete_my_item(self):
-        # TODO [Day 4 · Task 1-5]: As bob, DELETE alice's item.
+        # TODO [Day 4 · Task 1-5 · STRETCH (optional)]: As bob, DELETE alice's item.
         #   Expected: 404 AND alice's item still exists in the database.
         # YOUR CODE HERE
-        self.skipTest("TODO [Day 4 · Task 1-5]")
+        self.skipTest("STRETCH (optional) - Day 4 · Task 1: write this test")
 
     def test_past_target_date_returns_400(self):
-        # TODO [Day 4 · Task 1-6]: As alice, POST book_2 with target_date = yesterday.
+        # TODO [Day 4 · Task 1-6 · REQUIRED]: As alice, POST book_2 with target_date = yesterday.
         #   yesterday = timezone.localdate() - timedelta(days=1)   -> send it as yesterday.isoformat()
         #   Expected: 400 and "target_date" in response.data
         # YOUR CODE HERE
-        self.skipTest("TODO [Day 4 · Task 1-6]")
+        self.skipTest("REQUIRED - Day 4 · Task 1: write this test")
 
     def test_duplicate_book_returns_400(self):
-        # TODO [Day 4 · Task 1-7]: As alice, POST book_1 again (it is already on her list).
+        # TODO [Day 4 · Task 1-7 · STRETCH (optional)]: As alice, POST book_1 again (it is already on her list).
         #   Expected: 400, "book" in response.data, and alice still has exactly 1 item in the database.
         # YOUR CODE HERE
-        self.skipTest("TODO [Day 4 · Task 1-7]")
+        self.skipTest("STRETCH (optional) - Day 4 · Task 1: write this test")
 
     def test_patch_updates_only_status(self):
-        # TODO [Day 4 · Task 1-8]: As alice, PATCH her item with {"status": "FINISHED"}.
+        # TODO [Day 4 · Task 1-8 · STRETCH (optional)]: As alice, PATCH her item with {"status": "FINISHED"}.
         #   Expected: 200; after self.alice_item.refresh_from_db(): status is FINISHED and book is still book_1.
         # YOUR CODE HERE
-        self.skipTest("TODO [Day 4 · Task 1-8]")
+        self.skipTest("STRETCH (optional) - Day 4 · Task 1: write this test")

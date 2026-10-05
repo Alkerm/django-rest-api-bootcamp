@@ -4,7 +4,7 @@
 |---|---|
 | **What you will practice** | Writing a `ModelSerializer` (including a read-only related field) · building a `ModelViewSet` · registering it with a router · exercising all six CRUD operations and reading their status codes |
 | **Where to start** | This folder: `days/day-02/exercise/`. Files: `catalog/serializers.py` → `catalog/views.py` → `catalog/urls.py` → `catalog/models.py` → `crud_checklist.md` |
-| **Result to produce** | A working `/api/books/` API with list, create, retrieve, update, partial update and delete, `python manage.py test` → **Ran 9 tests ... OK**, and a completed `crud_checklist.md` |
+| **Result to produce** | **Core:** a working `/api/books/` API with all six operations, sorted A-Z; `python manage.py test` → **Ran 9 tests ... OK**. **Stretch:** the completed `crud_checklist.md` |
 | **Time** | ~50 minutes |
 | **Hints** | [`../hints.md`](../hints.md) · worked example: [`../example/`](../example/) |
 
@@ -122,14 +122,16 @@ python manage.py migrate
 **Database change:** none to the rows. The migration only records the new default ordering.
 **Expected output:** `GET /api/books/` now starts with *Clean Architecture, Clean Code, Patterns of ...*
 
-### 3B: CRUD checklist
+### 3B (STRETCH, optional): CRUD checklist
+
+> The project milestone has its own 7-request check, so do this one only if you finish early.
 
 Work through [`crud_checklist.md`](crud_checklist.md): 9 requests, each with its body, expected status and expected
 database change. Record the actual status, then answer the 3 questions at the bottom.
 
 **Acceptance criteria**
 - [ ] `python manage.py test` → `Ran 9 tests ... OK`.
-- [ ] Every row of `crud_checklist.md` has an actual status that matches the expected one.
+- [ ] *Stretch:* every row of `crud_checklist.md` has an actual status that matches the expected one.
 
 ---
 

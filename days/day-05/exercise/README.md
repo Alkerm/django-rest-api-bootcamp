@@ -1,11 +1,16 @@
 # Day 5 Exercise: Production Readiness (Database Switch, Static Files, Smoke Test)
 
+> **This whole exercise is OPTIONAL (stretch).** Today's priority is deploying **your project**.
+> The instructor demonstrates Tasks 1-2 live during the explanation block. Do this exercise only **after** your
+> project is deployed and your demo is done, or later as homework. Everything here is also covered by the
+> project milestone (P1-P4) and its smoke test.
+
 | | |
 |---|---|
 | **What you will practice** | Choosing the database from `DATABASE_URL` · serving static files with WhiteNoise when `DEBUG=False` · `collectstatic` · running the app with production-like settings · writing a smoke test that sends real HTTP requests |
 | **Where to start** | This folder: `days/day-05/exercise/`. Files: `config/settings.py` (Tasks 1 + 2) → `smoke_test.py` (Task 3) |
 | **Result to produce** | The app runs on a database chosen by `DATABASE_URL`, the admin is styled with `DEBUG=False`, and `python smoke_test.py` prints **7/7 checks passed** |
-| **Time** | ~45 minutes, so most of the session stays free for deploying your project |
+| **Time** | optional: ~45 minutes, after your project is deployed |
 | **Hints** | [`../hints.md`](../hints.md) · worked example: [`../example/`](../example/) |
 
 ---

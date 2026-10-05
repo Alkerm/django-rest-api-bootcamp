@@ -7,6 +7,7 @@ BEFORE YOU START
     * Run this file from days/day-01/exercise with your .venv active:
           python orm_practice.py
     * The self-check at the bottom prints PASS/FAIL for every function.
+      Core = functions 1-3 (3/5 passed). Functions 4-5 are STRETCH (optional): do them if you finish early.
       The check for function 5 creates a temporary book and deletes it again, so the sample data stays unchanged.
 
 DATA YOU WORK WITH (pre-loaded sample data)
@@ -60,7 +61,7 @@ def count_published_after(year):
 def available_titles():
     """4. FIELD LOOKUP - Titles of books that can be borrowed now (available_copies > 0), sorted A-Z.
     Expected: ["Clean Architecture", "Clean Code", "Patterns of Enterprise Application Architecture", "Refactoring"]"""
-    # TODO [Day 1 · Task 3B-4]
+    # TODO [Day 1 · Task 3B-4 · STRETCH (optional)]
     # YOUR CODE HERE
     return []
 
@@ -75,7 +76,7 @@ def create_update_delete_book():
         c. DELETE   delete the book                                             -> 6 books again
     Return a tuple: (copies_after_update, books_after_delete)    Expected: (1, 6)
     """
-    # TODO [Day 1 · Task 3B-5]: Implement steps a, b and c.
+    # TODO [Day 1 · Task 3B-5 · STRETCH (optional)]: Implement steps a, b and c.
     #   Get the author first: Author.objects.get(name="Martin Fowler")
     #   After save(), read the row again with refresh_from_db() to prove the DB really changed.
     # HINT: days/day-01/hints.md#task-3  |  Example: days/day-01/example/orm_examples.py

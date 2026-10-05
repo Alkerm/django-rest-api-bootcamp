@@ -28,7 +28,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    # TODO [Day 5 · Task 2a]: Add "whitenoise.middleware.WhiteNoiseMiddleware" on the line directly below
+    # TODO [Day 5 · Task 2a · OPTIONAL]: Add "whitenoise.middleware.WhiteNoiseMiddleware" on the line directly below
     #   SecurityMiddleware. It serves CSS/JS when DEBUG is False (Django itself stops serving them then).
     # HINT: days/day-05/hints.md#task-2
     # YOUR CODE HERE
@@ -66,7 +66,7 @@ DATABASES = {
     }
 }
 
-# TODO [Day 5 · Task 1]: If the environment variable DATABASE_URL is set, use it instead of the SQLite file:
+# TODO [Day 5 · Task 1 · OPTIONAL]: If the environment variable DATABASE_URL is set, use it instead of the SQLite file:
 #   DATABASES = {"default": dj_database_url.config(conn_max_age=600, conn_health_checks=True)}
 #   If it is NOT set, keep the SQLite DATABASES above (local work and tests stay unchanged).
 # HINT: days/day-05/hints.md#task-1  |  Example: days/day-05/example/settings_production.py
@@ -81,7 +81,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-# TODO [Day 5 · Task 2b]: Configure collected static files:
+# TODO [Day 5 · Task 2b · OPTIONAL]: Configure collected static files:
 #   STATIC_ROOT -> BASE_DIR / "staticfiles"     (where `collectstatic` copies every CSS/JS file)
 #   STORAGES    -> {"default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
 #                   "staticfiles": {"BACKEND": "whitenoise.storage.CompressedStaticFilesStorage"}}
