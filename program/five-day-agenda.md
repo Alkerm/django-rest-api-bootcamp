@@ -5,7 +5,7 @@
 > Based on *Task 02, Five-Day Learning Agenda* and *Estimated Daily Session Timing* (original PDFs in
 > [`assets/source-documents/`](../assets/source-documents/)), **rebalanced for a 1 h + 1 h + 1 h day**: validation
 > moved from Day 3 to Day 2, the README moved from Day 4 to Day 5, and Day 5's middle hour is a guided deployment.
-> The final outcome is unchanged.
+> The final outcome is unchanged. Approval copy: [`02-five-day-agenda-v2.pdf`](../assets/source-documents/02-five-day-agenda-v2.pdf).
 
 ## Program outcome
 
