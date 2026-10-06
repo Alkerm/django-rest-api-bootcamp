@@ -14,5 +14,5 @@ class TaskSerializer(serializers.ModelSerializer):
         #   read_only_fields -> fields the client must NEVER set:
         #                       id, owner, created_at, updated_at
         # HINT: days/day-02/hints.md#p2  |  Example: days/day-02/example/serializers.py
-        # YOUR CODE HERE
+        # YOUR CODE HERE - replace the placeholder line below
         fields = ["id"]

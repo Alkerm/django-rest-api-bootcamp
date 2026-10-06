@@ -13,16 +13,12 @@ every previous day is already solved, and that day's work is marked with `TODO [
 
 ## Using a checkpoint
 
-**On track:** keep working in your own repository and copy only the **new** files the day's
-`project-milestone.md` lists, then add the TODO code where the comments show.
+**Days 2-4: everyone copies the whole checkpoint each morning** (exact commands on each day's
+`project-milestone.md`). Keep your own `.git` and `.venv`; your database is not part of a checkpoint, so your users
+and tasks stay as they are. Then run `python manage.py migrate`.
 
-**Behind:** copy the whole checkpoint over your project folder. Keep your own `.git` (your history) and `.venv`
-folders. Then:
+**Day 5:** if you are on track, copy only `config/settings.py`, `.env.example` and `smoke_test.py`, so your own
+README and tests stay yours. If you are behind, copy the whole checkpoint.
 
-```bash
-python -m pip install -r requirements.txt
-python manage.py migrate
-git add . && git commit -m "Start Day N from checkpoint" && git push
-```
-
-Your database (`db.sqlite3`) is not part of a checkpoint, so your users and tasks stay as they are.
+The migration files have exactly the names Django generates for you (`0001_initial.py`, `0002_alter_task_options.py`),
+so a checkpoint copy simply replaces your own copy of the same migration.

@@ -23,6 +23,9 @@ python manage.py loaddata sample_data         # -> Installed 9 object(s) from 1 
 python manage.py runserver                    # keep it running; use a 2nd terminal for other commands
 ```
 
+> **Your progress meter:** `python manage.py test` (in the 2nd terminal). At the start most tests fail: that is
+> expected. Each failure says which task fixes it. Check one task at a time with `python manage.py test -k task1`.
+
 > **Database state: pre-filled with sample data.** After the commands above, the database contains **3 authors and
 > 6 books** (tables below). The API is **open (no login)** today, so you can focus on CRUD. Authentication comes on Day 3.
 

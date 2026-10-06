@@ -9,10 +9,35 @@ final README, and the live demonstration.
 
 ## Where to start
 
-- **Finished Day 4?** Continue in your own repository. Copy `smoke_test.py` from
-  [`project/checkpoints/day-05`](../../project/checkpoints/day-05), then apply the settings TODOs P1-P4 to your
-  `config/settings.py` (each TODO comment in the checkpoint shows where the code goes).
-- **Behind?** Copy the whole checkpoint over your project folder (keep `.git` and `.venv`).
+Open a terminal in the folder that contains **both** `django-rest-api-bootcamp` and `task-management-api`.
+
+**Finished Day 4?** Copy **only these three files**, so your own README and tests (written yesterday and graded) stay
+yours:
+
+```powershell
+# Windows PowerShell
+git -C django-rest-api-bootcamp pull       # only when the instructor announces an update
+cd task-management-api
+git add -A; git commit -m "End of Day 4"
+$cp = "..\django-rest-api-bootcamp\project\checkpoints\day-05"
+Copy-Item "$cp\config\settings.py" config\ -Force
+Copy-Item "$cp\.env.example", "$cp\smoke_test.py" . -Force
+.venv\Scripts\Activate.ps1
+```
+
+```bash
+# macOS
+git -C django-rest-api-bootcamp pull       # only when the instructor announces an update
+cd task-management-api
+git add -A && git commit -m "End of Day 4"
+cp ../django-rest-api-bootcamp/project/checkpoints/day-05/config/settings.py config/
+cp ../django-rest-api-bootcamp/project/checkpoints/day-05/{.env.example,smoke_test.py} .
+source .venv/bin/activate
+```
+
+**Behind?** Copy the **whole** checkpoint instead (same command as on Days 2-4, with `day-05`), then
+`python -m pip install -r requirements.txt` and `python manage.py migrate`. This also replaces `README.md` and
+`tasks/tests.py` with the reference versions: review them, and make the README your own before you submit.
 
 ## 1. Prepare the code (local)
 

@@ -6,11 +6,34 @@ protection, validation.
 
 ## Where to start
 
-- **Finished Day 2?** Continue in your own repository. Create `tasks/permissions.py` by copying it from
-  [`project/checkpoints/day-03`](../../project/checkpoints/day-03), then apply the TODOs below to your files.
-  Each TODO comment in the checkpoint shows exactly where the code goes.
-- **Behind?** Copy the checkpoint's files over your project folder (keep `.git` and `.venv`), then run
-  `python manage.py migrate`.
+**Everyone does the same thing each morning:** copy today's checkpoint over your project. It contains everything up
+to yesterday already solved, plus today's TODOs, so you never have to merge files by hand. Your Git history, your
+`.venv` and your database (users and tasks) are kept.
+
+Open a terminal in the folder that contains **both** `django-rest-api-bootcamp` and `task-management-api`:
+
+```powershell
+# Windows PowerShell
+git -C django-rest-api-bootcamp pull       # only when the instructor announces an update
+cd task-management-api
+git add -A; git commit -m "End of Day 2"                       # save your own work first
+Copy-Item -Path ..\django-rest-api-bootcamp\project\checkpoints\day-03\* -Destination . -Recurse -Force
+.venv\Scripts\Activate.ps1
+python manage.py migrate
+```
+
+```bash
+# macOS
+git -C django-rest-api-bootcamp pull       # only when the instructor announces an update
+cd task-management-api
+git add -A && git commit -m "End of Day 2"
+cp -R ../django-rest-api-bootcamp/project/checkpoints/day-03/. .
+source .venv/bin/activate
+python manage.py migrate
+```
+
+> Curious how your Day 2 code compares with the reference? Run `git diff` before your next commit: the differences
+> are a free code review. `nothing to commit` after `git commit` is fine.
 
 ## TODOs
 

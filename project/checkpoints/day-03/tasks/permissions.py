@@ -14,5 +14,5 @@ class IsOwner(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         # TODO [Day 3 · P5]: Return True only when the task's owner is the user making the request.
         # HINT: days/day-03/hints.md#p5  |  Example: days/day-03/example/permissions.py
-        # YOUR CODE HERE
+        # YOUR CODE HERE - replace the placeholder line below
         return True

@@ -19,6 +19,7 @@ Run these in a terminal **opened in this folder** (`days/day-04/exercise`):
 source ../../../.venv/bin/activate            # macOS
 
 python manage.py test                         # -> Ran 9 tests ... OK (skipped=8)  <- your starting point
+python manage.py test -v 2                    # lists every test and whether it is REQUIRED or STRETCH
 ```
 
 > **Database state:** the tests do **not** use `db.sqlite3` or the sample data. Each test gets a fresh, empty

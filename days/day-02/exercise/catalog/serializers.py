@@ -38,5 +38,5 @@ class BookSerializer(serializers.ModelSerializer):
         model = Book
         # TODO [Day 2 · Task 1b]: List all 8 fields in the order shown above,
         #   and make `id` and `created_at` read-only (the server sets them).
-        # YOUR CODE HERE
+        # YOUR CODE HERE - replace the placeholder line below
         fields = ["id"]

@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #   DEBUG           "True"                                         bool  -> True only when the text is "true" (any case)
 #   ALLOWED_HOSTS   "127.0.0.1,localhost"                          list  -> split on ",", strip spaces, skip empty items
 # HINT: days/day-04/hints.md#task-2  |  Example: days/day-04/example/settings_env.py
-# YOUR CODE HERE
+# YOUR CODE HERE - replace the placeholder lines below
 SECRET_KEY = "exercise-only-key"
 DEBUG = True
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]

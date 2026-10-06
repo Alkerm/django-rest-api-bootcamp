@@ -59,12 +59,12 @@ class TaskAPITests(APITestCase):
         # TODO [Day 4 · P2 · REQUIRED]: POST username + password of alice to self.token_url (format="json").
         #   Assert 200 and that response.data["token"] equals self.alice_token.key
         # HINT: days/day-04/hints.md#p2
-        # YOUR CODE HERE
+        # YOUR CODE HERE - replace the placeholder line below
         self.skipTest("REQUIRED - Day 4 · P2: write this test")
 
     def test_token_endpoint_rejects_wrong_password(self):
         # TODO [Day 4 · P2 · STRETCH (optional)]: POST a wrong password. Assert 400 and that no "token" key is returned.
-        # YOUR CODE HERE
+        # YOUR CODE HERE - replace the placeholder line below
         self.skipTest("STRETCH (optional) - Day 4 · P2: write this test")
 
     # ------------------------------------------------------------------ create + ownership
@@ -73,12 +73,12 @@ class TaskAPITests(APITestCase):
         # TODO [Day 4 · P2 - build together with the instructor · REQUIRED]:
         #   As alice, POST a new task that tries to set "owner": self.bob.id.
         #   Assert 201, response owner is "alice", and the saved Task in the DB belongs to alice.
-        # YOUR CODE HERE
+        # YOUR CODE HERE - replace the placeholder line below
         self.skipTest("REQUIRED - Day 4 · P2: write this test")
 
     def test_list_returns_only_own_tasks(self):
         # TODO [Day 4 · P2 · REQUIRED]: As alice, GET the list. Assert 200 and that only alice's task id is returned.
-        # YOUR CODE HERE
+        # YOUR CODE HERE - replace the placeholder line below
         self.skipTest("REQUIRED - Day 4 · P2: write this test")
 
     # ------------------------------------------------------------------ data isolation
@@ -86,58 +86,58 @@ class TaskAPITests(APITestCase):
     def test_cannot_retrieve_another_users_task(self):
         # TODO [Day 4 · P2 - build together with the instructor · REQUIRED]:
         #   As alice, GET bob's task. Assert 404 (the task is invisible to alice, not "forbidden").
-        # YOUR CODE HERE
+        # YOUR CODE HERE - replace the placeholder line below
         self.skipTest("REQUIRED - Day 4 · P2: write this test")
 
     def test_cannot_update_another_users_task(self):
         # TODO [Day 4 · P2 · STRETCH (optional)]: As alice, PATCH bob's task title. Assert 404 AND that bob's title is unchanged in the DB.
         #   Remember: call self.bob_task.refresh_from_db() before checking the database value.
-        # YOUR CODE HERE
+        # YOUR CODE HERE - replace the placeholder line below
         self.skipTest("STRETCH (optional) - Day 4 · P2: write this test")
 
     def test_cannot_delete_another_users_task(self):
         # TODO [Day 4 · P2 · STRETCH (optional)]: As alice, DELETE bob's task. Assert 404 AND that bob's task still exists.
-        # YOUR CODE HERE
+        # YOUR CODE HERE - replace the placeholder line below
         self.skipTest("STRETCH (optional) - Day 4 · P2: write this test")
 
     # ------------------------------------------------------------------ CRUD on own tasks
 
     def test_retrieve_own_task(self):
         # TODO [Day 4 · P2 · STRETCH (optional)]: As alice, GET her task. Assert 200 and the returned title.
-        # YOUR CODE HERE
+        # YOUR CODE HERE - replace the placeholder line below
         self.skipTest("STRETCH (optional) - Day 4 · P2: write this test")
 
     def test_full_update_with_put(self):
         # TODO [Day 4 · P2 · STRETCH (optional)]: As alice, PUT title/description/status/due_date on her task.
         #   Assert 200 and that the DB row now has the new values.
-        # YOUR CODE HERE
+        # YOUR CODE HERE - replace the placeholder line below
         self.skipTest("STRETCH (optional) - Day 4 · P2: write this test")
 
     def test_partial_update_with_patch(self):
         # TODO [Day 4 · P2 · REQUIRED]: As alice, PATCH only {"status": "DONE"}.
         #   Assert 200, status changed, and the title did NOT change.
-        # YOUR CODE HERE
+        # YOUR CODE HERE - replace the placeholder line below
         self.skipTest("REQUIRED - Day 4 · P2: write this test")
 
     def test_delete_own_task(self):
         # TODO [Day 4 · P2 · REQUIRED]: As alice, DELETE her task. Assert 204 and that it is gone from the DB.
-        # YOUR CODE HERE
+        # YOUR CODE HERE - replace the placeholder line below
         self.skipTest("REQUIRED - Day 4 · P2: write this test")
 
     # ------------------------------------------------------------------ validation
 
     def test_blank_title_is_rejected(self):
         # TODO [Day 4 · P2 · REQUIRED]: As alice, POST {"title": "   "}. Assert 400 and that "title" is in response.data.
-        # YOUR CODE HERE
+        # YOUR CODE HERE - replace the placeholder line below
         self.skipTest("REQUIRED - Day 4 · P2: write this test")
 
     def test_invalid_status_is_rejected(self):
         # TODO [Day 4 · P2 · STRETCH (optional)]: As alice, POST a task with status "FINISHED". Assert 400 with a "status" error.
-        # YOUR CODE HERE
+        # YOUR CODE HERE - replace the placeholder line below
         self.skipTest("STRETCH (optional) - Day 4 · P2: write this test")
 
     def test_past_due_date_is_rejected_on_create(self):
         # TODO [Day 4 · P2 · STRETCH (optional)]: As alice, POST a task whose due_date is yesterday.
         #   Assert 400, a "due_date" error, and that no extra task was saved.
-        # YOUR CODE HERE
+        # YOUR CODE HERE - replace the placeholder line below
         self.skipTest("STRETCH (optional) - Day 4 · P2: write this test")

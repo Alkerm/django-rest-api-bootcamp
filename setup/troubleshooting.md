@@ -14,6 +14,8 @@ fails.
 | `Error: That port is already in use` | another server is still running | stop it (Ctrl+C in its terminal) or `python manage.py runserver 8001` |
 | `database is locked` | DB Browser and Django write at the same time | close DB Browser or revert its unsaved edits |
 | `git push` rejected / asks for a password | authentication or remote URL issue | sign in through VS Code or the browser prompt; check `git remote -v` |
+| `warning: ... LF will be replaced by CRLF` (or `CRLF ... by LF`) | Windows line-ending notice from Git | harmless, nothing to fix; the project's `.gitattributes` keeps line endings consistent |
+| `git pull` of the bootcamp repo: *Your local changes ... would be overwritten* | you edited exercise files that the instructor also updated | `git -C django-rest-api-bootcamp stash`, then `pull`, then `git -C django-rest-api-bootcamp stash pop` |
 
 ## Django and DRF errors
 

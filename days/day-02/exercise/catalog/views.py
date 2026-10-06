@@ -19,6 +19,6 @@ class AuthorViewSet(viewsets.ReadOnlyModelViewSet):
 #   - queryset         -> every book
 #   - serializer_class -> BookSerializer
 # HINT: days/day-02/hints.md#task-2  |  Example: days/day-02/example/views.py
-# YOUR CODE HERE
+# YOUR CODE HERE - replace the placeholder lines below
 class BookViewSet(viewsets.GenericViewSet):
     pass

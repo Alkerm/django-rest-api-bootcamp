@@ -38,7 +38,7 @@ def count_books():
     """1. READ - How many books are in the library?   Expected: 6"""
     # TODO [Day 1 · Task 3B-1]: Return the number of Book rows.
     # HINT: days/day-01/hints.md#task-3
-    # YOUR CODE HERE
+    # YOUR CODE HERE - replace the placeholder line below
     return None
 
 
@@ -47,14 +47,14 @@ def titles_by_author(author_name):
     Expected for "Martin Fowler": ["Patterns of Enterprise Application Architecture", "Refactoring"]"""
     # TODO [Day 1 · Task 3B-2]: Filter books by the author's NAME (double underscore: author__name),
     #   order by title, and return a plain list of titles.
-    # YOUR CODE HERE
+    # YOUR CODE HERE - replace the placeholder line below
     return []
 
 
 def count_published_after(year):
     """3. FIELD LOOKUP - How many books were published AFTER a year?   Expected for 2005: 3"""
     # TODO [Day 1 · Task 3B-3]: Use the __gt ("greater than") lookup on published_year.
-    # YOUR CODE HERE
+    # YOUR CODE HERE - replace the placeholder line below
     return None
 
 
@@ -62,7 +62,7 @@ def available_titles():
     """4. FIELD LOOKUP - Titles of books that can be borrowed now (available_copies > 0), sorted A-Z.
     Expected: ["Clean Architecture", "Clean Code", "Patterns of Enterprise Application Architecture", "Refactoring"]"""
     # TODO [Day 1 · Task 3B-4 · STRETCH (optional)]
-    # YOUR CODE HERE
+    # YOUR CODE HERE - replace the placeholder line below
     return []
 
 
@@ -80,30 +80,45 @@ def create_update_delete_book():
     #   Get the author first: Author.objects.get(name="Martin Fowler")
     #   After save(), read the row again with refresh_from_db() to prove the DB really changed.
     # HINT: days/day-01/hints.md#task-3  |  Example: days/day-01/example/orm_examples.py
-    # YOUR CODE HERE
+    # YOUR CODE HERE - replace the placeholder line below
     return (None, None)
 
 
 # ---------------------------------------------------------------------- self-check (do not edit)
 if __name__ == "__main__":
+    NOT_STARTED = (None, [], (None, None))  # what the untouched placeholder lines return
     checks = [
-        ("1. count_books()", count_books, (), 6),
-        ("2. titles_by_author('Martin Fowler')", titles_by_author, ("Martin Fowler",),
+        ("core", "1. count_books()", count_books, (), 6),
+        ("core", "2. titles_by_author('Martin Fowler')", titles_by_author, ("Martin Fowler",),
          ["Patterns of Enterprise Application Architecture", "Refactoring"]),
-        ("3. count_published_after(2005)", count_published_after, (2005,), 3),
-        ("4. available_titles()", available_titles, (),
+        ("core", "3. count_published_after(2005)", count_published_after, (2005,), 3),
+        ("stretch", "4. available_titles()", available_titles, (),
          ["Clean Architecture", "Clean Code", "Patterns of Enterprise Application Architecture", "Refactoring"]),
-        ("5. create_update_delete_book()", create_update_delete_book, (), (1, 6)),
+        ("stretch", "5. create_update_delete_book()", create_update_delete_book, (), (1, 6)),
     ]
-    passed = 0
-    for label, function, args, expected in checks:
+    score = {"core": [0, 0], "stretch": [0, 0]}
+    for level, label, function, args, expected in checks:
+        score[level][1] += 1
         try:
             result = function(*args)
         except Exception as error:  # show the error but keep checking the rest
             result = f"ERROR: {type(error).__name__}: {error}"
-        ok = result == expected
-        passed += ok
-        print(f"[{'PASS' if ok else 'FAIL'}] {label}")
-        if not ok:
-            print(f"        expected: {expected!r}\n        got:      {result!r}")
-    print(f"\n{passed}/{len(checks)} passed")
+        if result == expected:
+            score[level][0] += 1
+            print(f"[PASS] {label}")
+        elif result in NOT_STARTED:
+            print(f"[TODO] {label}  - not started yet" + ("  (stretch, optional)" if level == "stretch" else ""))
+        else:
+            print(f"[FAIL] {label}")
+            print(f"        expected: {expected!r}")
+            print(f"        got:      {result!r}")
+    core, stretch = score["core"], score["stretch"]
+    print()
+    print(f"Core:    {core[0]}/{core[1]} passed")
+    print(f"Stretch: {stretch[0]}/{stretch[1]} passed (optional)")
+    if core[0] == core[1]:
+        print()
+        if stretch[0] < stretch[1]:
+            print("Core done - well done! Move on to the project milestone, or try the stretch functions.")
+        else:
+            print("Everything passes - excellent work!")

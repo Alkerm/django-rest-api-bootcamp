@@ -18,6 +18,7 @@ Copy-Item -Recurse django-rest-api-bootcamp\project\starter task-management-api
 cd task-management-api
 py -m venv .venv
 .venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
@@ -27,6 +28,7 @@ cp -R django-rest-api-bootcamp/project/starter task-management-api
 cd task-management-api
 python3 -m venv .venv
 source .venv/bin/activate
+python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 

@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #   DEBUG          default "True"  -> convert the TEXT to a bool: "true"/"True" -> True, anything else -> False
 #   ALLOWED_HOSTS  default "127.0.0.1,localhost" -> split on "," into a list, strip spaces, drop empty items
 # HINT: days/day-04/hints.md#p3  |  Example: days/day-04/example/settings_env.py
-# YOUR CODE HERE
+# YOUR CODE HERE - replace the placeholder lines below
 SECRET_KEY = "development-only-key"
 DEBUG = True
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]

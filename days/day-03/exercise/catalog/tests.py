@@ -23,7 +23,8 @@ class ReadingListAcceptanceTests(APITestCase):
         response = self.client.post(
             "/api/auth/token/", {"username": username, "password": password}, format="json"
         )
-        self.assertEqual(response.status_code, status.HTTP_200_OK, "token login failed - Task 1")
+        self.assertEqual(response.status_code, status.HTTP_200_OK,
+                         "token login failed: check rest_framework.authtoken, migrate, and the api/auth/token/ URL (Task 1)")
         self.client.credentials(HTTP_AUTHORIZATION=f"Token {response.data['token']}")
 
     # ---- Task 1: token authentication
@@ -31,7 +32,8 @@ class ReadingListAcceptanceTests(APITestCase):
         response = self.client.post(
             "/api/auth/token/", {"username": "alice", "password": "alice-pass-2026"}, format="json"
         )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK,
+                         "POST /api/auth/token/ should return 200: is the token URL added and authtoken migrated? (Task 1)")
         self.assertEqual(len(response.data["token"]), 40)
 
     def test_task1_wrong_password_returns_400(self):
@@ -41,17 +43,20 @@ class ReadingListAcceptanceTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_task1_no_token_returns_401(self):
-        self.assertEqual(self.client.get("/api/reading-list/").status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(self.client.get("/api/reading-list/").status_code, status.HTTP_401_UNAUTHORIZED,
+                         "no token must give 401: list TokenAuthentication FIRST in DEFAULT_AUTHENTICATION_CLASSES (Task 1b)")
 
     # ---- Task 2: ownership
     def test_task2_alice_sees_only_her_two_items(self):
         self.login("alice", "alice-pass-2026")
         response = self.client.get("/api/reading-list/")
-        self.assertEqual([item["id"] for item in response.data], [1, 2])
+        self.assertEqual([item["id"] for item in response.data], [1, 2],
+                         "alice must see only items 1 and 2: filter get_queryset() by request.user (Task 2a)")
 
     def test_task2_bob_cannot_read_change_or_delete_alices_item(self):
         self.login("bob", "bob-pass-2026")
-        self.assertEqual(self.client.get("/api/reading-list/1/").status_code, status.HTTP_404_NOT_FOUND)
+        self.assertEqual(self.client.get("/api/reading-list/1/").status_code, status.HTTP_404_NOT_FOUND,
+                         "bob must not see alice's item: filter get_queryset() by request.user (Task 2a)")
         self.assertEqual(
             self.client.patch("/api/reading-list/1/", {"notes": "hacked"}, format="json").status_code,
             status.HTTP_404_NOT_FOUND,
@@ -62,7 +67,8 @@ class ReadingListAcceptanceTests(APITestCase):
     def test_task2_create_sets_user_from_token(self):
         self.login("bob", "bob-pass-2026")
         response = self.client.post("/api/reading-list/", {"book": 1, "user": 1}, format="json")
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED,
+                         "create failed: set user=self.request.user in perform_create() (Task 2b)")
         self.assertEqual(response.data["user"], "bob")
         self.assertEqual(ReadingListItem.objects.get(pk=response.data["id"]).user.username, "bob")
 
@@ -72,7 +78,8 @@ class ReadingListAcceptanceTests(APITestCase):
         yesterday = (timezone.localdate() - timedelta(days=1)).isoformat()
         response = self.client.post("/api/reading-list/", {"book": 2, "target_date": yesterday}, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(response.data["target_date"], ["Target date cannot be in the past."])
+        self.assertEqual(response.data["target_date"], ["Target date cannot be in the past."],
+                         "add validate_target_date() with this exact message (Task 3a)")
 
     def test_task3_today_target_date_is_allowed(self):
         self.login("alice", "alice-pass-2026")
@@ -84,7 +91,8 @@ class ReadingListAcceptanceTests(APITestCase):
         self.login("alice", "alice-pass-2026")
         response = self.client.post("/api/reading-list/", {"book": 1}, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(response.data["book"], ["This book is already on your reading list."])
+        self.assertEqual(response.data["book"], ["This book is already on your reading list."],
+                         "add validate_book() with this exact message (Task 3b)")
 
     def test_task3_same_book_for_another_user_is_allowed(self):
         self.login("bob", "bob-pass-2026")

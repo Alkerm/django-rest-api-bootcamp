@@ -35,5 +35,5 @@ class Book(models.Model):
 
     def __str__(self):
         # TODO [Day 1 · Task 1]: Return the book title so the admin shows "Clean Code" instead of "Book object (1)".
-        # YOUR CODE HERE
+        # YOUR CODE HERE - replace the placeholder line below
         return super().__str__()

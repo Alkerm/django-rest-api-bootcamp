@@ -5,14 +5,34 @@
 
 ## Where to start
 
-- **Finished Day 1?** Continue in your own `task-management-api` repository.
-- **Behind?** Copy the files of [`project/checkpoints/day-02`](../../project/checkpoints/day-02) over your project
-  folder (keep your `.git` and `.venv` folders). It contains Day 1 solved + today's TODOs.
-  Then run `python manage.py migrate` and make sure you have two users and a superuser.
+**Everyone does the same thing each morning:** copy today's checkpoint over your project. It contains everything up
+to yesterday already solved, plus today's TODOs, so you never have to merge files by hand. Your Git history, your
+`.venv` and your database (users and tasks) are kept.
 
-> If you continue your own project: create these new files by copying them from `project/checkpoints/day-02/`:
-> `tasks/serializers.py`, `tasks/views.py`, `tasks/urls.py`. Then copy the `REST_FRAMEWORK` block at the end of
-> `config/settings.py`, and replace `config/urls.py`. They contain today's TODOs.
+Open a terminal in the folder that contains **both** `django-rest-api-bootcamp` and `task-management-api`:
+
+```powershell
+# Windows PowerShell
+git -C django-rest-api-bootcamp pull       # only when the instructor announces an update
+cd task-management-api
+git add -A; git commit -m "End of Day 1"                       # save your own work first
+Copy-Item -Path ..\django-rest-api-bootcamp\project\checkpoints\day-02\* -Destination . -Recurse -Force
+.venv\Scripts\Activate.ps1
+python manage.py migrate
+```
+
+```bash
+# macOS
+git -C django-rest-api-bootcamp pull       # only when the instructor announces an update
+cd task-management-api
+git add -A && git commit -m "End of Day 1"
+cp -R ../django-rest-api-bootcamp/project/checkpoints/day-02/. .
+source .venv/bin/activate
+python manage.py migrate
+```
+
+> Curious how your Day 1 code compares with the reference? Run `git diff` before your next commit: the differences
+> are a free code review. `nothing to commit` after `git commit` is fine.
 
 ## TODOs
 

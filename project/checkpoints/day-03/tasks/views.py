@@ -25,7 +25,7 @@ class TaskViewSet(viewsets.ModelViewSet):
     #   Day 2 used:  queryset = Task.objects.all()   <- every user could see every task!
     #   Override get_queryset() and return only the tasks whose owner is self.request.user.
     # HINT: days/day-03/hints.md#p4  |  Example: days/day-03/example/views.py
-    # YOUR CODE HERE
+    # YOUR CODE HERE - replace the placeholder line below
     queryset = Task.objects.all()
 
     def perform_create(self, serializer):

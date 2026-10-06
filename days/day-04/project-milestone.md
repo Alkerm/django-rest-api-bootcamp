@@ -6,12 +6,34 @@ from the environment, and a deployment rehearsal.
 
 ## Where to start
 
-- **Finished Day 3?** Continue in your own repository. Copy these from
-  [`project/checkpoints/day-04`](../../project/checkpoints/day-04): `tasks/tests.py`, `.env.example`, `.python-version`,
-  `requirements.txt`, and `README.md` (replace your short one). Then apply the settings TODO (P3) to your
-  `config/settings.py`.
-- **Behind?** Copy the whole checkpoint over your project folder (keep `.git` and `.venv`), then
-  `python manage.py migrate`.
+**Everyone does the same thing each morning:** copy today's checkpoint over your project. It contains everything up
+to yesterday already solved, plus today's TODOs, so you never have to merge files by hand. Your Git history, your
+`.venv` and your database (users and tasks) are kept.
+
+Open a terminal in the folder that contains **both** `django-rest-api-bootcamp` and `task-management-api`:
+
+```powershell
+# Windows PowerShell
+git -C django-rest-api-bootcamp pull       # only when the instructor announces an update
+cd task-management-api
+git add -A; git commit -m "End of Day 3"                       # save your own work first
+Copy-Item -Path ..\django-rest-api-bootcamp\project\checkpoints\day-04\* -Destination . -Recurse -Force
+.venv\Scripts\Activate.ps1
+python manage.py migrate
+```
+
+```bash
+# macOS
+git -C django-rest-api-bootcamp pull       # only when the instructor announces an update
+cd task-management-api
+git add -A && git commit -m "End of Day 3"
+cp -R ../django-rest-api-bootcamp/project/checkpoints/day-04/. .
+source .venv/bin/activate
+python manage.py migrate
+```
+
+> Curious how your Day 3 code compares with the reference? Run `git diff` before your next commit: the differences
+> are a free code review. `nothing to commit` after `git commit` is fine.
 
 ## TODOs
 
@@ -21,7 +43,7 @@ from the environment, and a deployment rehearsal.
 | P2 | `tasks/tests.py` | write the 7 tests marked **REQUIRED**, starting with the two marked *build together with the instructor*. The 7 **STRETCH** tests are optional | [hints#p2](hints.md#p2) |
 | P3 | `config/settings.py` | `SECRET_KEY`, `DEBUG`, `ALLOWED_HOSTS` from environment variables | [hints#p3](hints.md#p3) |
 | P4 | `.env.example` | document the three variables with placeholders | [hints#p4](hints.md#p4) |
-| P5 | `requirements.txt` | add `psycopg[binary]`, `dj-database-url`, `gunicorn`, `whitenoise` and install them | [hints#p5](hints.md#p5) |
+| P5 | `requirements.txt` | add `psycopg[binary]`, `dj-database-url`, `gunicorn`, `whitenoise`, then `python -m pip install -r requirements.txt` | [hints#p5](hints.md#p5) |
 | P6 | `README.md` | complete every `_TODO_` section | [hints#p6](hints.md#p6) |
 
 **Required test coverage** = the example + the 7 REQUIRED tests (8 in total): unauthenticated access · token login ·
@@ -29,6 +51,7 @@ create + owner assignment · own-only list · cross-user access · update · del
 
 ```bash
 python manage.py test          # goal: "OK (skipped=7)": only STRETCH tests may still be skipped
+python manage.py test -v 2     # shows which tests are still skipped, and whether each is REQUIRED or STRETCH
 ```
 
 Finish the README (P6) and the partner review **before** any STRETCH test.

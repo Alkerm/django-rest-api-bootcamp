@@ -9,7 +9,7 @@ class Task(models.Model):
         # TODO [Day 1 · P2]: Define the three allowed status values.
         #   Stored value -> human label:  TODO -> "To do", IN_PROGRESS -> "In progress", DONE -> "Done"
         # HINT: days/day-01/hints.md#p2  |  Example: days/day-01/example/models.py
-        # YOUR CODE HERE
+        # YOUR CODE HERE - replace the placeholder line below
         pass
 
     # `id` is created automatically by Django (BigAutoField) - do not add it yourself.
@@ -30,5 +30,5 @@ class Task(models.Model):
         # TODO [Day 1 · P4]: Return a readable label, e.g. "Buy groceries (To do)".
         #   get_status_display() returns the human label of the status.
         # HINT: days/day-01/hints.md#p4
-        # YOUR CODE HERE
+        # YOUR CODE HERE - replace the placeholder line below
         return super().__str__()

@@ -4,7 +4,7 @@
 |---|---|
 | **What you will practice** | Defining a Django model with a relationship · creating and applying migrations · loading sample data · registering models in the admin · reading and writing data with the ORM |
 | **Where to start** | This folder: `days/day-01/exercise/`. Files: `catalog/models.py` → `catalog/admin.py` → `orm_practice.py` |
-| **Result to produce** | **Core:** a migrated SQLite database with 3 authors and 6 books, a working admin for both models, and ORM functions 1-3 passing. **Stretch:** functions 4-5 (`5/5 passed`) |
+| **Result to produce** | **Core:** a migrated SQLite database with 3 authors and 6 books, a working admin for both models, and ORM functions 1-3 passing. **Stretch:** functions 4-5 (`Stretch: 2/2 passed`) |
 | **Time** | ~45 minutes |
 | **Hints** | [`../hints.md`](../hints.md) · worked example: [`../example/`](../example/) |
 
@@ -142,7 +142,7 @@ Searching `clean` shows 3 books. Filtering by *Martin Fowler* shows 2 books.
 
 ### 3B: ORM practice
 
-**File:** `orm_practice.py`. Complete the 5 functions marked `TODO [Day 1 · Task 3B-n]`. Each function's docstring
+**File:** `orm_practice.py`. Complete functions 1-3 (core); 4-5 are stretch. They are marked `TODO [Day 1 · Task 3B-n]`. Each function's docstring
 states its expected result. Stop the server (Ctrl+C) or use a second terminal, then run:
 
 ```bash
@@ -162,8 +162,8 @@ python orm_practice.py
 
 **Acceptance criteria**
 - [ ] Admin shows both models with the requested columns, filter, and search.
-- [ ] Core: `python orm_practice.py` shows PASS for functions 1-3.
-- [ ] *Stretch:* `5/5 passed`.
+- [ ] Core: `python orm_practice.py` prints `Core:    3/3 passed`.
+- [ ] *Stretch:* `Stretch: 2/2 passed`.
 
 ---
 

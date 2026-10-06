@@ -23,6 +23,9 @@ python manage.py loaddata sample_data         # -> Installed 14 object(s) from 1
 python manage.py runserver
 ```
 
+> **Your progress meter:** `python manage.py test -k task1` (then `-k task2`) in a 2nd terminal. The tests fail at
+> the start, which is expected; each failure message names the task that fixes it.
+
 > **Database state: pre-filled with sample data.** 2 users, 3 authors, 6 books, 3 reading-list items (tables in
 > each task below). Every endpoint already **requires authentication**, so before Task 1 any request returns
 > `403 Forbidden` because there is no way to log in yet.

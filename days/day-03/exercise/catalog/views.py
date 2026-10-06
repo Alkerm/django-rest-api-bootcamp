@@ -22,7 +22,7 @@ class ReadingListItemViewSet(viewsets.ModelViewSet):
     # TODO [Day 3 · Task 2a]: Return ONLY the reading-list items of the user who sent the request.
     #   The stub below returns everyone's items -> alice can see bob's list. Fix it with get_queryset().
     # HINT: days/day-03/hints.md#task-2  |  Example: days/day-03/example/views.py
-    # YOUR CODE HERE
+    # YOUR CODE HERE - replace the placeholder line below
     queryset = ReadingListItem.objects.all()
 
     # TODO [Day 3 · Task 2b]: Save new items with user = the user who sent the request.

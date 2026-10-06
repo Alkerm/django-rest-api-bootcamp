@@ -9,7 +9,7 @@ users' data. It ends as a tested, documented, deployed service. No frontend is r
 | Folder | What it is | When to use it |
 |---|---|---|
 | [`starter/`](starter/) | the Day 1 starting point: a generated Django project with Day 1 TODOs | copy it once on Day 1 into your own `task-management-api` folder |
-| [`checkpoints/day-02`](checkpoints/day-02) … [`day-05`](checkpoints/day-05) | the start of each day: **all previous days solved** + that day's TODOs | copy the new files from it each morning, or the whole folder if you fell behind |
+| [`checkpoints/day-02`](checkpoints/day-02) … [`day-05`](checkpoints/day-05) | the start of each day: **all previous days solved** + that day's TODOs | copy the whole folder over your project each morning (Day 5: only 3 files if you are on track) |
 | [`reference-solution/`](reference-solution/) | the complete project (instructor repository) | after the program |
 
 Every TODO looks like this and points to a hint:

@@ -28,7 +28,7 @@ ALLOWED_HOSTS = [
 # TODO [Day 5 · P4]: Read CSRF_TRUSTED_ORIGINS from the environment, the same way as ALLOWED_HOSTS
 #   (comma-separated, default "" -> empty list). Production value: https://<your-app>.onrender.com
 # HINT: days/day-05/hints.md#p4
-# YOUR CODE HERE
+# YOUR CODE HERE - replace the placeholder line below
 CSRF_TRUSTED_ORIGINS = []
 
 # Safety net: never run production with the public development key.

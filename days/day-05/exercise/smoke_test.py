@@ -53,7 +53,7 @@ def get_token(base_url, username, password):
     # TODO [Day 5 · Task 3a · OPTIONAL]: Send the request with requests.post(url, json={...}, timeout=TIMEOUT).
     #   Return response.json()["token"] when the status is 200, otherwise None.
     # HINT: days/day-05/hints.md#task-3  |  Example: days/day-05/example/smoke_example.py
-    # YOUR CODE HERE
+    # YOUR CODE HERE - replace the placeholder line below
     return None
 
 
@@ -62,7 +62,7 @@ def create_item(base_url, token, book_id):
     Request:  POST {base_url}/api/reading-list/   JSON {"book": book_id}   + auth header
     Expected: 201  {"id": <new id>, "user": "alice", "book": 2, ...}"""
     # TODO [Day 5 · Task 3b · OPTIONAL]
-    # YOUR CODE HERE
+    # YOUR CODE HERE - replace the placeholder line below
     return None, None
 
 
@@ -70,14 +70,14 @@ def get_item_status(base_url, token, item_id):
     """GET one reading-list item with this token and return ONLY the status code.
     Expected: 200 for the owner, 404 for any other user."""
     # TODO [Day 5 · Task 3c · OPTIONAL]
-    # YOUR CODE HERE
+    # YOUR CODE HERE - replace the placeholder line below
     return None
 
 
 def delete_item(base_url, token, item_id):
     """DELETE one reading-list item and return the status code.  Expected: 204"""
     # TODO [Day 5 · Task 3d · OPTIONAL]
-    # YOUR CODE HERE
+    # YOUR CODE HERE - replace the placeholder line below
     return None
 
 
