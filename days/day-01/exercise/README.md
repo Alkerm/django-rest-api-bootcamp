@@ -4,7 +4,7 @@
 |---|---|
 | **What you will practice** | Defining a Django model with a relationship · creating and applying migrations · loading sample data · registering models in the admin · reading and writing data with the ORM |
 | **Where to start** | This folder: `days/day-01/exercise/`. Files: `catalog/models.py` → `catalog/admin.py` → `orm_practice.py` |
-| **Result to produce** | **Core:** a migrated SQLite database with 3 authors and 6 books, a working admin for both models, and ORM functions 1-3 passing. **Stretch:** functions 4-5 (`Stretch: 2/2 passed`) |
+| **Result to produce** | **Core (Tasks 1, 2, 3A):** a migrated SQLite database with 3 authors and 6 books and a working admin for both models. **Stretch (Task 3B):** the ORM practice file (`ORM practice: 5/5 passed`) |
 | **Time** | ~45 minutes |
 | **Hints** | [`../hints.md`](../hints.md) · worked example: [`../example/`](../example/) |
 
@@ -140,9 +140,12 @@ Searching `clean` shows 3 books. Filtering by *Martin Fowler* shows 2 books.
 
 **Database change:** `createsuperuser` adds 1 row to `auth_user`. Books and authors are unchanged.
 
-### 3B: ORM practice
+### 3B (STRETCH, optional): ORM practice
 
-**File:** `orm_practice.py`. Complete functions 1-3 (core); 4-5 are stretch. They are marked `TODO [Day 1 · Task 3B-n]`. Each function's docstring
+> Do this after the project milestone, or at home. In the API, DRF writes these queries for you; this shows what
+> happens underneath.
+
+**File:** `orm_practice.py`. Complete the functions marked `TODO [Day 1 · Task 3B-n]`, in order. Each function's docstring
 states its expected result. Stop the server (Ctrl+C) or use a second terminal, then run:
 
 ```bash
@@ -151,9 +154,9 @@ python orm_practice.py
 
 | # | Function | Level | ORM skill | Input | Expected output |
 |---|---|---|---|---|---|
-| 1 | `count_books()` | **core** | `.count()` | none | `6` |
-| 2 | `titles_by_author(name)` | **core** | filter across a ForeignKey (`author__name`) + `order_by` | `"Martin Fowler"` | `["Patterns of Enterprise Application Architecture", "Refactoring"]` |
-| 3 | `count_published_after(year)` | **core** | `__gt` lookup | `2005` | `3` |
+| 1 | `count_books()` | stretch | `.count()` | none | `6` |
+| 2 | `titles_by_author(name)` | stretch | filter across a ForeignKey (`author__name`) + `order_by` | `"Martin Fowler"` | `["Patterns of Enterprise Application Architecture", "Refactoring"]` |
+| 3 | `count_published_after(year)` | stretch | `__gt` lookup | `2005` | `3` |
 | 4 | `available_titles()` | stretch | `__gt` lookup + `values_list` | none | 4 titles A-Z (see docstring) |
 | 5 | `create_update_delete_book()` | stretch | `create()`, `save()`, `delete()` | none | `(1, 6)` |
 
@@ -161,9 +164,8 @@ python orm_practice.py
 (6 books again). After the script, the table is exactly as listed in Task 2.
 
 **Acceptance criteria**
-- [ ] Admin shows both models with the requested columns, filter, and search.
-- [ ] Core: `python orm_practice.py` prints `Core:    3/3 passed`.
-- [ ] *Stretch:* `Stretch: 2/2 passed`.
+- [ ] Core: the admin shows both models with the requested columns, filter, and search.
+- [ ] *Stretch:* `python orm_practice.py` prints `ORM practice: 5/5 passed`.
 
 ---
 

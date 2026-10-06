@@ -8,16 +8,10 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# TODO [Day 4 · Task 2a]: Read these three settings from ENVIRONMENT VARIABLES with os.getenv(name, default).
-#   variable        default (used when the variable is not set)    type in Python
-#   SECRET_KEY      "exercise-only-key"                            str
-#   DEBUG           "True"                                         bool  -> True only when the text is "true" (any case)
-#   ALLOWED_HOSTS   "127.0.0.1,localhost"                          list  -> split on ",", strip spaces, skip empty items
-# HINT: days/day-04/hints.md#task-2  |  Example: days/day-04/example/settings_env.py
-# YOUR CODE HERE - replace the placeholder lines below
-SECRET_KEY = "exercise-only-key"
-DEBUG = True
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+# GIVEN: settings read from environment variables (you write these yourself in today's project, P3).
+SECRET_KEY = os.getenv("SECRET_KEY", "exercise-only-key")
+DEBUG = os.getenv("DEBUG", "True").lower() == "true"
+ALLOWED_HOSTS = [host.strip() for host in os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",") if host.strip()]
 
 INSTALLED_APPS = [
     "django.contrib.admin",

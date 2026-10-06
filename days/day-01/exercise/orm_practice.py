@@ -1,5 +1,8 @@
 """
-Day 1 exercise - Task 3B: talk to the database with the Django ORM.
+Day 1 exercise - Task 3B (STRETCH, optional): talk to the database with the Django ORM.
+
+This whole file is optional extra practice. The Day 1 core is Tasks 1, 2 and 3A; do this after the project
+milestone, or at home. (In the API, DRF writes these queries for you; here you see what happens underneath.)
 
 BEFORE YOU START
     * Tasks 1 and 2 are done: the Book table exists and the sample data is loaded
@@ -7,7 +10,6 @@ BEFORE YOU START
     * Run this file from days/day-01/exercise with your .venv active:
           python orm_practice.py
     * The self-check at the bottom prints PASS/FAIL for every function.
-      Core = functions 1-3 (3/5 passed). Functions 4-5 are STRETCH (optional): do them if you finish early.
       The check for function 5 creates a temporary book and deletes it again, so the sample data stays unchanged.
 
 DATA YOU WORK WITH (pre-loaded sample data)
@@ -36,7 +38,7 @@ from catalog.models import Author, Book  # noqa: E402  (must come after django.s
 
 def count_books():
     """1. READ - How many books are in the library?   Expected: 6"""
-    # TODO [Day 1 · Task 3B-1]: Return the number of Book rows.
+    # TODO [Day 1 · Task 3B-1 · STRETCH (optional)]: Return the number of Book rows.
     # HINT: days/day-01/hints.md#task-3
     # YOUR CODE HERE - replace the placeholder line below
     return None
@@ -45,7 +47,7 @@ def count_books():
 def titles_by_author(author_name):
     """2. FILTER ACROSS A RELATIONSHIP - Titles of one author's books, sorted A-Z.
     Expected for "Martin Fowler": ["Patterns of Enterprise Application Architecture", "Refactoring"]"""
-    # TODO [Day 1 · Task 3B-2]: Filter books by the author's NAME (double underscore: author__name),
+    # TODO [Day 1 · Task 3B-2 · STRETCH (optional)]: Filter books by the author's NAME (double underscore: author__name),
     #   order by title, and return a plain list of titles.
     # YOUR CODE HERE - replace the placeholder line below
     return []
@@ -53,7 +55,7 @@ def titles_by_author(author_name):
 
 def count_published_after(year):
     """3. FIELD LOOKUP - How many books were published AFTER a year?   Expected for 2005: 3"""
-    # TODO [Day 1 · Task 3B-3]: Use the __gt ("greater than") lookup on published_year.
+    # TODO [Day 1 · Task 3B-3 · STRETCH (optional)]: Use the __gt ("greater than") lookup on published_year.
     # YOUR CODE HERE - replace the placeholder line below
     return None
 
@@ -88,37 +90,32 @@ def create_update_delete_book():
 if __name__ == "__main__":
     NOT_STARTED = (None, [], (None, None))  # what the untouched placeholder lines return
     checks = [
-        ("core", "1. count_books()", count_books, (), 6),
-        ("core", "2. titles_by_author('Martin Fowler')", titles_by_author, ("Martin Fowler",),
+        ("stretch", "1. count_books()", count_books, (), 6),
+        ("stretch", "2. titles_by_author('Martin Fowler')", titles_by_author, ("Martin Fowler",),
          ["Patterns of Enterprise Application Architecture", "Refactoring"]),
-        ("core", "3. count_published_after(2005)", count_published_after, (2005,), 3),
+        ("stretch", "3. count_published_after(2005)", count_published_after, (2005,), 3),
         ("stretch", "4. available_titles()", available_titles, (),
          ["Clean Architecture", "Clean Code", "Patterns of Enterprise Application Architecture", "Refactoring"]),
         ("stretch", "5. create_update_delete_book()", create_update_delete_book, (), (1, 6)),
     ]
-    score = {"core": [0, 0], "stretch": [0, 0]}
+    passed = 0
     for level, label, function, args, expected in checks:
-        score[level][1] += 1
         try:
             result = function(*args)
         except Exception as error:  # show the error but keep checking the rest
             result = f"ERROR: {type(error).__name__}: {error}"
         if result == expected:
-            score[level][0] += 1
+            passed += 1
             print(f"[PASS] {label}")
         elif result in NOT_STARTED:
-            print(f"[TODO] {label}  - not started yet" + ("  (stretch, optional)" if level == "stretch" else ""))
+            print(f"[TODO] {label}  - not started yet")
         else:
             print(f"[FAIL] {label}")
             print(f"        expected: {expected!r}")
             print(f"        got:      {result!r}")
-    core, stretch = score["core"], score["stretch"]
     print()
-    print(f"Core:    {core[0]}/{core[1]} passed")
-    print(f"Stretch: {stretch[0]}/{stretch[1]} passed (optional)")
-    if core[0] == core[1]:
-        print()
-        if stretch[0] < stretch[1]:
-            print("Core done - well done! Move on to the project milestone, or try the stretch functions.")
-        else:
-            print("Everything passes - excellent work!")
+    print(f"ORM practice: {passed}/{len(checks)} passed (optional)")
+    if passed == len(checks):
+        print("Everything passes - excellent work!")
+    elif passed:
+        print("Nice progress. Every function you finish is a query you now understand.")

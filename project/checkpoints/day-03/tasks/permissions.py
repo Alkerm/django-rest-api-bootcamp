@@ -12,7 +12,8 @@ class IsOwner(permissions.BasePermission):
     message = "You can only access your own tasks."
 
     def has_object_permission(self, request, view, obj):
-        # TODO [Day 3 · P5]: Return True only when the task's owner is the user making the request.
+        # TODO [Day 3 · P5 · STRETCH (optional)]: Return True only when the task's owner is the user making the request.
+        #   Optional because get_queryset() (P4) already hides other users' tasks; this is a second safety layer.
         # HINT: days/day-03/hints.md#p5  |  Example: days/day-03/example/permissions.py
         # YOUR CODE HERE - replace the placeholder line below
         return True

@@ -152,7 +152,7 @@ def get_queryset(self):
 </details>
 
 <a id="p5"></a>
-### P5: `IsOwner`
+### P5 (stretch): `IsOwner`
 
 <details><summary>Level 1</summary>
 
@@ -161,7 +161,7 @@ def get_queryset(self):
 </details>
 
 <a id="p6"></a>
-### P6: Owner as username (Day 2 review)
+### P6 (stretch): Owner as username (Day 2 review)
 
 <details><summary>Level 1</summary>
 

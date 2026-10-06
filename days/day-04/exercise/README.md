@@ -1,10 +1,10 @@
-# Day 4 Exercise: Test the Reading-List API + Configuration from the Environment
+# Day 4 Exercise: Test the Reading-List API
 
 | | |
 |---|---|
-| **What you will practice** | Writing `APITestCase` tests (arrange → act → assert) · testing success **and** failure cases · checking the database inside a test · reading a failing test · moving settings to environment variables · documenting them in `.env.example` |
-| **Where to start** | This folder: `days/day-04/exercise/`. Files: `catalog/tests.py` (Task 1) → `config/settings.py` + `.env.example` (Task 2) → `catalog/views.py` (Task 3, a temporary experiment) |
-| **Result to produce** | **Core:** the 4 REQUIRED tests pass, settings change with environment variables, and `.env.example` holds placeholders only. **Stretch:** the 4 STRETCH tests and Task 3 |
+| **What you will practice** | Writing `APITestCase` tests (arrange → act → assert) · testing success **and** failure cases · checking the database inside a test · reading a failing test |
+| **Where to start** | This folder: `days/day-04/exercise/`. Files: `catalog/tests.py` (Task 1) → `catalog/views.py` (Task 2, a temporary experiment) |
+| **Result to produce** | **Core:** the 4 REQUIRED tests pass (`OK (skipped=4)`). **Stretch:** the 4 STRETCH tests and Task 2 |
 | **Time** | ~45 minutes for the core; stretch only if you finish early (the project milestone comes first) |
 | **Hints** | [`../hints.md`](../hints.md) · worked example: [`../example/`](../example/) |
 
@@ -69,56 +69,7 @@ python manage.py test -v 2                    # lists every test and whether it 
 
 ---
 
-## Task 2: Settings from environment variables
-
-**Files:** `config/settings.py` (`TODO Task 2a`) and `.env.example` (`TODO Task 2b`).
-
-| Variable | Default when not set | Python value |
-|---|---|---|
-| `SECRET_KEY` | `exercise-only-key` | string |
-| `DEBUG` | `True` | **bool**: `True` only when the text is `true`/`True` |
-| `ALLOWED_HOSTS` | `127.0.0.1,localhost` | **list**, e.g. `["127.0.0.1", "localhost"]` |
-
-**Check your work:** `show_settings.py` (given) prints what Django loaded.
-
-```bash
-python show_settings.py
-#   DEBUG         : True  (bool)
-#   ALLOWED_HOSTS : ['127.0.0.1', 'localhost']
-```
-
-Now set variables **in the same terminal** and run it again:
-
-```powershell
-# Windows PowerShell
-$env:DEBUG = "False"; $env:SECRET_KEY = "any-long-test-value"; $env:ALLOWED_HOSTS = "example.com, api.example.com"
-python show_settings.py
-Remove-Item Env:DEBUG, Env:SECRET_KEY, Env:ALLOWED_HOSTS      # clean up afterwards
-```
-
-```bash
-# macOS
-DEBUG=False SECRET_KEY=any-long-test-value ALLOWED_HOSTS="example.com, api.example.com" python show_settings.py
-```
-
-**Expected output with the variables set**
-
-```text
-SECRET_KEY    : ******** (from environment, 19 characters)
-DEBUG         : False  (bool)
-ALLOWED_HOSTS : ['example.com', 'api.example.com']
-```
-
-Then complete `.env.example`: one line per variable with a comment and a **placeholder** value.
-
-**Acceptance criteria**
-- [ ] With no variables set, the defaults print. With variables set, the new values print with the right types.
-- [ ] `.env.example` lists all three variables and contains **no real secret**.
-- [ ] `python manage.py test` still passes.
-
----
-
-## Task 3 (STRETCH, optional): Watch a test catch a security bug (experiment, then undo)
+## Task 2 (STRETCH, optional): Watch a test catch a security bug (experiment, then undo)
 
 **File:** `catalog/views.py`. This task shows **why** tests matter.
 
@@ -140,5 +91,4 @@ test's expectation.
 ## Done? Check yourself
 
 - [ ] I can explain why tests create their own data instead of using my `db.sqlite3`.
-- [ ] I can explain why `SECRET_KEY` must not be written in `settings.py` for production.
 - [ ] Now apply the same ideas to the project: [`../project-milestone.md`](../project-milestone.md)

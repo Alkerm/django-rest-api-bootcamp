@@ -25,11 +25,12 @@ ALLOWED_HOSTS = [
 ]
 
 # Render terminates HTTPS and forwards CSRF-protected admin/login forms from your https:// URL.
-# TODO [Day 5 · P4]: Read CSRF_TRUSTED_ORIGINS from the environment, the same way as ALLOWED_HOSTS
-#   (comma-separated, default "" -> empty list). Production value: https://<your-app>.onrender.com
-# HINT: days/day-05/hints.md#p4
-# YOUR CODE HERE - replace the placeholder line below
-CSRF_TRUSTED_ORIGINS = []
+# GIVEN: trusted https:// origins for the admin/login forms (comma-separated, from the environment).
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")
+    if origin.strip()
+]
 
 # Safety net: never run production with the public development key.
 if not DEBUG and SECRET_KEY == "development-only-key":
@@ -58,10 +59,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    # TODO [Day 5 · P2]: Add WhiteNoise's middleware IMMEDIATELY after SecurityMiddleware
-    #   so the deployed admin and browsable API get their CSS/JS.
-    # HINT: days/day-05/hints.md#p2
-    # YOUR CODE HERE
+    # GIVEN: WhiteNoise serves CSS/JS when DEBUG is False (must stay right after SecurityMiddleware).
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -130,12 +129,12 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-# TODO [Day 5 · P3]: Tell `collectstatic` where to gather files, and let WhiteNoise serve them compressed.
-#   STATIC_ROOT -> BASE_DIR / "staticfiles"
-#   STORAGES    -> "default": Django's FileSystemStorage,
-#                  "staticfiles": "whitenoise.storage.CompressedStaticFilesStorage"
-# HINT: days/day-05/hints.md#p3
-# YOUR CODE HERE
+# GIVEN: `collectstatic` gathers files into STATIC_ROOT and WhiteNoise serves them compressed.
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STORAGES = {
+    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+    "staticfiles": {"BACKEND": "whitenoise.storage.CompressedStaticFilesStorage"},
+}
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 

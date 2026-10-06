@@ -22,10 +22,10 @@ complete and deployed.
 
 | Day | Date | Focus | Exercise (Library API) | Project increment (your Task API) |
 |---|---|---|---|---|
-| [1](days/day-01/README.md) | Sun, Oct 11 | Foundation | Book model, migrations, sample data, admin, ORM | Django project, `Task` model, admin, GitHub repo |
+| [1](days/day-01/README.md) | Sun, Oct 11 | Foundation | Book model, migrations, sample data, admin | Django project, `Task` model, admin, GitHub repo |
 | [2](days/day-02/README.md) | Mon, Oct 12 | Core API | Book CRUD API with serializer, viewset, router, validation | Complete CRUD at `/api/tasks/` + validation |
 | [3](days/day-03/README.md) | Tue, Oct 13 | Security | Personal reading list: tokens, ownership | Token login, per-user isolation, permissions |
-| [4](days/day-04/README.md) | Wed, Oct 14 | Testing | Write API tests, settings from environment | 8 required tests, env config, deployment packages |
+| [4](days/day-04/README.md) | Wed, Oct 14 | Testing | Write API tests | 8 required tests, env config, deployment packages |
 | [5](days/day-05/README.md) | Thu, Oct 15 | Publish | *guided deployment instead* (exercise optional) | Live HTTPS deployment, smoke test, README, demo |
 
 Daily session: **about 3 hours**: ~1 h explanation and demo, ~1 h exercise, ~1 h project (on Day 5 the exercise

@@ -11,7 +11,7 @@ final README, and the live demonstration.
 | Hour | What you do |
 |---|---|
 | 1 | Explanation + the instructor deploys the reference project live |
-| 2 | **Guided deployment:** steps 1-2 (production settings, Neon, Render, production users) |
+| 2 | **Guided deployment:** steps 1-2 (`DATABASE_URL` setting, Neon, Render, production users) |
 | 3 | Steps 3-6: smoke test, persistence, README, submission, live demo at a review station |
 
 ## Where to start
@@ -51,10 +51,10 @@ source .venv/bin/activate
 | TODO | File | What | Hint |
 |---|---|---|---|
 | P1 | `config/settings.py` | use `DATABASE_URL` when it is set | [hints#p1](hints.md#p1) |
-| P2 | `config/settings.py` | WhiteNoise middleware | [hints#p2](hints.md#p2) |
-| P3 | `config/settings.py` | `STATIC_ROOT` + `STORAGES` | [hints#p3](hints.md#p3) |
-| P4 | `config/settings.py` | `CSRF_TRUSTED_ORIGINS` from the environment | [hints#p4](hints.md#p4) |
-| P5 | `.env.example` | add `DATABASE_URL` and `CSRF_TRUSTED_ORIGINS` placeholders | [hints#p5](hints.md#p5) |
+| P2 | `.env.example` | add `DATABASE_URL` and `CSRF_TRUSTED_ORIGINS` placeholders | [hints#p2](hints.md#p2) |
+
+WhiteNoise, static files and `CSRF_TRUSTED_ORIGINS` are **already written** in the settings you copied (marked
+`GIVEN`): read them, so you know what Render needs.
 
 Check locally, then push:
 
@@ -84,10 +84,10 @@ Expected: `10/10 checks passed`.
 **Persistence check:** create one task with Postman → Render **Manual Deploy → Restart service** (or redeploy) → list
 the tasks again: it is still there.
 
-## 4. Finish the README (P6) · hour 3
+## 4. Finish the README (P3) · hour 3
 
 Complete every `_TODO_` section of the README you received on Day 4, add the live URL at the top, and write the
-Deployment section ([hints#p6](hints.md#p6)). Commit and push. Render redeploys automatically.
+Deployment section ([hints#p3](hints.md#p3)). Commit and push. Render redeploys automatically.
 
 If a classmate is free, ask them to follow your README from a fresh clone. Every place they had to guess is a
 sentence to add.

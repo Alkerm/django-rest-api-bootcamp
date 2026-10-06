@@ -43,8 +43,11 @@ python manage.py migrate
 | P2 | `config/settings.py` | `DEFAULT_AUTHENTICATION_CLASSES`: Token first, then Session | [hints#p2](hints.md#p2) |
 | P3 | `config/urls.py` | import `obtain_auth_token`, add `api/auth/token/` (`name="api-token"`) | [hints#p3](hints.md#p3) |
 | P4 | `tasks/views.py` | `get_queryset()` → only the caller's tasks | [hints#p4](hints.md#p4) |
-| P5 | `tasks/permissions.py` | `IsOwner.has_object_permission` | [hints#p5](hints.md#p5) |
-| P6 *(Day 2 review)* | `tasks/serializers.py` | show `owner` as the username | [hints#p6](hints.md#p6) |
+| P5 *(stretch)* | `tasks/permissions.py` | `IsOwner.has_object_permission`, a second safety layer | [hints#p5](hints.md#p5) |
+| P6 *(stretch, Day 2 review)* | `tasks/serializers.py` | show `owner` as the username | [hints#p6](hints.md#p6) |
+
+**Core = P1-P4.** P5 and P6 are optional: the API is already secure and correct without them. Do them only after the
+two-user check below passes.
 
 ## The two-user security check (record the results)
 
@@ -56,8 +59,8 @@ Make sure **each** user owns at least one task (use the admin if needed).
 | 1 | `POST /api/auth/token/` alice's credentials | `200` + token |
 | 2 | `POST /api/auth/token/` wrong password | `400` |
 | 3 | `GET /api/tasks/` **without** token | `401` |
-| 4 | alice: `GET /api/tasks/` | `200`, only alice's tasks, `"owner": "alice"` |
-| 5 | alice: `POST /api/tasks/` `{"title": "Mine", "owner": <bob's id>}` | `201`, owner `alice` |
+| 4 | alice: `GET /api/tasks/` | `200`, only alice's tasks (`"owner"` shows alice's id, or `"alice"` with P6) |
+| 5 | alice: `POST /api/tasks/` `{"title": "Mine", "owner": <bob's id>}` | `201`, owner is alice (not bob's id) |
 | 6 | bob: `GET /api/tasks/{alice's task id}/` | `404` |
 | 7 | bob: `PATCH /api/tasks/{alice's task id}/` `{"title": "x"}` | `404`, alice's task unchanged |
 | 8 | bob: `DELETE /api/tasks/{alice's task id}/` | `404`, task still exists |

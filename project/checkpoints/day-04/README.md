@@ -6,9 +6,9 @@ endpoint with token authentication, and blocks access to other users' data.
 
 Built during the Tuwaiq Club at KFUPM bootcamp *Building REST APIs with Django* (Oct 11-15, 2026).
 
-<!-- TODO [Day 5 · P6]: Complete every section marked "TODO" on Day 5, after your deployment works.
+<!-- TODO [Day 5 · P3]: Complete every section marked "TODO" on Day 5, after your deployment works.
      Test it: a classmate must be able to clone, set up, test, and use your API from this README alone.
-     HINT: days/day-05/hints.md#p6 -->
+     HINT: days/day-05/hints.md#p3 -->
 
 **Live API:** _added on Day 5_
 

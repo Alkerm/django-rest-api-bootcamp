@@ -11,7 +11,7 @@ By the end of the session, you can verify API behaviour with automated tests, re
 | Block | Time | What happens | Material |
 |---|---|---|---|
 | 1. Explanation + live demo | ~60 min | the instructor explains and builds in front of you | [`slides.md`](slides.md) · [`example/`](example/) |
-| 2. Exercise | ~60 min | Test the reading-list API (4 required tests) + settings from environment variables. **Core** tasks first, **stretch** only if time is left | [`exercise/README.md`](exercise/README.md) |
+| 2. Exercise | ~60 min | Test the reading-list API: 4 required tests. **Core** tasks first, **stretch** only if time is left | [`exercise/README.md`](exercise/README.md) |
 | 3. Project milestone | ~60 min | apply the same concept to **your** Task Management API | [`project-milestone.md`](project-milestone.md) |
 
 Take a short break between blocks. The day ends with the **exit check** at the bottom of the milestone page.

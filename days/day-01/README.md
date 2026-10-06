@@ -11,7 +11,7 @@ By the end of the session, you can explain the basic HTTP request-response flow,
 | Block | Time | What happens | Material |
 |---|---|---|---|
 | 1. Explanation + live demo | ~60 min | the instructor explains and builds in front of you | [`slides.md`](slides.md) · [`example/`](example/) |
-| 2. Exercise | ~60 min | Library catalog: complete the `Book` model, migrate, load sample data, admin, ORM practice. **Core** tasks first, **stretch** only if time is left | [`exercise/README.md`](exercise/README.md) |
+| 2. Exercise | ~60 min | Library catalog: complete the `Book` model, migrate, load sample data, admin (ORM practice is stretch). **Core** tasks first, **stretch** only if time is left | [`exercise/README.md`](exercise/README.md) |
 | 3. Project milestone | ~60 min | apply the same concept to **your** Task Management API | [`project-milestone.md`](project-milestone.md) |
 
 Take a short break between blocks. The day ends with the **exit check** at the bottom of the milestone page.

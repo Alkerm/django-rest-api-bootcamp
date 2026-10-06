@@ -60,7 +60,7 @@ Instructor explains + demos  →  days/day-0X/exercise/   →  days/day-0X/proje
 - **Instructor explains (~60 min):** the full request flow on the finished project; HTTP verbs on the Task resource;
   project vs app vs DRF; a live model → migration → admin → ORM demo; reproducibility (dependencies recorded,
   environments and secrets out of Git).
-- **Exercise (~60 min):** Library catalog: `Book` model, migrations, sample data, admin, 3 ORM functions (+2 stretch).
+- **Exercise (~60 min):** Library catalog: `Book` model, migrations, sample data, admin (+ ORM practice as stretch).
 - **Project (~60 min):** copy the starter, Task fields and status choices, owner → User, migrations, admin, two users,
   first GitHub push. If the push runs over, it finishes in the first 10 minutes of Day 2.
 - **Completion criteria:** a fresh terminal activates the environment and starts the server; `migrate` reports no
@@ -87,8 +87,8 @@ Instructor explains + demos  →  days/day-0X/exercise/   →  days/day-0X/proje
   defense in depth; 401 vs 403 vs 404.
 - **Exercise (~60 min):** personal reading list: token login, `get_queryset` + `perform_create` (+ user-aware validation
   as stretch).
-- **Project (~60 min):** token support, token endpoint, filtered querysets, automatic owner, `IsOwner`, owner shown as
-  username, the 8-step two-user scenario.
+- **Project (~60 min):** token support, token endpoint, filtered querysets, automatic owner, the 8-step two-user
+  scenario (+ `IsOwner` and owner shown as username as stretch).
 - **Completion criteria:** valid credentials return a token; no token → 401; a client-supplied owner is ignored; each
   list contains only the caller's records; cross-user access is blocked (404) without leaking data.
 
@@ -97,8 +97,8 @@ Instructor explains + demos  →  days/day-0X/exercise/   →  days/day-0X/proje
 - **Instructor explains (~60 min):** tests as executable promises; positive vs failure tests; test isolation;
   `APITestCase`, `setUp` and tokens in tests; reading a failing assertion and fixing the application; configuration
   from environment variables, `.env.example`, deployment packages.
-- **Exercise (~60 min):** 4 required tests for the reading-list API + settings from environment variables (+4 tests and
-  a "break it on purpose" experiment as stretch).
+- **Exercise (~60 min):** 4 required tests for the reading-list API (+4 tests and a "break it on purpose" experiment as
+  stretch).
 - **Project (~60 min):** the example + 7 required tests (8 in total, two built with the instructor), settings from the
   environment, `.env.example`, deployment packages in `requirements.txt` (+7 stretch tests).
 - **Optional homework (~15 min):** open the Neon and Render accounts and read the deployment guide.
@@ -110,9 +110,9 @@ Instructor explains + demos  →  days/day-0X/exercise/   →  days/day-0X/proje
 
 - **Instructor explains (~60 min):** deployment as the same app under production configuration; a live deployment of
   the reference project; log reading by failure category; smoke tests and persistence; the 5-minute demo.
-- **Guided deployment (~60 min, replaces the exercise):** production settings (`DATABASE_URL`, WhiteNoise, static
-  files, CSRF origins), Neon database, Render web service, environment variables, production users, everyone step by
-  step with the instructor.
+- **Guided deployment (~60 min, replaces the exercise):** the `DATABASE_URL` setting (WhiteNoise, static files and CSRF
+  origins come pre-written), Neon database, Render web service, environment variables, production users, everyone
+  step by step with the instructor.
 - **Project (~60 min):** smoke test against the live URL, persistence check, complete README, submission, and the live
   demo at one of 2-3 parallel review stations as soon as each participant is ready.
 - **Completion criteria:** public HTTPS URL reachable with current migrations; token auth and CRUD work in production;

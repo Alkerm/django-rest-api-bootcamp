@@ -2,7 +2,7 @@
 
 Open the hints **one level at a time**. Level 3 is close to the answer.
 
-**Exercise:** [Task 1](#task-1) · [Task 2](#task-2) · [Task 3](#task-3)
+**Exercise:** [Task 1](#task-1) · [Task 2 (stretch)](#task-2)
 **Project:** [P2 tests](#p2) · [P3 settings](#p3) · [P4 .env.example](#p4) · [P5 requirements](#p5)
 
 ---
@@ -57,31 +57,7 @@ def test_other_users_item_returns_404(self):
 </details>
 
 <a id="task-2"></a>
-### Task 2: Settings from the environment
-
-<details><summary>Level 1: nudge</summary>
-
-`os.getenv("NAME", "default")` always returns **text**. Convert it: compare lower-cased text with `"true"` for a
-bool, and `split(",")` for a list. See [`example/settings_env.py`](example/settings_env.py).
-</details>
-
-<details><summary>Level 2: almost the answer</summary>
-
-```python
-SECRET_KEY = os.getenv("SECRET_KEY", "exercise-only-key")
-DEBUG = os.getenv("DEBUG", "True").lower() == ___
-ALLOWED_HOSTS = [host.strip() for host in os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",") if host.strip()]
-```
-`.env.example` lines look like `NAME=placeholder`, with a `# comment` above each one.
-</details>
-
-<details><summary>Why is <code>bool(os.getenv("DEBUG"))</code> wrong?</summary>
-
-`bool("False")` is `True`: any non-empty string is truthy. Production would run with `DEBUG` on.
-</details>
-
-<a id="task-3"></a>
-### Task 3: Break it on purpose
+### Task 2 (stretch): Break it on purpose
 
 <details><summary>Level 1</summary>
 
@@ -133,7 +109,8 @@ payload = {"title": "Late", "due_date": yesterday.isoformat()}   # "2026-10-13"
 
 <details><summary>Level 1</summary>
 
-Exactly the same three lines as the exercise's Task 2, with the project's default `"development-only-key"`.
+Three lines with `os.getenv(name, default)`: see [`example/settings_env.py`](example/settings_env.py). Use the
+project's default `"development-only-key"` for `SECRET_KEY`.
 Delete the three stub lines below `# YOUR CODE HERE`. After the change, `python manage.py runserver` and
 `python manage.py test` must still work **without** setting any variable.
 </details>

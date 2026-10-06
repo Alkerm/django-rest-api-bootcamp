@@ -3,7 +3,7 @@
 Open the hints **one level at a time**. Level 3 is close to the answer.
 
 **Exercise:** [Task 1](#task-1) · [Task 2](#task-2) · [Task 3](#task-3)
-**Project:** [P1](#p1) · [P2](#p2) · [P3](#p3) · [P4](#p4) · [P5](#p5) · [P6](#p6) · [Deployment problems](#deploy)
+**Project:** [P1](#p1) · [P2](#p2) · [P3](#p3) · [Deployment problems](#deploy)
 
 ---
 
@@ -93,38 +93,13 @@ The server is not running (or runs on another port). Start it in a different ter
 
 <details><summary>Level 1</summary>
 
-Identical to the exercise's Task 1. Locally nothing changes (no variable set). On Render, `DATABASE_URL` holds your
-Neon connection string.
+Keep the SQLite `DATABASES` as it is and add an `if os.getenv("DATABASE_URL"):` block below it (see
+[`example/settings_production.py`](example/settings_production.py)). Locally nothing changes; on Render, `DATABASE_URL`
+holds your Neon connection string. WhiteNoise, static files and CSRF origins are already written for you.
 </details>
 
 <a id="p2"></a>
-### P2: WhiteNoise middleware
-
-<details><summary>Level 1</summary>
-
-`"whitenoise.middleware.WhiteNoiseMiddleware",` as the **second** item of `MIDDLEWARE`.
-</details>
-
-<a id="p3"></a>
-### P3: `STATIC_ROOT` + `STORAGES`
-
-<details><summary>Level 1</summary>
-
-Copy the block from [`example/settings_production.py`](example/settings_production.py). Test it locally:
-`python manage.py collectstatic --noinput` must succeed.
-</details>
-
-<a id="p4"></a>
-### P4: `CSRF_TRUSTED_ORIGINS`
-
-<details><summary>Level 1</summary>
-
-Same list-from-text pattern as `ALLOWED_HOSTS`, but with an **empty** default (`""`). Values include the scheme:
-`https://your-app.onrender.com`.
-</details>
-
-<a id="p5"></a>
-### P5: `.env.example`
+### P2: `.env.example`
 
 <details><summary>Level 1</summary>
 
@@ -135,8 +110,8 @@ CSRF_TRUSTED_ORIGINS=https://your-app-name.onrender.com
 Placeholders only. **Never** paste your real Neon string here.
 </details>
 
-<a id="p6"></a>
-### P6: Final README
+<a id="p3"></a>
+### P3: Final README
 
 <details><summary>Level 1: what goes in</summary>
 
