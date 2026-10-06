@@ -4,7 +4,7 @@ Read-only example files (Movies domain, models from [`../../day-01/example/model
 
 | File | Shows |
 |---|---|
-| [`serializers.py`](serializers.py) | `ModelSerializer`, `fields`, `read_only_fields`, a read-only related field with `source=` |
+| [`serializers.py`](serializers.py) | `ModelSerializer`, `fields`, `read_only_fields`, a read-only related field with `source=`, **validation**: custom error messages (`extra_kwargs`) and a field rule (`validate_<field>`, `self.instance`) |
 | [`views.py`](views.py) | `ModelViewSet` vs `ReadOnlyModelViewSet`, `perform_create` |
 | [`urls.py`](urls.py) | `DefaultRouter`, the generated URLs and their names |
 

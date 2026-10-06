@@ -27,17 +27,16 @@ class TaskSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ["id", "owner", "created_at", "updated_at"]
         # DRF already rejects a missing/blank title and an unknown status value (status has choices).
-        # TODO [Day 3 · P7]: Make the title errors clear for API clients with extra_kwargs:
-        #   missing title  -> "Title is required."
-        #   blank title    -> "Title cannot be blank."   ("   " counts as blank - DRF trims whitespace)
-        # HINT: days/day-03/hints.md#p7
-        # YOUR CODE HERE
+        extra_kwargs = {
+            "title": {
+                "error_messages": {
+                    "required": "Title is required.",
+                    "blank": "Title cannot be blank.",
+                }
+            }
+        }
 
-    # TODO [Day 3 · P8]: Reject a due_date earlier than today - but only when CREATING a task.
-    #   - Field-level validator name: validate_<field_name>
-    #   - On create, self.instance is None (on update it is the existing Task).
-    #   - Use timezone.localdate() for "today" (Riyadh time, see TIME_ZONE in settings).
-    #   - due_date is optional: None must stay valid.
-    #   Error message: "Due date cannot be earlier than today."
-    # HINT: days/day-03/hints.md#p8  |  Example: days/day-03/example/serializers.py
-    # YOUR CODE HERE
+    def validate_due_date(self, value):
+        if self.instance is None and value is not None and value < timezone.localdate():
+            raise serializers.ValidationError("Due date cannot be earlier than today.")
+        return value

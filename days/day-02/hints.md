@@ -2,8 +2,8 @@
 
 Open the hints **one level at a time**. Level 3 is close to the answer.
 
-**Exercise:** [Task 1](#task-1) · [Task 2](#task-2) · [Task 3](#task-3)
-**Project:** [P1](#p1) · [P2](#p2) · [P3](#p3) · [P4](#p4) · [P5](#p5) · [P6](#p6)
+**Exercise:** [Task 1](#task-1) · [Task 2](#task-2) · [Task 3](#task-3) · [Task 4 (stretch)](#task-4)
+**Project:** [P1](#p1) · [P2](#p2) · [P3](#p3) · [P4](#p4) · [P5](#p5) · [P6](#p6) · [P7](#p7) · [P8](#p8)
 
 ---
 
@@ -69,7 +69,43 @@ Remove the stub class (the one with `pass`) when you write yours. Then in `urls.
 </details>
 
 <a id="task-3"></a>
-### Task 3: Ordering + CRUD checklist
+### Task 3: Validation
+
+<details><summary>Level 1: nudge</summary>
+
+Two different tools:
+- **3a** changes the *text* of an error DRF already produces: `extra_kwargs` inside `class Meta`, with
+  `error_messages` for the field.
+- **3b** adds a *new rule*: a method named `validate_<field_name>(self, value)` on the serializer (not inside `Meta`).
+See [`example/serializers.py`](example/serializers.py).
+</details>
+
+<details><summary>Level 2: almost the answer</summary>
+
+```python
+class Meta:
+    ...
+    extra_kwargs = {"title": {"error_messages": {"blank": "Title cannot be blank."}}}
+
+def validate_published_year(self, value):
+    if value > timezone.localdate().___:
+        raise serializers.ValidationError("Published year cannot be in the future.")
+    return value
+```
+`timezone` is already imported at the top of the file.
+</details>
+
+<details><summary>Common errors</summary>
+
+| Symptom | Cause |
+|---|---|
+| The rule never runs | the method name must be exactly `validate_published_year`, and it must be indented inside `BookSerializer`, not inside `Meta` |
+| `test_task3_this_year_is_allowed` fails | use `>` (later than this year), not `>=` |
+| Everything returns 400 now | you forgot `return value` at the end of the method |
+</details>
+
+<a id="task-4"></a>
+### Task 4 (stretch): Ordering + CRUD checklist
 
 <details><summary>Level 1: ordering</summary>
 
@@ -179,4 +215,48 @@ Then log in at http://127.0.0.1:8000/api-auth/login/ and open http://127.0.0.1:8
 
 Expected while you are logged out: today the API requires a logged-in user. Log in at `/api-auth/login/` with one of
 the users you created on Day 1.
+</details>
+
+<a id="p7"></a>
+### P7: Title error messages
+
+<details><summary>Level 1</summary>
+
+`extra_kwargs` sets options for fields that `ModelSerializer` generates. The option you need is `error_messages`, a
+dictionary from error code (`"required"`, `"blank"`) to text.
+</details>
+
+<details><summary>Level 2</summary>
+
+```python
+extra_kwargs = {
+    "title": {
+        "error_messages": {
+            "required": "Title is required.",
+            "blank": "___",
+        }
+    }
+}
+```
+It goes **inside** `class Meta`. See `extra_kwargs` in [`example/serializers.py`](example/serializers.py).
+</details>
+
+<a id="p8"></a>
+### P8: Due date not in the past (on create)
+
+<details><summary>Level 1</summary>
+
+Write `validate_due_date(self, value)`. Three conditions must all be true to reject: it is a create
+(`self.instance is None`), a date was given (`value is not None`), and it is before `timezone.localdate()`. `validate_release_date` in
+[`example/serializers.py`](example/serializers.py) is the same idea.
+</details>
+
+<details><summary>Level 2</summary>
+
+```python
+def validate_due_date(self, value):
+    if self.instance is None and value is not None and value < ___:
+        raise serializers.ValidationError("Due date cannot be earlier than today.")
+    return ___
+```
 </details>

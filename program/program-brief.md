@@ -45,16 +45,16 @@ Full requirements, API contract, Definition of Done and rubric: [`project/projec
 
 ## 5. Five connected daily milestones
 
-Delivery baseline: five guided sessions of about three hours (~15 contact hours), supported by up to one hour of
-optional independent work per day.
+Delivery baseline: five guided sessions of about three hours (~15 contact hours): about one hour of explanation, one
+hour of exercise, and one hour of project work per day, plus optional homework.
 
 | Day | Date | Focus | Exit check |
 |---|---|---|---|
 | 1 | Oct 11 | Foundation | Repository is pushed. Server starts locally. Admin shows saved Task records after restart. |
-| 2 | Oct 12 | Core API | All CRUD operations work locally with valid JSON and appropriate status codes. |
-| 3 | Oct 13 | Security | User A cannot view or modify User B's tasks. Invalid data is rejected with field-level errors. |
-| 4 | Oct 14 | Quality and delivery | All tests pass. A fresh clone can be set up from the README. Deployment configuration is ready. |
-| 5 | Oct 15 | Publish and demonstrate | Public HTTPS URL works, data persists, all required evidence is submitted, and the live demo passes. |
+| 2 | Oct 12 | Core API: CRUD + validation | All CRUD operations work locally with valid JSON and appropriate status codes. Invalid data is rejected with field-level errors. |
+| 3 | Oct 13 | Security | User A cannot view or modify User B's tasks. Requests without a token get 401. |
+| 4 | Oct 14 | Testing and configuration | At least 8 required tests pass. Settings come from the environment. Deployment packages are ready. |
+| 5 | Oct 15 | Publish and demonstrate | Public HTTPS URL works, data persists, a fresh clone can be set up from the README, all required evidence is submitted, and the live demo passes. |
 
 Detailed daily plan: [`five-day-agenda.md`](five-day-agenda.md).
 
@@ -63,8 +63,8 @@ Detailed daily plan: [`five-day-agenda.md`](five-day-agenda.md).
 - The instructor maintains a known-good **checkpoint** for the start of each day
   ([`project/checkpoints/`](../project/checkpoints/)).
 - Participants who miss an exit check start the next session from the checkpoint, preserving Day 5 completion.
-- Cloud accounts and the approved platform are verified before Day 4. Deployment is rehearsed on Day 4, not left
-  entirely to Day 5.
+- Cloud accounts are verified in the readiness check before Day 1. On Day 5 the instructor deploys live first, then
+  everyone deploys together in a guided hour, so deployment is never left to each participant alone.
 - Stretch features are taught only after the minimum project works and all required tests pass.
 
 ## 7. Final evidence of completion

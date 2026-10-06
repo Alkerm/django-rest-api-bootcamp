@@ -1,8 +1,8 @@
-# Day 4 Project Milestone: Testing, Documentation, Delivery
+# Day 4 Project Milestone: Testing and Configuration
 
-**Project increment:** at least 8 automated API tests, complete README, dependency file, `.env.example`, settings
-from the environment, and a deployment rehearsal.
-**Exit check:** all tests pass, a fresh clone can be set up from the README, and the deployment configuration is ready.
+**Project increment:** at least 8 automated API tests, settings from the environment, `.env.example`, and the
+deployment packages in `requirements.txt`. (The README is completed on Day 5.)
+**Exit check:** all required tests pass, settings come from the environment, and the dependency file is ready for deployment.
 
 ## Where to start
 
@@ -44,7 +44,6 @@ python manage.py migrate
 | P3 | `config/settings.py` | `SECRET_KEY`, `DEBUG`, `ALLOWED_HOSTS` from environment variables | [hints#p3](hints.md#p3) |
 | P4 | `.env.example` | document the three variables with placeholders | [hints#p4](hints.md#p4) |
 | P5 | `requirements.txt` | add `psycopg[binary]`, `dj-database-url`, `gunicorn`, `whitenoise`, then `python -m pip install -r requirements.txt` | [hints#p5](hints.md#p5) |
-| P6 | `README.md` | complete every `_TODO_` section | [hints#p6](hints.md#p6) |
 
 **Required test coverage** = the example + the 7 REQUIRED tests (8 in total): unauthenticated access · token login ·
 create + owner assignment · own-only list · cross-user access · update · delete · validation.
@@ -54,41 +53,28 @@ python manage.py test          # goal: "OK (skipped=7)": only STRETCH tests may 
 python manage.py test -v 2     # shows which tests are still skipped, and whether each is REQUIRED or STRETCH
 ```
 
-Finish the README (P6) and the partner review **before** any STRETCH test.
+Finish P3-P5 **before** any STRETCH test.
 
 When a test fails, **fix the application, not the expected result**.
 
-## Peer review: fresh setup from the README
+## Homework (optional, ~15 minutes): get ready for Day 5
 
-Swap repository URLs with a partner. Each of you, in a **new folder**:
-
-```bash
-git clone https://github.com/<partner>/task-management-api.git
-```
-
-Follow **only** their README: venv, install, migrate, test, create a user, get a token, create a task.
-Write down every step where you had to guess. Give the list to your partner, who fixes the README.
-
-## Deployment rehearsal (prepares tomorrow)
+Day 5 is deployment day. Arriving with these done makes it much smoother:
 
 1. Your **Neon** and **Render** accounts open (they were part of the readiness check).
 2. In Neon: create a project `tuwaiq-django-api` and find the connection string. **Do not paste it anywhere yet.**
 3. In Render: **New → Web Service** → you can see your `task-management-api` repository. Stop before creating it.
 4. Read [`setup/deployment.md`](../../setup/deployment.md) once end to end.
-5. Locally, run the production checks: they must succeed.
 
-```bash
-python -m pip check
-python manage.py check
-python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"   # how you will create SECRET_KEY tomorrow
-```
+The README you received today (template with `_TODO_` sections) is completed on **Day 5**. If you want a head start,
+fill in the sections you already know (setup, tests, authentication).
 
 ## Commit
 
 ```bash
 git status                     # .env must NOT be listed
 git add .
-git commit -m "Day 4: API tests, README, environment configuration"
+git commit -m "Day 4: API tests and environment configuration"
 git push
 ```
 
@@ -96,7 +82,5 @@ git push
 
 - [ ] Tests cover unauthenticated access, create/owner, own-only list, cross-user access, update, delete, validation.
 - [ ] At least 8 meaningful tests pass (the example + 7 REQUIRED); only STRETCH tests may be skipped.
-- [ ] A partner set up the project from the README without your help.
-- [ ] The README documents authentication and every required endpoint with examples.
 - [ ] Settings read secrets from the environment; `.env.example` has placeholders only.
-- [ ] Neon and Render accounts and the repository connection are verified.
+- [ ] `python -m pip check` reports no broken requirements.

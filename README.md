@@ -23,12 +23,13 @@ complete and deployed.
 | Day | Date | Focus | Exercise (Library API) | Project increment (your Task API) |
 |---|---|---|---|---|
 | [1](days/day-01/README.md) | Sun, Oct 11 | Foundation | Book model, migrations, sample data, admin, ORM | Django project, `Task` model, admin, GitHub repo |
-| [2](days/day-02/README.md) | Mon, Oct 12 | Core API | Book CRUD API with serializer, viewset, router | Complete CRUD at `/api/tasks/` |
-| [3](days/day-03/README.md) | Tue, Oct 13 | Security | Personal reading list: tokens, ownership, validation | Token login, per-user isolation, validation |
-| [4](days/day-04/README.md) | Wed, Oct 14 | Quality | Write 8 API tests, settings from environment | ≥ 8 tests, README, env config, deploy rehearsal |
-| [5](days/day-05/README.md) | Thu, Oct 15 | Publish | *optional*: `DATABASE_URL`, static files, smoke test | Live HTTPS deployment, smoke test, demo |
+| [2](days/day-02/README.md) | Mon, Oct 12 | Core API | Book CRUD API with serializer, viewset, router, validation | Complete CRUD at `/api/tasks/` + validation |
+| [3](days/day-03/README.md) | Tue, Oct 13 | Security | Personal reading list: tokens, ownership | Token login, per-user isolation, permissions |
+| [4](days/day-04/README.md) | Wed, Oct 14 | Testing | Write API tests, settings from environment | 8 required tests, env config, deployment packages |
+| [5](days/day-05/README.md) | Thu, Oct 15 | Publish | *guided deployment instead* (exercise optional) | Live HTTPS deployment, smoke test, README, demo |
 
-Daily session: **3-3.5 hours**, made up of 45-60 min explanation and demo, a 10 min break, and 2-2.25 h hands-on.
+Daily session: **about 3 hours**: ~1 h explanation and demo, ~1 h exercise, ~1 h project (on Day 5 the exercise
+hour is a guided deployment).
 
 ## Start here
 

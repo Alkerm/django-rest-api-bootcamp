@@ -1,7 +1,8 @@
-# Day 2 Project Milestone: Core API (Complete CRUD)
+# Day 2 Project Milestone: Core API (Complete CRUD + Validation)
 
-**Project increment:** serializer, viewset, router, and the six CRUD operations at `/api/tasks/`.
-**Exit check:** all CRUD operations work locally with valid JSON and appropriate status codes.
+**Project increment:** serializer, viewset, router, the six CRUD operations at `/api/tasks/`, and input validation.
+**Exit check:** all CRUD operations work locally with valid JSON and appropriate status codes, and invalid input
+returns `400` with clear field-level errors.
 
 ## Where to start
 
@@ -44,6 +45,8 @@ python manage.py migrate
 | P4 | `tasks/views.py` | `perform_create` → owner = logged-in user | [hints#p4](hints.md#p4) |
 | P5 | `tasks/urls.py` | register `TaskViewSet` as `tasks`, `basename="task"` | [hints#p5](hints.md#p5) |
 | P6 | `config/urls.py` | include `tasks.urls` under `api/` and DRF login under `api-auth/` | [hints#p6](hints.md#p6) |
+| P7 | `tasks/serializers.py` | clear title errors: `Title is required.` / `Title cannot be blank.` | [hints#p7](hints.md#p7) |
+| P8 | `tasks/serializers.py` | `validate_due_date`: not before today, **on create only** | [hints#p8](hints.md#p8) |
 
 ## Try it
 
@@ -63,6 +66,9 @@ python manage.py runserver
 | 5 | `PATCH /api/tasks/{id}/` | `{"status": "DONE"}` | `200`, only status changed |
 | 6 | `DELETE /api/tasks/{id}/` | none | `204` |
 | 7 | `GET /api/tasks/{id}/` (deleted id) | none | `404` |
+| 8 | `POST /api/tasks/` | `{"title": "   "}` | `400` `{"title": ["Title cannot be blank."]}` |
+| 9 | `POST /api/tasks/` | `{"title": "X", "status": "FINISHED"}` | `400`, error on `status` (built-in, no code needed) |
+| 10 | `POST /api/tasks/` | `{"title": "X", "due_date": "2020-01-01"}` | `400` `{"due_date": ["Due date cannot be earlier than today."]}` |
 
 Check the database after each write (admin or DB Browser).
 
@@ -73,7 +79,7 @@ Check the database after each write (admin or DB Browser).
 
 ```bash
 git add .
-git commit -m "Day 2: Task serializer, viewset, router, CRUD endpoints"
+git commit -m "Day 2: Task serializer, viewset, router, CRUD endpoints, validation"
 git push
 ```
 
@@ -84,4 +90,5 @@ git push
 - [ ] Retrieve returns `200`; an unknown id returns `404`.
 - [ ] PUT/PATCH change the intended fields; DELETE returns `204`.
 - [ ] `owner` is read-only and assigned by the server.
-- [ ] All seven checks above pass and the commit is pushed.
+- [ ] Blank title, invalid status, and a past due date on create return `400` with field errors.
+- [ ] All ten checks above pass and the commit is pushed.

@@ -54,10 +54,10 @@ existence is not revealed) · invalid input → `400` with `{"field": ["message"
 | Day | Increment | Milestone page | Start folder |
 |---|---|---|---|
 | 1 | repository, project, `Task` model, migrations, admin data | [day-01](../days/day-01/project-milestone.md) | `starter/` |
-| 2 | serializer, viewset, router, CRUD | [day-02](../days/day-02/project-milestone.md) | `checkpoints/day-02` |
-| 3 | token auth, ownership, permissions, validation | [day-03](../days/day-03/project-milestone.md) | `checkpoints/day-03` |
-| 4 | tests, README, env configuration, deploy rehearsal | [day-04](../days/day-04/project-milestone.md) | `checkpoints/day-04` |
-| 5 | production settings, deployment, smoke test, demo | [day-05](../days/day-05/project-milestone.md) | `checkpoints/day-05` |
+| 2 | serializer, viewset, router, CRUD, validation | [day-02](../days/day-02/project-milestone.md) | `checkpoints/day-02` |
+| 3 | token auth, ownership, permissions | [day-03](../days/day-03/project-milestone.md) | `checkpoints/day-03` |
+| 4 | tests, env configuration, deployment packages | [day-04](../days/day-04/project-milestone.md) | `checkpoints/day-04` |
+| 5 | production settings, guided deployment, smoke test, README, demo | [day-05](../days/day-05/project-milestone.md) | `checkpoints/day-05` |
 
 <a id="optional-extensions"></a>
 ## Optional extensions and out of scope

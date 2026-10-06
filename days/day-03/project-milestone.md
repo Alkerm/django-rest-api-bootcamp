@@ -1,8 +1,8 @@
-# Day 3 Project Milestone: Authentication, Ownership, Validation
+# Day 3 Project Milestone: Authentication, Ownership, Permissions
 
 **Project increment:** token login endpoint, protected routes, automatic owner, per-user isolation, cross-user
-protection, validation.
-**Exit check:** user A cannot view or modify user B's tasks, and invalid data is rejected with field-level errors.
+protection. (Validation was added on Day 2.)
+**Exit check:** user A cannot view or modify user B's tasks, and requests without a token get `401`.
 
 ## Where to start
 
@@ -45,8 +45,6 @@ python manage.py migrate
 | P4 | `tasks/views.py` | `get_queryset()` → only the caller's tasks | [hints#p4](hints.md#p4) |
 | P5 | `tasks/permissions.py` | `IsOwner.has_object_permission` | [hints#p5](hints.md#p5) |
 | P6 *(Day 2 review)* | `tasks/serializers.py` | show `owner` as the username | [hints#p6](hints.md#p6) |
-| P7 | `tasks/serializers.py` | clear title errors: `Title is required.` / `Title cannot be blank.` | [hints#p7](hints.md#p7) |
-| P8 | `tasks/serializers.py` | `validate_due_date`: not before today, **on create only** | [hints#p8](hints.md#p8) |
 
 ## The two-user security check (record the results)
 
@@ -63,9 +61,6 @@ Make sure **each** user owns at least one task (use the admin if needed).
 | 6 | bob: `GET /api/tasks/{alice's task id}/` | `404` |
 | 7 | bob: `PATCH /api/tasks/{alice's task id}/` `{"title": "x"}` | `404`, alice's task unchanged |
 | 8 | bob: `DELETE /api/tasks/{alice's task id}/` | `404`, task still exists |
-| 9 | alice: `POST /api/tasks/` `{"title": "   "}` | `400` `{"title": ["Title cannot be blank."]}` |
-| 10 | alice: `POST /api/tasks/` `{"title": "X", "status": "FINISHED"}` | `400` `status` error |
-| 11 | alice: `POST /api/tasks/` `{"title": "X", "due_date": "2020-01-01"}` | `400` `{"due_date": ["Due date cannot be earlier than today."]}` |
 
 Save evidence (screenshots or copied responses, **without tokens**) in your notes. You will automate all of this
 tomorrow.
@@ -74,7 +69,7 @@ tomorrow.
 
 ```bash
 git add .
-git commit -m "Day 3: token auth, ownership, validation"
+git commit -m "Day 3: token auth, ownership, permissions"
 git push
 ```
 
@@ -84,5 +79,4 @@ git push
 - [ ] Authenticated creation ignores any client-supplied owner.
 - [ ] Each user's list contains only their own records.
 - [ ] Cross-user retrieve/update/delete is blocked (`404`) without leaking data.
-- [ ] Blank title, invalid status, and a past due date on create return `400`.
 - [ ] The two-user check is recorded and the commit is pushed.

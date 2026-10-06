@@ -6,28 +6,30 @@
 
 By the end of the session, you can explain the basic HTTP request-response flow, run a reproducible Django REST Framework environment, and persist Task records through a correctly migrated data model.
 
-## Session flow (about 3-3.5 hours)
+## Session flow (about 3 hours)
 
 | Block | Time | What happens | Material |
 |---|---|---|---|
-| 1. Explanation + live demo | 45-60 min | the instructor explains and builds in front of you | [`slides.md`](slides.md) · [`example/`](example/) |
-| Break / Q&A | 10 min | none | none |
-| 2. Exercise | ~45 min (core ~35) | practise today's concept on a small Library API: **core** tasks first, **stretch** only if time is left | [`exercise/README.md`](exercise/README.md) |
-| 3. Project milestone | ~75 min | apply the same concept to **your** Task Management API | [`project-milestone.md`](project-milestone.md) |
-| Exit check | 5-10 min | show the working result to a mentor | bottom of the milestone page |
+| 1. Explanation + live demo | ~60 min | the instructor explains and builds in front of you | [`slides.md`](slides.md) · [`example/`](example/) |
+| 2. Exercise | ~60 min | Library catalog: complete the `Book` model, migrate, load sample data, admin, ORM practice. **Core** tasks first, **stretch** only if time is left | [`exercise/README.md`](exercise/README.md) |
+| 3. Project milestone | ~60 min | apply the same concept to **your** Task Management API | [`project-milestone.md`](project-milestone.md) |
 
-About 30% of the session is explanation; at least 70% is hands-on work.
+Take a short break between blocks. The day ends with the **exit check** at the bottom of the milestone page.
 
 **Priority rule:** the **project milestone** is what you are assessed on. If time is short, finish the exercise's
 *core* tasks, move to the project, and come back to *stretch* tasks later.
 
-## What the instructor explains
+> If the first GitHub push runs over, finish it in the first 10 minutes of Day 2.
 
-- The finished project first: request → Django → DRF validation → ORM → database → JSON + status code
-- HTTP verbs on the Task resource: GET reads, POST creates, PUT/PATCH change, DELETE removes; the URL names the resource, the verb names the action
-- Django structure: the **project** (`config/`) holds global configuration, the **app** (`tasks/`) owns behaviour, DRF adds API tools on top
-- Models, the ORM, and migrations: Python classes → migration files → database tables
-- Reproducibility: virtual environments, recorded dependencies, `.gitignore`, secrets outside Git
+## What the instructor explains (~60 min)
+
+| Time | Topic |
+|---|---|
+| 10 min | The finished project first: request → Django → DRF → ORM → database → JSON + status code |
+| 10 min | HTTP verbs on the Task resource: GET reads, POST creates, PUT/PATCH change, DELETE removes; the URL names the resource, the verb names the action |
+| 10 min | Django structure: the **project** (`config/`) holds global configuration, the **app** (`tasks/`) owns behaviour, DRF adds API tools on top |
+| 25 min | Live demo: a model → `makemigrations` → `migrate` → admin → a few ORM queries in the shell |
+| 5 min | Reproducibility: virtual environment, `requirements.txt`, `.gitignore`, secrets outside Git |
 
 ## Your materials for today
 
@@ -35,7 +37,7 @@ About 30% of the session is explanation; at least 70% is hands-on work.
 |---|---|
 | [`slides.md`](slides.md) | slides for this session (`slides.pdf` is added when ready) |
 | [`example/`](example/) | a short worked example of today's concepts in a different domain: read it when you forget the syntax |
-| [`exercise/`](exercise/) | **Library catalog: complete the `Book` model, migrate, load sample data, admin, ORM practice** (its own Django project and its own SQLite database) |
+| [`exercise/`](exercise/) | today's exercise: its own Django project and its own SQLite database |
 | [`hints.md`](hints.md) | step-by-step hints for every exercise task **and** every project TODO |
 | [`solution/`](solution/) | the exercise solution, published by the instructor after the session |
 | [`project-milestone.md`](project-milestone.md) | today's increment of the Task Management API, with its exit check |

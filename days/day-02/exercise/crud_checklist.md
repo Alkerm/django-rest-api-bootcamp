@@ -8,7 +8,7 @@ Fill in the **Actual status** column, then check the database (admin or DB Brows
 
 | # | Operation | Method + URL | Body (JSON) | Expected status | Expected database change | Actual status |
 |---|---|---|---|---|---|---|
-| 1 | List | `GET /api/books/` | none | `200` | none: 6 books returned, A-Z after Task 3A | |
+| 1 | List | `GET /api/books/` | none | `200` | none: 6 books returned, A-Z after Task 4A | |
 | 2 | Create | `POST /api/books/` | `{"title": "Domain-Driven Design", "isbn": "9780000000073", "published_year": 2003, "available_copies": 2, "author": 2}` | `201` | new row id **7** in `catalog_book` | |
 | 3 | Retrieve | `GET /api/books/7/` | none | `200` | none | |
 | 4 | Full update | `PUT /api/books/7/` | `{"title": "Domain-Driven Design (Reference)", "isbn": "9780000000073", "published_year": 2015, "available_copies": 1, "author": 2}` | `200` | row 7: title, year and copies changed | |

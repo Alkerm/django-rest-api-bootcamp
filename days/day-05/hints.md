@@ -138,10 +138,24 @@ Placeholders only. **Never** paste your real Neon string here.
 <a id="p6"></a>
 ### P6: Final README
 
-<details><summary>Level 1</summary>
+<details><summary>Level 1: what goes in</summary>
 
-Add your real `https://...onrender.com` URL at the top, and a **Deployment** section: platform, build command, start
-command, the environment variables (names only, no values), and how you verified the release (the smoke-test output).
+Fill **every** `_TODO_` section of the README that arrived with the Day 4 checkpoint, plus the two Day 5 parts: your
+real `https://...onrender.com` URL at the top, and a **Deployment** section (platform, build command, start command,
+environment variable *names* only, and your smoke-test result).
+</details>
+
+<details><summary>Level 2: who it is for</summary>
+
+Write for a classmate who has never seen your project. Each `_TODO_` section needs real commands or examples that
+**work when copied**. The test: swap repositories with a partner, follow only the README, and note every place where
+they got stuck.
+</details>
+
+<details><summary>Level 3: checklist from the program brief</summary>
+
+The README must cover: setup, environment variables, migrations, test command, authentication, endpoint examples,
+deployed URL (Day 5), and project decisions.
 </details>
 
 <a id="deploy"></a>

@@ -3,7 +3,7 @@
 Open the hints **one level at a time**. Level 3 is close to the answer.
 
 **Exercise:** [Task 1](#task-1) · [Task 2](#task-2) · [Task 3](#task-3)
-**Project:** [P2 tests](#p2) · [P3 settings](#p3) · [P4 .env.example](#p4) · [P5 requirements](#p5) · [P6 README](#p6)
+**Project:** [P2 tests](#p2) · [P3 settings](#p3) · [P4 .env.example](#p4) · [P5 requirements](#p5)
 
 ---
 
@@ -164,20 +164,4 @@ python -m pip check
 ```
 Then add one line per package to `requirements.txt` (with a version range), or regenerate it with
 `python -m pip freeze > requirements.txt`. Render installs exactly what this file lists.
-</details>
-
-<a id="p6"></a>
-### P6: README
-
-<details><summary>Level 1</summary>
-
-Write for a classmate who has never seen your project. Each `_TODO_` section needs real commands or examples that
-**work when copied**. The test: swap repositories with a partner, follow only the README, and note every place where
-they got stuck.
-</details>
-
-<details><summary>Level 2: checklist from the program brief</summary>
-
-The README must cover: setup, environment variables, migrations, test command, authentication, endpoint examples,
-deployed URL (Day 5), and project decisions.
 </details>

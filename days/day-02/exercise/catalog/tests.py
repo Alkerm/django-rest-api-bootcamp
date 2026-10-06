@@ -5,8 +5,10 @@ Run:  python manage.py test             (all tasks)
       python manage.py test -k task1    (only Task 1, works before Task 2 exists)
 These tests build their own temporary database with the sample data, so they never change your db.sqlite3.
 Before you start, they fail - that is expected. They turn green task by task.
-When every task is done you should see:  Ran 9 tests ... OK
+Core (Tasks 1-3):     python manage.py test -k task1 -k task2 -k task3   ->  Ran 11 tests ... OK
+With stretch Task 4:  python manage.py test                                 ->  Ran 12 tests ... OK
 """
+from django.utils import timezone
 from rest_framework import status
 from rest_framework.test import APITestCase
 
@@ -78,9 +80,30 @@ class BookAPIAcceptanceTests(APITestCase):
         self.assertEqual(self.client.get("/api/books/6/").status_code, status.HTTP_404_NOT_FOUND,
                          "after DELETE the book should be gone")
 
-    def test_task3_books_are_listed_a_to_z(self):
+    def test_task3_blank_title_has_clear_message(self):
+        payload = {"title": "   ", "isbn": "9780000000097", "published_year": 2020, "author": 1}
+        response = self.client.post("/api/books/", payload, format="json")
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST, NO_ROUTE)
+        self.assertEqual(response.data.get("title"), ["Title cannot be blank."],
+                         "add extra_kwargs with the blank-title message (Task 3a)")
+
+    def test_task3_future_year_is_rejected(self):
+        next_year = timezone.localdate().year + 1
+        payload = {"title": "From the future", "isbn": "9780000000103", "published_year": next_year, "author": 1}
+        response = self.client.post("/api/books/", payload, format="json")
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST,
+                         "a future published_year must be rejected: add validate_published_year() (Task 3b)")
+        self.assertEqual(response.data.get("published_year"), ["Published year cannot be in the future."])
+
+    def test_task3_this_year_is_allowed(self):
+        payload = {"title": "Brand new", "isbn": "9780000000110", "published_year": timezone.localdate().year, "author": 1}
+        response = self.client.post("/api/books/", payload, format="json")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED,
+                         f"this year must be allowed (use '>' not '>='). Response: {response.data}")
+
+    def test_task4_books_are_listed_a_to_z(self):
         response = self.client.get("/api/books/")
         self.assertEqual(response.status_code, status.HTTP_200_OK, NO_ROUTE)
         titles = [book["title"] for book in response.data]
         self.assertEqual(titles, sorted(titles),
-                         "books are not sorted A-Z: add Meta.ordering = ['title'] and run makemigrations + migrate (Task 3A)")
+                         "books are not sorted A-Z: add Meta.ordering = ['title'] and run makemigrations + migrate (stretch Task 4)")

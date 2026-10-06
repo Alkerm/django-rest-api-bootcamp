@@ -6,7 +6,8 @@ endpoint with token authentication, and blocks access to other users' data.
 
 Built during the Tuwaiq Club at KFUPM bootcamp *Building REST APIs with Django* (Oct 11-15, 2026).
 
-<!-- TODO [Day 5 · P6]: Fill in the live URL and the Deployment section after your release succeeds.
+<!-- TODO [Day 5 · P6]: Complete every section marked "TODO" on Day 5, after your deployment works.
+     Test it: a classmate must be able to clone, set up, test, and use your API from this README alone.
      HINT: days/day-05/hints.md#p6 -->
 
 **Live API:** _TODO: https://<your-app>.onrender.com_
@@ -32,57 +33,19 @@ python manage.py runserver
 
 ## Environment variables
 
-Locally **no variables are required**: the defaults are safe for development. Production values are set on Render
-(see [`.env.example`](.env.example)). Never commit real values.
-
-| Variable | Purpose | Local default | Production |
-|---|---|---|---|
-| `SECRET_KEY` | Django cryptographic signing | `development-only-key` | long random value (secret) |
-| `DEBUG` | Debug pages and error details | `True` | `False` |
-| `ALLOWED_HOSTS` | Host names the app may serve | `127.0.0.1,localhost` | `<app>.onrender.com` |
+_TODO: list every variable from `.env.example`, what it does, and its local default._
 
 ## Create test users
 
-```bash
-python manage.py createsuperuser          # admin account for http://127.0.0.1:8000/admin/
-```
-
-Create at least two normal users (for example `alice` and `bob`) in the admin under **Users -> Add user**,
-or from the shell:
-
-```bash
-python manage.py shell -c "from django.contrib.auth.models import User; User.objects.create_user('alice', password='choose-a-password')"
-```
+_TODO: explain how a reviewer creates users to try the API (admin or command)._
 
 ## Run the tests
 
-```bash
-python manage.py test
-```
-
-Expected: `Ran 15 tests ... OK`. The tests create their own users and tasks in a temporary database: they cover
-authentication, CRUD, ownership/data isolation, and validation.
+_TODO: the test command and what a passing run looks like._
 
 ## Authentication
 
-1. Exchange a username and password for a token:
-
-   ```http
-   POST /api/auth/token/
-   Content-Type: application/json
-
-   {"username": "alice", "password": "<password>"}
-   ```
-
-   Response `200 OK`: `{"token": "<40-character token>"}`
-
-2. Send the token with every task request:
-
-   ```http
-   Authorization: Token <40-character token>
-   ```
-
-Requests without a valid token receive `401 Unauthorized`.
+_TODO: how to obtain a token and how to send it with each request._
 
 ## Endpoints
 
@@ -120,41 +83,7 @@ Response `201 Created`:
 }
 ```
 
-### Example: partial update
-
-```http
-PATCH /api/tasks/7/
-Authorization: Token <token>
-Content-Type: application/json
-
-{"status": "DONE"}
-```
-
-Response `200 OK` with the full task, `"status": "DONE"`.
-
-### Example: validation error
-
-```http
-POST /api/tasks/
-Authorization: Token <token>
-Content-Type: application/json
-
-{"title": "  ", "status": "FINISHED", "due_date": "2020-01-01"}
-```
-
-Response `400 Bad Request`:
-
-```json
-{
-  "title": ["Title cannot be blank."],
-  "status": ["\"FINISHED\" is not a valid choice."],
-  "due_date": ["Due date cannot be earlier than today."]
-}
-```
-
-### Example: another user's task
-
-`GET /api/tasks/{id-of-bobs-task}/` with Alice's token returns `404 Not Found`: other users' tasks are invisible.
+_TODO: add examples for update (PATCH), a validation error (400), and another user's task (404)._
 
 ### Field rules
 
@@ -172,9 +101,4 @@ _TODO: document the platform, build/start commands, environment variables, and h
 
 ## Project decisions
 
-- **Token authentication (DRF `authtoken`)**: simple to use from Postman and tests; JWT was out of scope.
-- **Other users' tasks return 404, not 403**: the queryset only contains the caller's tasks, so the API does not
-  even reveal that another user's task id exists.
-- **Owner is read-only and set from the token**: a client can never create or move a task into another account.
-- **Due date is checked only on create** (Riyadh local date): an existing task may become overdue and still be edited.
-- **SQLite locally, PostgreSQL in production**: zero local setup, persistent managed storage on Neon.
+_TODO: 3-5 bullet points explaining important choices you made and why._

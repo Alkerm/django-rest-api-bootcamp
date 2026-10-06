@@ -23,9 +23,9 @@ class Book(models.Model):
     available_copies = models.PositiveIntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    # TODO [Day 2 · Task 3A - Day 1 review]: Sort books A-Z by title in every list.
+    # TODO [Day 2 · Task 4 · STRETCH (optional) - Day 1 review]: Sort books A-Z by title in every list.
     #   Add an inner Meta class with ordering = ["title"], then run makemigrations + migrate.
-    # HINT: days/day-02/hints.md#task-3
+    # HINT: days/day-02/hints.md#task-4
     # YOUR CODE HERE
 
     def __str__(self):

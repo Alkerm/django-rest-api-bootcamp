@@ -1,6 +1,7 @@
 """
 Day 2 exercise - Task 1: serializers (model <-> JSON, plus input validation).
 """
+from django.utils import timezone
 from rest_framework import serializers
 
 from .models import Author, Book
@@ -40,3 +41,14 @@ class BookSerializer(serializers.ModelSerializer):
         #   and make `id` and `created_at` read-only (the server sets them).
         # YOUR CODE HERE - replace the placeholder line below
         fields = ["id"]
+        # TODO [Day 2 · Task 3a]: Give API clients a clear message for a blank title, using extra_kwargs:
+        #   blank title (e.g. "" or "   ")  ->  "Title cannot be blank."
+        # HINT: days/day-02/hints.md#task-3  |  Example: days/day-02/example/serializers.py
+        # YOUR CODE HERE
+
+    # TODO [Day 2 · Task 3b]: Reject a published_year in the FUTURE.
+    #   - Field-level validator name: validate_published_year(self, value)
+    #   - "This year" = timezone.localdate().year     (this year itself is allowed)
+    #   - Error message: "Published year cannot be in the future."
+    # HINT: days/day-02/hints.md#task-3  |  Example: days/day-02/example/serializers.py
+    # YOUR CODE HERE

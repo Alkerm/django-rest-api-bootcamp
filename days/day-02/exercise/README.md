@@ -1,11 +1,11 @@
-# Day 2 Exercise: Book CRUD API (Serializers, ViewSets, Routers)
+# Day 2 Exercise: Book CRUD API (Serializers, Validation, ViewSets, Routers)
 
 | | |
 |---|---|
-| **What you will practice** | Writing a `ModelSerializer` (including a read-only related field) · building a `ModelViewSet` · registering it with a router · exercising all six CRUD operations and reading their status codes |
-| **Where to start** | This folder: `days/day-02/exercise/`. Files: `catalog/serializers.py` → `catalog/views.py` → `catalog/urls.py` → `catalog/models.py` → `crud_checklist.md` |
-| **Result to produce** | **Core:** a working `/api/books/` API with all six operations, sorted A-Z; `python manage.py test` → **Ran 9 tests ... OK**. **Stretch:** the completed `crud_checklist.md` |
-| **Time** | ~50 minutes |
+| **What you will practice** | Writing a `ModelSerializer` (including a read-only related field) · building a `ModelViewSet` · registering it with a router · adding validation rules with clear error messages · reading CRUD status codes |
+| **Where to start** | This folder: `days/day-02/exercise/`. Files: `catalog/serializers.py` → `catalog/views.py` → `catalog/urls.py` → `catalog/serializers.py` again (validation) → stretch: `catalog/models.py`, `crud_checklist.md` |
+| **Result to produce** | **Core (Tasks 1-3):** a working `/api/books/` API with all six operations and two validation rules; `python manage.py test -k task1 -k task2 -k task3` → **Ran 11 tests ... OK**. **Stretch (Task 4):** books sorted A-Z and the completed `crud_checklist.md` |
+| **Time** | ~50 minutes for the core |
 | **Hints** | [`../hints.md`](../hints.md) · worked example: [`../example/`](../example/) |
 
 ---
@@ -107,34 +107,57 @@ Create a viewset with **all six** operations and register it as `books`. The rou
 
 **Acceptance criteria**
 - [ ] http://127.0.0.1:8000/api/ lists both `authors` and `books`.
-- [ ] `python manage.py test` passes every `test_task1_*` and `test_task2_*` test.
+- [ ] `python manage.py test -k task1 -k task2` passes.
 
 ---
 
-## Task 3: Order the list, then prove every operation
+## Task 3: Validation (the serializer as gatekeeper)
 
-### 3A: Sort books A-Z (Day 1 review)
+**File:** `catalog/serializers.py`. Find `TODO [Day 2 · Task 3a]` and `TODO [Day 2 · Task 3b]`.
 
-**File:** `catalog/models.py`. Find `TODO [Day 2 · Task 3A]`. Add `Meta.ordering = ["title"]`, then:
+DRF already rejects many bad inputs for you (missing fields, wrong types, a duplicate `isbn`, an unknown author).
+Now you add the library's own rules and make one built-in message clearer:
+
+| Rule | Field | Error message (exact) |
+|---|---|---|
+| 3a: a blank title gets a clear message (built-in rule, custom text via `extra_kwargs`) | `title` | `Title cannot be blank.` |
+| 3b: `published_year` cannot be later than this year (this year is fine) | `published_year` | `Published year cannot be in the future.` |
+
+**Expected input → output** (in the browsable API at `/api/books/`, *Raw data* tab)
+
+| Request | Expected response | Database change |
+|---|---|---|
+| `POST {"title": "   ", "isbn": "9780000000097", "published_year": 2020, "author": 1}` | `400` `{"title": ["Title cannot be blank."]}` | none |
+| `POST {"title": "From the future", "isbn": "9780000000103", "published_year": 2099, "author": 1}` | `400` `{"published_year": ["Published year cannot be in the future."]}` | none |
+| `POST {"title": "Brand new", "isbn": "9780000000110", "published_year": 2026, "author": 1}` | `201` | new book row |
+
+**Acceptance criteria**
+- [ ] `python manage.py test -k task1 -k task2 -k task3` → `Ran 11 tests ... OK`.
+
+---
+
+## Task 4 (STRETCH, optional): Order the list, then prove every operation
+
+### 4A: Sort books A-Z (Day 1 review)
+
+**File:** `catalog/models.py`. Find `TODO [Day 2 · Task 4]`. Add `Meta.ordering = ["title"]`, then:
 
 ```bash
-python manage.py makemigrations catalog     # -> 0002_... "Change Meta options on book"
+python manage.py makemigrations catalog     # -> 0002_alter_book_options.py "Change Meta options on book"
 python manage.py migrate
 ```
 
 **Database change:** none to the rows. The migration only records the new default ordering.
-**Expected output:** `GET /api/books/` now starts with *Clean Architecture, Clean Code, Patterns of ...*
+**Expected output:** `GET /api/books/` now starts with *Brand new* (if you created it), *Clean Architecture, Clean Code, …*
 
-### 3B (STRETCH, optional): CRUD checklist
-
-> The project milestone has its own 7-request check, so do this one only if you finish early.
+### 4B: CRUD checklist
 
 Work through [`crud_checklist.md`](crud_checklist.md): 9 requests, each with its body, expected status and expected
 database change. Record the actual status, then answer the 3 questions at the bottom.
 
 **Acceptance criteria**
-- [ ] `python manage.py test` → `Ran 9 tests ... OK`.
-- [ ] *Stretch:* every row of `crud_checklist.md` has an actual status that matches the expected one.
+- [ ] `python manage.py test` → `Ran 12 tests ... OK`.
+- [ ] Every row of `crud_checklist.md` has an actual status that matches the expected one.
 
 ---
 
@@ -142,4 +165,5 @@ database change. Record the actual status, then answer the 3 questions at the bo
 
 - [ ] I can explain why `PUT` with one field returns 400 but `PATCH` with one field returns 200.
 - [ ] I can explain what the router generated for me (look at http://127.0.0.1:8000/api/).
+- [ ] I can explain the difference between a built-in validation rule and a `validate_<field>` method.
 - [ ] Now apply the same ideas to the project: [`../project-milestone.md`](../project-milestone.md)

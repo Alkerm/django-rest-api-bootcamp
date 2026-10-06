@@ -4,8 +4,15 @@
 final README, and the live demonstration.
 **Exit check:** the public HTTPS URL works, data persists, all required evidence is submitted, and the live demo passes.
 
-> **Today the project comes first.** The Day 5 exercise is optional (the instructor demonstrates it). Start here
-> right after the explanation block. Deployment takes longer than you think.
+> **Today has no exercise hour.** After the explanation, the second hour is a **guided deployment**: everyone does
+> steps 1-2 below together with the instructor. The third hour is for verifying, finishing the README, submitting and
+> demonstrating (steps 3-6). The Library exercise for Day 5 is optional homework.
+
+| Hour | What you do |
+|---|---|
+| 1 | Explanation + the instructor deploys the reference project live |
+| 2 | **Guided deployment:** steps 1-2 (production settings, Neon, Render, production users) |
+| 3 | Steps 3-6: smoke test, persistence, README, submission, live demo at a review station |
 
 ## Where to start
 
@@ -39,7 +46,7 @@ source .venv/bin/activate
 `python -m pip install -r requirements.txt` and `python manage.py migrate`. This also replaces `README.md` and
 `tasks/tests.py` with the reference versions: review them, and make the README your own before you submit.
 
-## 1. Prepare the code (local)
+## 1. Prepare the code (local) · hour 2
 
 | TODO | File | What | Hint |
 |---|---|---|---|
@@ -57,14 +64,14 @@ python manage.py collectstatic --noinput    # succeeds
 git add . && git commit -m "Day 5: production settings" && git push
 ```
 
-## 2. Deploy
+## 2. Deploy · hour 2
 
 Follow [`setup/deployment.md`](../../setup/deployment.md) step by step: Neon database → Render web service →
 environment variables → build → production users.
 
 Write down your public URL: `https://______________________.onrender.com`
 
-## 3. Verify (smoke test)
+## 3. Verify (smoke test) · hour 3
 
 Create two users in **production** (see the deployment guide), then:
 
@@ -77,10 +84,13 @@ Expected: `10/10 checks passed`.
 **Persistence check:** create one task with Postman → Render **Manual Deploy → Restart service** (or redeploy) → list
 the tasks again: it is still there.
 
-## 4. Finish the README (P6)
+## 4. Finish the README (P6) · hour 3
 
-Fill in the live URL and the Deployment section ([hints#p6](hints.md#p6)). Commit and push. Render redeploys
-automatically.
+Complete every `_TODO_` section of the README you received on Day 4, add the live URL at the top, and write the
+Deployment section ([hints#p6](hints.md#p6)). Commit and push. Render redeploys automatically.
+
+If a classmate is free, ask them to follow your README from a fresh clone. Every place they had to guess is a
+sentence to add.
 
 ## 5. Submit
 
@@ -113,7 +123,8 @@ For each step: **state the claim → perform the request → point at the proof*
 - [ ] Token authentication and all CRUD operations work in production.
 - [ ] Two-user isolation and validation checks pass against the live URL.
 - [ ] A created record survives a restart or redeploy.
-- [ ] Automated tests pass, and the README contains final repository and deployment instructions.
+- [ ] Automated tests pass, and the README contains setup, tests, authentication, endpoint examples, the live URL and
+  deployment instructions, so a new reviewer can set the project up from a fresh clone.
 - [ ] The submission includes repository URL, deployment URL, test evidence, and the completed checklist.
 - [ ] The live demo completes without instructor code changes.
 

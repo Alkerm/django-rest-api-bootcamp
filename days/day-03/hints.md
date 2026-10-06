@@ -3,7 +3,7 @@
 Open the hints **one level at a time**. Level 3 is close to the answer.
 
 **Exercise:** [Task 1](#task-1) · [Task 2](#task-2) · [Task 3](#task-3)
-**Project:** [P1](#p1) · [P2](#p2) · [P3](#p3) · [P4](#p4) · [P5](#p5) · [P6](#p6) · [P7](#p7) · [P8](#p8)
+**Project:** [P1](#p1) · [P2](#p2) · [P3](#p3) · [P4](#p4) · [P5](#p5) · [P6](#p6)
 
 ---
 
@@ -167,47 +167,4 @@ def get_queryset(self):
 
 Same technique as `author_name` in the Day 2 exercise: a `ReadOnlyField` with a `source` that follows the relation.
 Declare it **above** `class Meta` and keep the name `owner`.
-</details>
-
-<a id="p7"></a>
-### P7: Title error messages
-
-<details><summary>Level 1</summary>
-
-`extra_kwargs` sets options for fields that `ModelSerializer` generates. The option you need is `error_messages`, a
-dictionary from error code (`"required"`, `"blank"`) to text.
-</details>
-
-<details><summary>Level 2</summary>
-
-```python
-extra_kwargs = {
-    "title": {
-        "error_messages": {
-            "required": "Title is required.",
-            "blank": "___",
-        }
-    }
-}
-```
-It goes **inside** `class Meta`.
-</details>
-
-<a id="p8"></a>
-### P8: Due date not in the past (on create)
-
-<details><summary>Level 1</summary>
-
-Write `validate_due_date(self, value)`. Three conditions must all be true to reject: it is a create
-(`self.instance is None`), a date was given (`value is not None`), and it is before `timezone.localdate()`.
-</details>
-
-<details><summary>Level 2</summary>
-
-```python
-def validate_due_date(self, value):
-    if self.instance is None and value is not None and value < ___:
-        raise serializers.ValidationError("Due date cannot be earlier than today.")
-    return ___
-```
 </details>

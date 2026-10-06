@@ -5,7 +5,7 @@
 | **What you will practice** | Enabling DRF token authentication · protecting endpoints · filtering a queryset by `request.user` · setting the owner on the server · field validation with clear error messages |
 | **Where to start** | This folder: `days/day-03/exercise/`. Files: `config/settings.py` + `config/urls.py` (Task 1) → `catalog/views.py` (Task 2) → `catalog/serializers.py` (Task 3) |
 | **Result to produce** | **Core (Tasks 1-2):** Alice and Bob each get a token and each sees and changes **only their own** reading list; `python manage.py test -k task1 -k task2` → **Ran 6 tests ... OK**. **Stretch (Task 3):** validation errors; all 11 tests pass |
-| **Time** | ~35 minutes for the core; Task 3 only if you finish early (the project repeats validation) |
+| **Time** | ~45 minutes for the core (Postman included); Task 3 only if you finish early |
 | **Hints** | [`../hints.md`](../hints.md) · worked example: [`../example/`](../example/) |
 
 ---
@@ -100,7 +100,7 @@ book id) · `status` one of `WANT_TO_READ` (default) / `READING` / `FINISHED` ·
 
 ## Task 3 (STRETCH, optional): Validation rules
 
-> The project milestone practises the same idea (P7-P8), so skip this task if time is short and come back later.
+> You learned validation on Day 2. This task adds rules that need the **current user** (`self.context["request"]`), which is good practice, but optional: skip it if time is short.
 
 **File:** `catalog/serializers.py`. Find `TODO Task 3a` (`validate_target_date`) and `TODO Task 3b` (`validate_book`).
 
