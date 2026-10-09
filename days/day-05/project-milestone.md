@@ -53,7 +53,7 @@ source .venv/bin/activate
 | P1 | `config/settings.py` | use `DATABASE_URL` when it is set | [hints#p1](hints.md#p1) |
 | P2 | `.env.example` | add `DATABASE_URL` and `CSRF_TRUSTED_ORIGINS` placeholders | [hints#p2](hints.md#p2) |
 
-WhiteNoise, static files and `CSRF_TRUSTED_ORIGINS` are **already written** in the settings you copied (marked
+WhiteNoise, static files, `CSRF_TRUSTED_ORIGINS` and a production-safe `DEBUG` default are **already written** in the settings you copied (marked
 `GIVEN`): read them, so you know what Render needs.
 
 Check locally, then push:

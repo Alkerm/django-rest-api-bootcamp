@@ -1,7 +1,7 @@
 # Deployment Runbook: Render + Neon (Day 5)
 
 Deploy your Task Management API as a **public HTTPS** service with a **persistent PostgreSQL** database, for free.
-Rehearse steps 1-2 on Day 4 and run the whole sequence on Day 5.
+Run the whole sequence on Day 5. Optional Day 4 homework: open the Neon project and look at Render's *New → Web Service* page (stop before creating it).
 
 ```text
 1. code ready → 2. Neon database → 3. Render web service → 4. environment variables → 5. build + start
@@ -70,15 +70,18 @@ Failure? Read the **first** error in the log and use
 
 The Neon database starts **empty**. Your local users do not exist there.
 
-- **Option A: Render Shell** (if your plan offers the Shell tab): `python manage.py createsuperuser`
-- **Option B: from your laptop**, in a **new** terminal inside your project with `.venv` active:
+Render's **Shell** tab is not available on the free instance type, so you create the first user **from your
+laptop**, connected to the Neon database for one command. In a **new** terminal inside your project with `.venv` active:
 
-  ```powershell
-  $env:DATABASE_URL = "<paste the Neon string here, in the terminal only>"     # macOS: export DATABASE_URL="..."
-  python manage.py createsuperuser
-  ```
+```powershell
+$env:DATABASE_URL = "<paste the Neon string here, in the terminal only>"     # macOS: export DATABASE_URL="..."
+python manage.py createsuperuser
+```
 
-  Then **close that terminal**, so you cannot accidentally run local commands against production.
+Then **close that terminal**, so you cannot accidentally run local commands against production.
+
+If `createsuperuser` hangs or fails with *connection timed out*, the network is blocking the PostgreSQL port (5432),
+which some campus Wi-Fi networks do. Switch to a phone hotspot and run the same command again.
 
 Then open `https://<app>.onrender.com/admin/`, log in, and add two normal users (e.g. `alice`, `bob`).
 

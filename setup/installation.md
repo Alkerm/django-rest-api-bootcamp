@@ -49,6 +49,16 @@ Never download Python from an unofficial site.
 python3 --version          # Python 3.13.x
 python3 -m pip --version
 ```
+
+3. **Install the HTTPS certificates (required).** The python.org installer does not do this by itself. Without it,
+   Python scripts that open `https://` addresses (such as the Day 5 smoke test) fail with
+   `CERTIFICATE_VERIFY_FAILED`, even though `pip` keeps working. Run once:
+
+```bash
+open "/Applications/Python 3.13/Install Certificates.command"
+```
+
+   (or double-click **Install Certificates.command** in *Applications → Python 3.13*) and wait for `-- update complete`.
 </details>
 
 ## 2. VS Code and extensions
@@ -157,6 +167,7 @@ python -c "import json; print(json.dumps({'title': 'Environment check', 'complet
 | Virtual env | `.venv\Scripts\Activate.ps1` | `source .venv/bin/activate` | prompt starts with `(.venv)` |
 | Django | `python -m django --version` | same | 5.2.x |
 | Django project | `python manage.py check` (Day 1 exercise) | same | no issues |
+| HTTPS from Python | `py -c "import urllib.request; print(urllib.request.urlopen('https://www.python.org').status)"` | `python3 -c "import urllib.request; print(urllib.request.urlopen('https://www.python.org').status)"` | `200` |
 | Postman | Postman Echo GET | same | 200 OK |
 | SQLite | open DB Browser | same | app opens |
 | Accounts | GitHub + Neon + Render | same | dashboards open |

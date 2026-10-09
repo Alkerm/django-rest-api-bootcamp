@@ -11,6 +11,10 @@ every previous day is already solved, and that day's work is marked with `TODO [
 | [`day-04/`](day-04/) | Days 1-3 | Day 4: tests, env settings, `.env.example`, requirements (README template arrives, filled on Day 5) |
 | [`day-05/`](day-05/) | Days 1-4 | Day 5: `DATABASE_URL`, `.env.example`, README (WhiteNoise, static files, CSRF origins given) |
 
+**Released one day at a time.** Each checkpoint contains the solved work of the previous days, so it is published
+in this repository on the **morning of the day it is for** (e.g. `day-03/` appears on Day 3). Until then the folder
+holds only a short note. When the instructor announces it, run `git -C django-rest-api-bootcamp pull`.
+
 ## Using a checkpoint
 
 **Days 2-4: everyone copies the whole checkpoint each morning** (exact commands on each day's

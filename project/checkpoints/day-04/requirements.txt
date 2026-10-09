@@ -1,7 +1,0 @@
-Django>=5.2,<5.3
-djangorestframework>=3.16,<3.17
-# TODO [Day 4 · P5]: Add the four deployment packages (see setup/installation.md, "project package set"):
-#   PostgreSQL driver psycopg[binary]>=3.2,<4 , dj-database-url , gunicorn , whitenoise
-#   Install them in your .venv, then check:  python -m pip check
-# HINT: days/day-04/hints.md#p5
-# YOUR CODE HERE

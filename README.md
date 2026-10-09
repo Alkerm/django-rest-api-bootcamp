@@ -64,7 +64,7 @@ days/day-01 … day-05/
 project/
   project-brief.md           requirements, API contract, Definition of Done, rubric
   starter/                   Day 1 starting point of your project
-  checkpoints/day-02 … 05    start of each day: previous days solved + new TODOs (also your recovery point)
+  checkpoints/day-02 … 05    start of each day: previous days solved + new TODOs (published each morning)
   reference-solution/        complete project (instructor repository)
 assets/
   postman/                   Postman collection for the Task API

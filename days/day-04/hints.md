@@ -135,10 +135,20 @@ Placeholders only. Check that `.env` (the real one, if you create it) is in `.gi
 
 <details><summary>Level 1</summary>
 
+Add these four lines to the end of `requirements.txt` (exact versions, tested by the instructor team):
+
+```text
+psycopg[binary]==3.3.6
+dj-database-url==3.1.2
+gunicorn==26.2.0
+whitenoise==6.12.0
+```
+
+Then install and check:
+
 ```bash
-python -m pip install "psycopg[binary]>=3.2,<4" gunicorn whitenoise dj-database-url
+python -m pip install -r requirements.txt
 python -m pip check
 ```
-Then add one line per package to `requirements.txt` (with a version range), or regenerate it with
-`python -m pip freeze > requirements.txt`. Render installs exactly what this file lists.
+Render installs exactly what this file lists, so your laptop and production run the same versions.
 </details>

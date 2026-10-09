@@ -11,7 +11,8 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY", "development-only-key")
-DEBUG = os.getenv("DEBUG", "True").lower() == "true"
+# On Render (RENDER=true) DEBUG defaults to False; locally to True.
+DEBUG = os.getenv("DEBUG", "False" if os.getenv("RENDER") else "True").lower() == "true"
 ALLOWED_HOSTS = [h.strip() for h in os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",") if h.strip()]
 CSRF_TRUSTED_ORIGINS = [o.strip() for o in os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",") if o.strip()]
 

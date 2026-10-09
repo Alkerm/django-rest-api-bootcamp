@@ -32,6 +32,11 @@ source .venv/bin/activate
 python manage.py migrate
 ```
 
+> **Did your Day 1 model differ from the field table** (e.g. `due_date` without `null=True`, a different
+> `max_length`)? Then your database no longer matches the checkpoint's migration, and creating a task later fails with
+> `NOT NULL constraint failed`. Fix it now, it takes 2 minutes: delete `db.sqlite3`, run `python manage.py migrate`,
+> then recreate your superuser (`createsuperuser`) and `alice` / `bob` in the admin.
+
 > Curious how your Day 1 code compares with the reference? Run `git diff` before your next commit: the differences
 > are a free code review. `nothing to commit` after `git commit` is fine.
 

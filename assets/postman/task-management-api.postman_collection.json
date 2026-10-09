@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "Task Management API",
-    "description": "Tuwaiq Club at KFUPM - Building REST APIs with Django. Requires the environment variables base_url, username, password and token. Placeholders only: never store real secrets here.",
+    "description": "Tuwaiq Club at KFUPM - Building REST APIs with Django. Requires the environment variables base_url, username, password, token, task_id and, for the isolation checks, other_username, other_password and other_token (import assets/postman/local-django.postman_environment.json). Placeholders only: never store real secrets here.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -46,8 +46,8 @@
             "type": "text/javascript",
             "exec": [
               "pm.test('200 OK', () => pm.response.to.have.status(200));",
-              "const data = pm.response.json();",
-              "pm.environment.set('token', data.token);"
+              "const body = pm.response.json();",
+              "pm.environment.set('token', body.token);"
             ]
           }
         }
@@ -324,6 +324,178 @@
             "type": "text/javascript",
             "exec": [
               "pm.test('400 Bad Request', () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Get token (other user)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/auth/token/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "token",
+            ""
+          ]
+        },
+        "description": "Second user (e.g. bob). Stores the token in {{other_token}} for the isolation checks.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"{{other_username}}\",\n  \"password\": \"{{other_password}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('200 OK', () => pm.response.to.have.status(200));",
+              "pm.environment.set('other_token', pm.response.json().token);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Other user retrieves my task (expect 404)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token {{other_token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/tasks/{{task_id}}/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "tasks",
+            "{{task_id}}",
+            ""
+          ]
+        },
+        "description": "Data isolation: the other user must not see the task. 404, not 403, so its existence is not revealed."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('404 Not Found', () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Other user updates my task (expect 404)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token {{other_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/tasks/{{task_id}}/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "tasks",
+            "{{task_id}}",
+            ""
+          ]
+        },
+        "description": "Run 'Retrieve task' afterwards: the title must be unchanged.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"changed by the other user\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('404 Not Found', () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Other user deletes my task (expect 404)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token {{other_token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/tasks/{{task_id}}/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "tasks",
+            "{{task_id}}",
+            ""
+          ]
+        },
+        "description": "Run 'Retrieve task' afterwards: the task must still exist."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('404 Not Found', () => pm.response.to.have.status(404));"
             ]
           }
         }

@@ -5,14 +5,15 @@ Postman is for **exploring and demonstrating** the API. It does not replace the 
 ## Import the ready-made collection (recommended)
 
 1. Postman → **Import** → choose [`assets/postman/task-management-api.postman_collection.json`](../assets/postman/task-management-api.postman_collection.json).
-2. Postman → **Environments** → **+** → name it `Local Django`, then add:
+2. Postman → **Import** → choose [`assets/postman/local-django.postman_environment.json`](../assets/postman/local-django.postman_environment.json).
+   It creates the `Local Django` environment with every variable the collection uses:
 
    | Variable | Initial value |
    |---|---|
    | `base_url` | `http://127.0.0.1:8000` |
-   | `username` | your test user, e.g. `alice` |
-   | `password` | that user's local password (type it in **Current value** only) |
-   | `token` | *(empty)* |
+   | `username` / `other_username` | `alice` / `bob` (change them to your two test users) |
+   | `password` / `other_password` | *(empty)*: type each password in **Current value** only |
+   | `token` / `other_token` / `task_id` | *(empty)*: filled in automatically by the requests |
 
 3. Select the `Local Django` environment (top right) before sending requests.
 4. Send **Get token** first. Its post-response script stores the token in `{{token}}` automatically.
@@ -29,18 +30,23 @@ For production, duplicate the environment as `Render` and set `base_url` to `htt
 | Retrieve task | `GET {{base_url}}/api/tasks/{{task_id}}/` | token | `200` |
 | Replace task | `PUT {{base_url}}/api/tasks/{{task_id}}/` | token + all writable fields | `200` |
 | Update task | `PATCH {{base_url}}/api/tasks/{{task_id}}/` | token + changed fields | `200` + task |
+| Get token (other user) | `POST {{base_url}}/api/auth/token/` | JSON with `{{other_username}}` / `{{other_password}}` | `200`, stored in `{{other_token}}` |
+| Other user retrieves my task | `GET {{base_url}}/api/tasks/{{task_id}}/` | `Authorization: Token {{other_token}}` | `404` |
+| Other user updates my task | `PATCH {{base_url}}/api/tasks/{{task_id}}/` | other token + `{"title": ...}` | `404`, title unchanged |
+| Other user deletes my task | `DELETE {{base_url}}/api/tasks/{{task_id}}/` | other token | `404`, task still exists |
 | Delete task | `DELETE {{base_url}}/api/tasks/{{task_id}}/` | token | `204` |
 | No token | `GET {{base_url}}/api/tasks/` | none | `401` |
 
-**Create task** stores the new id in `{{task_id}}`, so the following requests use it.
+**Create task** stores the new id in `{{task_id}}`, so the following requests use it. Run the requests **in order**
+(or with the Collection Runner): the four *other user* requests are the Day 3 two-user check and part of the Day 5 demo.
 
 ## Saving the token yourself
 
 In a request's **Scripts → Post-response** tab:
 
 ```javascript
-const data = pm.response.json();
-pm.environment.set("token", data.token);
+const body = pm.response.json();
+pm.environment.set("token", body.token);
 ```
 
 The label may differ slightly between Postman versions.

@@ -15,6 +15,7 @@ fails.
 | `database is locked` | DB Browser and Django write at the same time | close DB Browser or revert its unsaved edits |
 | `git push` rejected / asks for a password | authentication or remote URL issue | sign in through VS Code or the browser prompt; check `git remote -v` |
 | `warning: ... LF will be replaced by CRLF` (or `CRLF ... by LF`) | Windows line-ending notice from Git | harmless, nothing to fix; the project's `.gitattributes` keeps line endings consistent |
+| `ssl.SSLCertVerificationError` / `CERTIFICATE_VERIFY_FAILED` (macOS), e.g. in `smoke_test.py` | the python.org installer's certificates were never installed | run `open "/Applications/Python 3.13/Install Certificates.command"`, then retry (see [installation](installation.md)) |
 | `git pull` of the bootcamp repo: *Your local changes ... would be overwritten* | you edited exercise files that the instructor also updated | `git -C django-rest-api-bootcamp stash`, then `pull`, then `git -C django-rest-api-bootcamp stash pop` |
 
 ## Django and DRF errors
@@ -24,6 +25,7 @@ fails.
 | `No changes detected` | the model file was not saved, or the app is not in `INSTALLED_APPS` | save; check `INSTALLED_APPS` |
 | `no such table: ...` | migrations not applied | `python manage.py migrate` |
 | `You are trying to add a non-nullable field ...` | a required field was added to a table that already has rows | add a `default`, or (exercise only) delete `db.sqlite3` + the new migration and repeat |
+| `NOT NULL constraint failed: tasks_task.<field>` (e.g. `due_date`) right after copying a checkpoint | your Day 1 model differed from the field table, so your database was built from a different migration than the checkpoint's | delete `db.sqlite3`, run `python manage.py migrate`, recreate your users with `createsuperuser` + the admin (2 minutes) |
 | `NOT NULL constraint failed: tasks_task.owner_id` | the owner is not set on create | `perform_create` → `serializer.save(owner=self.request.user)` |
 | `RuntimeError: Model class rest_framework.authtoken.models.Token doesn't declare an explicit app_label` | `obtain_auth_token` imported before `rest_framework.authtoken` is installed | add `rest_framework.authtoken` to `INSTALLED_APPS`, then `migrate` |
 | `ImproperlyConfigured: Field name 'x' is not valid for model ...` | a name in `fields` is not a model field and is not declared on the serializer | fix the spelling, or declare the extra field |
