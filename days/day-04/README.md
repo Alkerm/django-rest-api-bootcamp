@@ -1,6 +1,6 @@
 # Day 4: Testing and Configuration
 
-**Wednesday, October 14, 2026** · Focus: **Quality** · [← Day 3](../day-03/README.md) · [Day 5 →](../day-05/README.md)
+**Wednesday, October 28, 2026** · Focus: **Quality** · [← Day 3](../day-03/README.md) · [Day 5 →](../day-05/README.md)
 
 ## Learning outcome
 

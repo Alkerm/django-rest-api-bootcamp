@@ -1,6 +1,6 @@
 # Day 2: Core API: CRUD and Validation
 
-**Monday, October 12, 2026** · Focus: **Core API** · [← Day 1](../day-01/README.md) · [Day 3 →](../day-03/README.md)
+**Monday, October 26, 2026** · Focus: **Core API** · [← Day 1](../day-01/README.md) · [Day 3 →](../day-03/README.md)
 
 ## Learning outcome
 

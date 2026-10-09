@@ -1,6 +1,6 @@
 # Day 1: Foundations, Setup, and Project Start
 
-**Sunday, October 11, 2026** · Focus: **Foundation** · [← Program overview](../../README.md) · [Day 2 →](../day-02/README.md)
+**Sunday, October 25, 2026** · Focus: **Foundation** · [← Program overview](../../README.md) · [Day 2 →](../day-02/README.md)
 
 ## Learning outcome
 

@@ -1,6 +1,6 @@
 # Day 5: Deploy, Verify, and Demonstrate
 
-**Thursday, October 15, 2026** · Focus: **Publish** · [← Day 4](../day-04/README.md) · [Project brief →](../../project/project-brief.md)
+**Thursday, October 29, 2026** · Focus: **Publish** · [← Day 4](../day-04/README.md) · [Project brief →](../../project/project-brief.md)
 
 ## Learning outcome
 

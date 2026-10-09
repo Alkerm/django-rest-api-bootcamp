@@ -1,7 +1,7 @@
 """
 Django settings for the Task Management API.
 
-Tuwaiq Club at KFUPM - Building REST APIs with Django (Oct 11-15, 2026).
+Tuwaiq Club at KFUPM - Building REST APIs with Django (Oct 25-29, 2026).
 Created with `django-admin startproject config .` and cleaned up for the program.
 """
 from pathlib import Path

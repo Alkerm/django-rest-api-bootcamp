@@ -1,6 +1,6 @@
 # Building REST APIs with Django
 
-**Tuwaiq Club at KFUPM** · Modern Software & Cloud track · **October 11-15, 2026** · five hands-on days
+**Tuwaiq Club at KFUPM** · Modern Software & Cloud track · **October 25-29, 2026** · five hands-on days
 
 In five days you design, build, test, document, and deploy a **database-backed REST API** with
 **Django REST Framework**, including token authentication, validated CRUD operations, and per-user permissions.
@@ -22,11 +22,11 @@ complete and deployed.
 
 | Day | Date | Focus | Exercise (Library API) | Project increment (your Task API) |
 |---|---|---|---|---|
-| [1](days/day-01/README.md) | Sun, Oct 11 | Foundation | Book model, migrations, sample data, admin | Django project, `Task` model, admin, GitHub repo |
-| [2](days/day-02/README.md) | Mon, Oct 12 | Core API | Book CRUD API with serializer, viewset, router, validation | Complete CRUD at `/api/tasks/` + validation |
-| [3](days/day-03/README.md) | Tue, Oct 13 | Security | Personal reading list: tokens, ownership | Token login, per-user isolation, permissions |
-| [4](days/day-04/README.md) | Wed, Oct 14 | Testing | Write API tests | 8 required tests, env config, deployment packages |
-| [5](days/day-05/README.md) | Thu, Oct 15 | Publish | *guided deployment instead* (exercise optional) | Live HTTPS deployment, smoke test, README, demo |
+| [1](days/day-01/README.md) | Sun, Oct 25 | Foundation | Book model, migrations, sample data, admin | Django project, `Task` model, admin, GitHub repo |
+| [2](days/day-02/README.md) | Mon, Oct 26 | Core API | Book CRUD API with serializer, viewset, router, validation | Complete CRUD at `/api/tasks/` + validation |
+| [3](days/day-03/README.md) | Tue, Oct 27 | Security | Personal reading list: tokens, ownership | Token login, per-user isolation, permissions |
+| [4](days/day-04/README.md) | Wed, Oct 28 | Testing | Write API tests | 8 required tests, env config, deployment packages |
+| [5](days/day-05/README.md) | Thu, Oct 29 | Publish | *guided deployment instead* (exercise optional) | Live HTTPS deployment, smoke test, README, demo |
 
 Daily session: **about 3 hours**: ~1 h explanation and demo, ~1 h exercise, ~1 h project (on Day 5 the exercise
 hour is a guided deployment).

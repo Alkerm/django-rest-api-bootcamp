@@ -1,7 +1,7 @@
 # Task Management API
 
 A personal task management REST API built with Django and Django REST Framework during the
-Tuwaiq Club at KFUPM bootcamp *Building REST APIs with Django* (Oct 11-15, 2026).
+Tuwaiq Club at KFUPM bootcamp *Building REST APIs with Django* (Oct 25-29, 2026).
 
 > This README grows during the week. On Day 4 you will replace it with the full project README
 > (setup, environment variables, tests, authentication, endpoint examples, deployment).

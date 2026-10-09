@@ -100,7 +100,7 @@ def test_cannot_retrieve_another_users_task(self):
 ```python
 tomorrow = timezone.localdate() + timedelta(days=1)
 yesterday = timezone.localdate() - timedelta(days=1)
-payload = {"title": "Late", "due_date": yesterday.isoformat()}   # "2026-10-13"
+payload = {"title": "Late", "due_date": yesterday.isoformat()}   # "2026-10-27"
 ```
 </details>
 

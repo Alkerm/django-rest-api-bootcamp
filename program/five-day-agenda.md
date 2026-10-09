@@ -1,6 +1,6 @@
 # Five-Day Learning Agenda
 
-**Building REST APIs with Django** · Tuwaiq Club at KFUPM · Modern Software & Cloud · **October 11-15, 2026**
+**Building REST APIs with Django** · Tuwaiq Club at KFUPM · Modern Software & Cloud · **October 25-29, 2026**
 
 > Based on *Task 02, Five-Day Learning Agenda* and *Estimated Daily Session Timing* (original PDFs in
 > [`assets/source-documents/`](../assets/source-documents/)), **rebalanced for a 1 h + 1 h + 1 h day**: validation
@@ -16,11 +16,11 @@ Django REST Framework, including token authentication, validated CRUD operations
 
 | Day | Date | Focus | Project increment | Daily proof |
 |---|---|---|---|---|
-| [1](../days/day-01/README.md) | Sun, Oct 11 | Foundations and setup | Repository, Django/DRF project, Task model, migrations, admin data | Server runs; Task records persist |
-| [2](../days/day-02/README.md) | Mon, Oct 12 | Core API: CRUD + validation | Serializer, routes, complete CRUD endpoints, validation rules | CRUD checklist passes; invalid input → 400 |
-| [3](../days/day-03/README.md) | Tue, Oct 13 | Security | Token auth, ownership, data isolation, permissions | Two-user security check passes |
-| [4](../days/day-04/README.md) | Wed, Oct 14 | Testing and configuration | Automated tests, settings from the environment, deployment packages | 8 required tests pass |
-| [5](../days/day-05/README.md) | Thu, Oct 15 | Publish and demonstrate | Production deployment, smoke test, final README, demonstration | Live URL and final evidence pass |
+| [1](../days/day-01/README.md) | Sun, Oct 25 | Foundations and setup | Repository, Django/DRF project, Task model, migrations, admin data | Server runs; Task records persist |
+| [2](../days/day-02/README.md) | Mon, Oct 26 | Core API: CRUD + validation | Serializer, routes, complete CRUD endpoints, validation rules | CRUD checklist passes; invalid input → 400 |
+| [3](../days/day-03/README.md) | Tue, Oct 27 | Security | Token auth, ownership, data isolation, permissions | Two-user security check passes |
+| [4](../days/day-04/README.md) | Wed, Oct 28 | Testing and configuration | Automated tests, settings from the environment, deployment packages | 8 required tests pass |
+| [5](../days/day-05/README.md) | Thu, Oct 29 | Publish and demonstrate | Production deployment, smoke test, final README, demonstration | Live URL and final evidence pass |
 
 ## Daily session timing (about 3 hours)
 
@@ -55,7 +55,7 @@ Instructor explains + demos  →  days/day-0X/exercise/   →  days/day-0X/proje
 
 ## Day-by-day detail
 
-### Day 1: Foundations, setup, and project start (Sunday, Oct 11)
+### Day 1: Foundations, setup, and project start (Sunday, Oct 25)
 
 - **Instructor explains (~60 min):** the full request flow on the finished project; HTTP verbs on the Task resource;
   project vs app vs DRF; a live model → migration → admin → ORM demo; reproducibility (dependencies recorded,
@@ -67,7 +67,7 @@ Instructor explains + demos  →  days/day-0X/exercise/   →  days/day-0X/proje
   pending migrations; Task fields and status choices match the scope; admin creates, updates, and persists Task
   records with owners; the repository is pushed with no secrets or environment folder.
 
-### Day 2: Core API, CRUD and validation (Monday, Oct 12)
+### Day 2: Core API, CRUD and validation (Monday, Oct 26)
 
 - **Instructor explains (~60 min):** the serializer as translator and gatekeeper; viewsets and routers; the CRUD
   contract and status codes; one POST traced end to end; PUT vs PATCH; validation: built-in rules, clearer messages
@@ -80,7 +80,7 @@ Instructor explains + demos  →  days/day-0X/exercise/   →  days/day-0X/proje
   200, unknown id → 404; PUT/PATCH change the intended fields; DELETE → 204; owner is read-only and server-assigned;
   blank title, invalid status, and a past creation due date → 400 with field errors.
 
-### Day 3: Authentication, ownership, and permissions (Tuesday, Oct 13)
+### Day 3: Authentication, ownership, and permissions (Tuesday, Oct 27)
 
 - **Instructor explains (~60 min):** authentication vs authorization; tokens in the Authorization header; Postman with
   a token; two users show why authentication alone is insufficient (attack-and-fix demo); filtering by `request.user`;
@@ -92,7 +92,7 @@ Instructor explains + demos  →  days/day-0X/exercise/   →  days/day-0X/proje
 - **Completion criteria:** valid credentials return a token; no token → 401; a client-supplied owner is ignored; each
   list contains only the caller's records; cross-user access is blocked (404) without leaking data.
 
-### Day 4: Testing and configuration (Wednesday, Oct 14)
+### Day 4: Testing and configuration (Wednesday, Oct 28)
 
 - **Instructor explains (~60 min):** tests as executable promises; positive vs failure tests; test isolation;
   `APITestCase`, `setUp` and tokens in tests; reading a failing assertion and fixing the application; configuration
@@ -106,7 +106,7 @@ Instructor explains + demos  →  days/day-0X/exercise/   →  days/day-0X/proje
   delete, validation; at least 8 pass with none of the required ones skipped; production settings read from the
   environment; `pip check` is clean.
 
-### Day 5: Deploy, verify, and demonstrate (Thursday, Oct 15)
+### Day 5: Deploy, verify, and demonstrate (Thursday, Oct 29)
 
 - **Instructor explains (~60 min):** deployment as the same app under production configuration; a live deployment of
   the reference project; log reading by failure category; smoke tests and persistence; the 5-minute demo.

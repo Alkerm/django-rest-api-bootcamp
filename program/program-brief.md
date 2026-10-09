@@ -2,7 +2,7 @@
 
 | Organization | Track | Program dates | Format |
 |---|---|---|---|
-| Tuwaiq Club at KFUPM | Modern Software & Cloud | October 11-15, 2026 | Five-day hands-on program |
+| Tuwaiq Club at KFUPM | Modern Software & Cloud | October 25-29, 2026 | Five-day hands-on program |
 
 > Source: *Task 01, Program Brief, Version 1.0 (Sep 27, 2026)*, original PDF in
 > [`assets/source-documents/`](../assets/source-documents/). Scope changes after approval are recorded in a new
@@ -50,11 +50,11 @@ hour of exercise, and one hour of project work per day, plus optional homework.
 
 | Day | Date | Focus | Exit check |
 |---|---|---|---|
-| 1 | Oct 11 | Foundation | Repository is pushed. Server starts locally. Admin shows saved Task records after restart. |
-| 2 | Oct 12 | Core API: CRUD + validation | All CRUD operations work locally with valid JSON and appropriate status codes. Invalid data is rejected with field-level errors. |
-| 3 | Oct 13 | Security | User A cannot view or modify User B's tasks. Requests without a token get 401. |
-| 4 | Oct 14 | Testing and configuration | At least 8 required tests pass. Settings come from the environment. Deployment packages are ready. |
-| 5 | Oct 15 | Publish and demonstrate | Public HTTPS URL works, data persists, a fresh clone can be set up from the README, all required evidence is submitted, and the live demo passes. |
+| 1 | Oct 25 | Foundation | Repository is pushed. Server starts locally. Admin shows saved Task records after restart. |
+| 2 | Oct 26 | Core API: CRUD + validation | All CRUD operations work locally with valid JSON and appropriate status codes. Invalid data is rejected with field-level errors. |
+| 3 | Oct 27 | Security | User A cannot view or modify User B's tasks. Requests without a token get 401. |
+| 4 | Oct 28 | Testing and configuration | At least 8 required tests pass. Settings come from the environment. Deployment packages are ready. |
+| 5 | Oct 29 | Publish and demonstrate | Public HTTPS URL works, data persists, a fresh clone can be set up from the README, all required evidence is submitted, and the live demo passes. |
 
 Detailed daily plan: [`five-day-agenda.md`](five-day-agenda.md).
 

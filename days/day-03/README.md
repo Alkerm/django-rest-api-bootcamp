@@ -1,6 +1,6 @@
 # Day 3: Authentication, Ownership, and Permissions
 
-**Tuesday, October 13, 2026** · Focus: **Security** · [← Day 2](../day-02/README.md) · [Day 4 →](../day-04/README.md)
+**Tuesday, October 27, 2026** · Focus: **Security** · [← Day 2](../day-02/README.md) · [Day 4 →](../day-04/README.md)
 
 ## Learning outcome
 
