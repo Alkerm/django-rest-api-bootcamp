@@ -18,8 +18,8 @@ By the end of the program, participants can:
 | 1 | explain the basic HTTP request-response flow, run a reproducible Django REST Framework environment, and persist Task records through a correctly migrated data model. |
 | 2 | convert Task objects to validated JSON, implement routed create, list, retrieve, update, partial-update, and delete operations, and reject invalid input with clear field-level errors. |
 | 3 | secure the API with tokens, isolate each user's data, and enforce ownership at query and object level. |
-| 4 | verify API behaviour with automated tests, read a failing test to find a bug, and move configuration and secrets into environment variables. |
-| 5 | release the API to a public HTTPS environment, verify production behaviour and persistence, correct deployment issues, and demonstrate the completed system with evidence. |
+| 4 | verify API behavior with automated tests, read a failing test to find a bug, and move configuration and secrets into environment variables. |
+| 5 | release the API to a public HTTPS environment, verify production behavior and persistence, correct deployment issues, and demonstrate the completed system with evidence. |
 
 ## Explicitly out of scope
 

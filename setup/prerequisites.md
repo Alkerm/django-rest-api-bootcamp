@@ -9,11 +9,11 @@ installing software:** you must arrive with a working environment (see [`install
 |---|---|---|
 | Python | Beginner | use variables, strings, numbers, lists, dictionaries, conditions, loops, and functions |
 | Python OOP | Beginner | read and write a simple class, create objects, catch an exception with `try`/`except` |
-| Files and folders | Beginner | create a folder, find a downloaded file, recognise a file path |
+| Files and folders | Beginner | create a folder, find a downloaded file, recognize a file path |
 | Terminal | Beginner | open PowerShell (Windows) or Terminal (macOS), run a command, `cd` into a folder |
 | Virtual environments | Beginner | create and activate a `venv`, install a package with `pip` |
 | Git / GitHub | Beginner | `clone`, `add`, `commit`, `push`, `pull` |
-| Web basics | Awareness | recognise a URL, request, response, HTTP method, and status code |
+| Web basics | Awareness | recognize a URL, request, response, HTTP method, and status code |
 | JSON | Awareness | read a small JSON object with names, numbers, booleans, and lists |
 
 **Not required:** previous Django, Django REST Framework, database administration, cloud deployment, or
@@ -35,8 +35,8 @@ If you miss an answer you can still join, but review HTTP methods and JSON befor
 | Laptop | Windows 10/11 64-bit or a supported macOS release; **8 GB RAM** and **5 GB** free disk recommended; administrator rights to install software |
 | Internet | reliable connection and a modern browser |
 | GitHub account | required **before Day 1**, with two-factor authentication enabled |
-| Neon account (free) | required **before Day 1** (used on Days 4-5) |
-| Render account (free) | required **before Day 1**, connected to your GitHub account (used on Days 4-5) |
+| Neon account (free) | required **before Day 1** (used on Day 5) |
+| Render account (free) | required **before Day 1**, connected to your GitHub account (used on Day 5) |
 | Postman | the desktop app is required; a free account is recommended to save collections |
 | Email + phone | access to your account email and two-factor codes during the sessions |
 

@@ -34,7 +34,7 @@ python -m pip install -r requirements.txt
 
 The starter is what `django-admin startproject config .` and `python manage.py startapp tasks` generate, with comments
 and TODOs added. Look around first: `config/` holds **project** settings and URLs, while `tasks/` is the **app** that
-owns task behaviour.
+owns task behavior.
 
 ## 2. Complete the TODOs
 

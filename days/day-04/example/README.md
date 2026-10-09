@@ -20,7 +20,7 @@ Read it from the bottom up:
 
 1. **`AssertionError: 200 != 404`**: the API returned 200, but the test expected 404.
 2. **line 41**: which assertion failed.
-3. **the test name**: which behaviour is broken ("other user cannot edit note").
+3. **the test name**: which behavior is broken ("other user cannot edit note").
 
 Conclusion: the application lets another user edit the note, which is a security bug. **Fix the application**
 (here: `get_queryset()`), never weaken the test's expectation.

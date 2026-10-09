@@ -140,7 +140,7 @@ Now you add the library's own rules and make one built-in message clearer:
 
 ### 4A: Sort books A-Z (Day 1 review)
 
-**File:** `catalog/models.py`. Find `TODO [Day 2 · Task 4]`. Add `Meta.ordering = ["title"]`, then:
+**File:** `catalog/models.py`. Find `TODO [Day 2 · Task 4`. Add `Meta.ordering = ["title"]`, then:
 
 ```bash
 python manage.py makemigrations catalog     # -> 0002_alter_book_options.py "Change Meta options on book"

@@ -27,7 +27,7 @@ Take a short break between blocks. The day ends with the **exit check** at the b
 |---|---|
 | 10 min | The finished project first: request → Django → DRF → ORM → database → JSON + status code |
 | 10 min | HTTP verbs on the Task resource: GET reads, POST creates, PUT/PATCH change, DELETE removes; the URL names the resource, the verb names the action |
-| 10 min | Django structure: the **project** (`config/`) holds global configuration, the **app** (`tasks/`) owns behaviour, DRF adds API tools on top |
+| 10 min | Django structure: the **project** (`config/`) holds global configuration, the **app** (`tasks/`) owns behavior, DRF adds API tools on top |
 | 25 min | Live demo: a model → `makemigrations` → `migrate` → admin → a few ORM queries in the shell |
 | 5 min | Reproducibility: virtual environment, `requirements.txt`, `.gitignore`, secrets outside Git |
 

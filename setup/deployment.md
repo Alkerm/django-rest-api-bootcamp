@@ -99,7 +99,7 @@ Expected: `10/10 checks passed`. Copy the output (it contains no tokens) into yo
 2. Render → **Manual Deploy → Restart service** (or push a small README change to trigger a redeploy).
 3. `GET /api/tasks/`: `Persistence check` is still there.
 
-## Free-plan behaviour
+## Free-plan behavior
 
 - Free Render services **sleep after ~15 minutes** without traffic. The first request can take up to a minute, so open
   the URL before your demo.

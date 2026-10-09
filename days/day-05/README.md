@@ -4,7 +4,7 @@
 
 ## Learning outcome
 
-By the end of the session, you can release the API to a public HTTPS environment, verify production behaviour and persistence, correct deployment issues, and demonstrate the completed system with evidence.
+By the end of the session, you can release the API to a public HTTPS environment, verify production behavior and persistence, correct deployment issues, and demonstrate the completed system with evidence.
 
 ## Session flow (about 3 hours)
 

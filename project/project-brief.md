@@ -46,7 +46,7 @@ Every TODO looks like this and points to a hint:
 | PUT / PATCH | `/api/tasks/{id}/` | Replace or partially update one owned task | Yes | 200 |
 | DELETE | `/api/tasks/{id}/` | Delete one owned task | Yes | 204 |
 
-**Agreed error behaviour:** no or invalid token → `401` · another user's task → `404` (it is invisible, so its
+**Agreed error behavior:** no or invalid token → `401` · another user's task → `404` (it is invisible, so its
 existence is not revealed) · invalid input → `400` with `{"field": ["message"]}`.
 
 ## Daily increments
@@ -88,9 +88,9 @@ program completion.
 
 | Assessment area | Weight | Pass standard |
 |---|---|---|
-| Core API and data model | 25% | Required fields, persistence, and complete CRUD behaviour |
+| Core API and data model | 25% | Required fields, persistence, and complete CRUD behavior |
 | Authentication and ownership | 25% | Protected endpoints and a successful cross-user isolation check |
-| Validation and API behaviour | 15% | Required rules, clear errors, and appropriate status codes |
+| Validation and API behavior | 15% | Required rules, clear errors, and appropriate status codes |
 | Automated tests | 15% | At least 8 meaningful tests; all required tests pass |
 | Documentation and repository | 10% | Reproducible setup, useful README, clean Git history, no secrets |
 | Deployment and demonstration | 10% | Working HTTPS deployment and complete live demonstration |

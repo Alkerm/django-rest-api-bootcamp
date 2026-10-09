@@ -46,7 +46,7 @@ python manage.py test                         # -> Ran 9 tests ... OK  (the fini
 
 ## Task 1: Choose the database from `DATABASE_URL`
 
-**File:** `config/settings.py`. Find `TODO [Day 5 · Task 1]`.
+**File:** `config/settings.py`. Find `TODO [Day 5 · Task 1`.
 
 In production (Render) the database is PostgreSQL on Neon, given as **one** connection string in `DATABASE_URL`.
 Locally, without the variable, the project must keep using `db.sqlite3`.

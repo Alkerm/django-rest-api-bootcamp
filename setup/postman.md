@@ -30,6 +30,7 @@ For production, duplicate the environment as `Render` and set `base_url` to `htt
 | Retrieve task | `GET {{base_url}}/api/tasks/{{task_id}}/` | token | `200` |
 | Replace task | `PUT {{base_url}}/api/tasks/{{task_id}}/` | token + all writable fields | `200` |
 | Update task | `PATCH {{base_url}}/api/tasks/{{task_id}}/` | token + changed fields | `200` + task |
+| Validation error | `POST {{base_url}}/api/tasks/` | token + JSON `{"title": "   ", "status": "FINISHED", "due_date": "2020-01-01"}` | `400` with errors on `title`, `status` and `due_date` |
 | Get token (other user) | `POST {{base_url}}/api/auth/token/` | JSON with `{{other_username}}` / `{{other_password}}` | `200`, stored in `{{other_token}}` |
 | Other user retrieves my task | `GET {{base_url}}/api/tasks/{{task_id}}/` | `Authorization: Token {{other_token}}` | `404` |
 | Other user updates my task | `PATCH {{base_url}}/api/tasks/{{task_id}}/` | other token + `{"title": ...}` | `404`, title unchanged |

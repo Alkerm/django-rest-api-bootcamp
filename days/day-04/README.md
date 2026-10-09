@@ -4,7 +4,7 @@
 
 ## Learning outcome
 
-By the end of the session, you can verify API behaviour with automated tests, read a failing test to find a bug, and move configuration and secrets into environment variables.
+By the end of the session, you can verify API behavior with automated tests, read a failing test to find a bug, and move configuration and secrets into environment variables.
 
 ## Session flow (about 3 hours)
 

@@ -35,7 +35,7 @@ py --version            # Python 3.13.x
 py -m pip --version     # pip ... from C:\...
 ```
 
-`py` not recognised? Restart Windows. Still failing → re-run the installer with the PATH/launcher options.
+`py` not recognized? Restart Windows. Still failing → re-run the installer with the PATH/launcher options.
 Never download Python from an unofficial site.
 </details>
 

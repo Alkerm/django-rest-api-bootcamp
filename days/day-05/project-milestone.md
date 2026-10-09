@@ -18,7 +18,7 @@ final README, and the live demonstration.
 
 Open a terminal in the folder that contains **both** `django-rest-api-bootcamp` and `task-management-api`.
 
-**Finished Day 4?** Copy **only these three files**, so your own README and tests (written yesterday and graded) stay
+**Finished Day 4?** Copy **only these three files**, so your own tests (written yesterday) and any README sections you already filled in stay
 yours:
 
 ```powershell

@@ -17,7 +17,7 @@ You leave with a live, portfolio-ready backend: your own **Personal Task Managem
                                 own database, tasks + hints       built a bit more every day
 ```
 
-Each topic is learned once, practised on the **exercise**, then applied to the **project**. By Day 5 the project is
+Each topic is learned once, practiced on the **exercise**, then applied to the **project**. By Day 5 the project is
 complete and deployed.
 
 | Day | Date | Focus | Exercise (Library API) | Project increment (your Task API) |
