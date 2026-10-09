@@ -100,6 +100,8 @@ allow a participant to compensate for a missing mandatory item with optional fea
 
 ## Submission package
 
+Submitted on Day 5 through the [submission form](https://forms.gle/SjbXGzfP1zYCdjfN8).
+
 - GitHub repository URL accessible to reviewers
 - Public HTTPS deployment URL
 - README with setup, usage, endpoint, test, and deployment instructions

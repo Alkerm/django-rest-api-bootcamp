@@ -94,13 +94,18 @@ sentence to add.
 
 ## 5. Submit
 
+Submit everything through the **[submission form](https://forms.gle/SjbXGzfP1zYCdjfN8)** as soon as your smoke test passes, **before** your live
+demo. Have these ready to paste:
+
 | Evidence | Where |
 |---|---|
-| GitHub repository URL (accessible to reviewers) | submission form |
-| Public HTTPS deployment URL | submission form + README |
-| Passing test output (≥ 8 tests) | copy the `python manage.py test` output |
-| Smoke-test output (10/10) | copy the terminal output (no tokens or passwords in it) |
-| Completed Definition of Done checklist | [`project/project-brief.md`](../../project/project-brief.md#definition-of-done) |
+| GitHub repository URL (accessible to reviewers) | [submission form](https://forms.gle/SjbXGzfP1zYCdjfN8) |
+| Public HTTPS deployment URL | [submission form](https://forms.gle/SjbXGzfP1zYCdjfN8) + README |
+| Passing test output (≥ 8 tests) | copy the `python manage.py test` output into the form |
+| Smoke-test output (10/10) | copy the terminal output into the form (no tokens or passwords in it) |
+| Completed Definition of Done checklist | tick every item in the form ([`project/project-brief.md`](../../project/project-brief.md#definition-of-done)) |
+
+Typed a wrong link? Use **Edit your response** on the confirmation page, or tell a reviewer at your station.
 
 ## 6. Live demonstration (~5 minutes, at one of the 2-3 review stations)
 
