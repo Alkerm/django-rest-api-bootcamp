@@ -1,5 +1,5 @@
 """
-Settings for the Day 2 exercise: Book CRUD API (serializers, viewsets, routers).
+Settings for the Day 2 exercise: Book CRUD API (function views, path() routing).
 
 This exercise has its OWN database file: days/day-02/exercise/db.sqlite3 (created by `migrate`, not committed).
 """
@@ -69,7 +69,7 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Django REST Framework
-# Day 2 exercise: the API is OPEN (no login) so you can focus on CRUD. Day 3 adds authentication.
+# Day 2 exercise: the API is OPEN (no login) so you can focus on CRUD. Day 4 adds authentication.
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.AllowAny",

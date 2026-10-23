@@ -2,7 +2,7 @@
 
 **Tuwaiq Club at KFUPM** · Modern Software & Cloud track · **October 25-29, 2026** · five hands-on days
 
-In five days you design, build, test, document, and deploy a **database-backed REST API** with
+In five days you design, build, document, and deploy a **database-backed REST API** with
 **Django REST Framework**, including token authentication, validated CRUD operations, and per-user permissions.
 You leave with a live, portfolio-ready backend: your own **Personal Task Management API**.
 
@@ -23,9 +23,9 @@ complete and deployed.
 | Day | Date | Focus | Exercise (Library API) | Project increment (your Task API) |
 |---|---|---|---|---|
 | [1](days/day-01/README.md) | Sun, Oct 25 | Foundation | Book model, migrations, sample data, admin | Django project, `Task` model, admin, GitHub repo |
-| [2](days/day-02/README.md) | Mon, Oct 26 | Core API | Book CRUD API with serializer, viewset, router, validation | Complete CRUD at `/api/tasks/` + validation |
-| [3](days/day-03/README.md) | Tue, Oct 27 | Security | Personal reading list: tokens, ownership | Token login, per-user isolation, permissions |
-| [4](days/day-04/README.md) | Wed, Oct 28 | Testing | Write API tests | 8 required tests, env config, deployment packages |
+| [2](days/day-02/README.md) | Mon, Oct 26 | Core API | Book CRUD API: one function view per operation, `path()` routes | Complete CRUD under `/api/tasks/` with function views |
+| [3](days/day-03/README.md) | Tue, Oct 27 | Serialization | The same Book API with a serializer and validation rules | `TaskSerializer` in every view + validation |
+| [4](days/day-04/README.md) | Wed, Oct 28 | Security | Personal reading list: tokens, ownership | Token login, per-user isolation, env config, deployment packages |
 | [5](days/day-05/README.md) | Thu, Oct 29 | Publish | *guided deployment instead* (exercise optional) | Live HTTPS deployment, smoke test, README, demo |
 
 Daily session: **about 3 hours**: ~1 h explanation and demo, ~1 h exercise, ~1 h project (on Day 5 the exercise
@@ -74,8 +74,8 @@ assets/
 ## Conventions you will see in the code
 
 ```python
-# TODO [Day 3 · P4]: what to write, with the exact names and rules
-# HINT: days/day-03/hints.md#p4  |  Example: days/day-03/example/views.py
+# TODO [Day 4 · P4]: what to write, with the exact names and rules
+# HINT: days/day-04/hints.md#p4  |  Example: days/day-04/example/views.py
 # YOUR CODE HERE
 pass                    # placeholder that keeps the file runnable until you replace it
 ```
@@ -83,7 +83,6 @@ pass                    # placeholder that keeps the file runnable until you rep
 - `Task 1`, `Task 2`, … are exercise tasks. `P1`, `P2`, … are project TODOs.
 - **Core vs stretch:** exercise tasks marked **STRETCH (optional)** are extra practice for fast finishers. Do the
   core tasks, then the **project milestone** (that is what is assessed), and come back to stretch tasks if time is left.
-  On Day 4 the project's tests are labelled **REQUIRED** (8 in total) or **STRETCH**.
 - Lines marked **GIVEN** are complete. Read them, because they are often the pattern for your TODO.
 - Each exercise starts with **Before you start** (commands, database state, sample data) and lists the expected
   input, database change, and output next to every task.

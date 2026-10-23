@@ -1,6 +1,7 @@
 # Postman for the Task API
 
-Postman is for **exploring and demonstrating** the API. It does not replace the automated tests you write on Day 4.
+Postman is for **exploring, checking and demonstrating** the API. The collection uses token authentication, so it
+works from **Day 4** on (Days 2-3 use the browsable API with the session login).
 
 ## Import the ready-made collection (recommended)
 
@@ -26,20 +27,21 @@ For production, duplicate the environment as `Render` and set `base_url` to `htt
 |---|---|---|---|
 | Get token | `POST {{base_url}}/api/auth/token/` | JSON `{"username": "{{username}}", "password": "{{password}}"}` | `200` + token |
 | List tasks | `GET {{base_url}}/api/tasks/` | `Authorization: Token {{token}}` | `200` + array |
-| Create task | `POST {{base_url}}/api/tasks/` | token + JSON task fields | `201` + task |
+| Create task | `POST {{base_url}}/api/tasks/create/` | token + JSON task fields | `201` + task |
 | Retrieve task | `GET {{base_url}}/api/tasks/{{task_id}}/` | token | `200` |
-| Replace task | `PUT {{base_url}}/api/tasks/{{task_id}}/` | token + all writable fields | `200` |
-| Update task | `PATCH {{base_url}}/api/tasks/{{task_id}}/` | token + changed fields | `200` + task |
-| Validation error | `POST {{base_url}}/api/tasks/` | token + JSON `{"title": "   ", "status": "FINISHED", "due_date": "2020-01-01"}` | `400` with errors on `title`, `status` and `due_date` |
+| Replace task | `PUT {{base_url}}/api/tasks/{{task_id}}/update/` | token + all writable fields | `200` |
+| Update task | `PATCH {{base_url}}/api/tasks/{{task_id}}/update/` | token + changed fields | `200` + task |
+| Validation error | `POST {{base_url}}/api/tasks/create/` | token + JSON `{"title": "   ", "status": "FINISHED", "due_date": "2020-01-01"}` | `400` with errors on `title`, `status` and `due_date` |
 | Get token (other user) | `POST {{base_url}}/api/auth/token/` | JSON with `{{other_username}}` / `{{other_password}}` | `200`, stored in `{{other_token}}` |
 | Other user retrieves my task | `GET {{base_url}}/api/tasks/{{task_id}}/` | `Authorization: Token {{other_token}}` | `404` |
-| Other user updates my task | `PATCH {{base_url}}/api/tasks/{{task_id}}/` | other token + `{"title": ...}` | `404`, title unchanged |
-| Other user deletes my task | `DELETE {{base_url}}/api/tasks/{{task_id}}/` | other token | `404`, task still exists |
-| Delete task | `DELETE {{base_url}}/api/tasks/{{task_id}}/` | token | `204` |
+| Other user updates my task | `PATCH {{base_url}}/api/tasks/{{task_id}}/update/` | other token + `{"title": ...}` | `404`, title unchanged |
+| Other user deletes my task | `DELETE {{base_url}}/api/tasks/{{task_id}}/delete/` | other token | `404`, task still exists |
+| Delete task | `DELETE {{base_url}}/api/tasks/{{task_id}}/delete/` | token | `204` |
 | No token | `GET {{base_url}}/api/tasks/` | none | `401` |
 
 **Create task** stores the new id in `{{task_id}}`, so the following requests use it. Run the requests **in order**
-(or with the Collection Runner): the four *other user* requests are the Day 3 two-user check and part of the Day 5 demo.
+(or with the Collection Runner): the four *other user* requests cover the cross-user steps of the Day 4 two-user check and the isolation step
+of the Day 5 demo.
 
 ## Saving the token yourself
 

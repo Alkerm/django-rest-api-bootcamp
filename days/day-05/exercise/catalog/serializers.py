@@ -1,5 +1,5 @@
 """
-Day 3 exercise - Task 3: validation rules for the reading list.
+Day 5 exercise - GIVEN: the finished reading-list serializers from Day 4.
 """
 from django.utils import timezone
 from rest_framework import serializers

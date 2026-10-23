@@ -21,11 +21,11 @@ token = response.json()["token"]
 
 # 2) authenticated requests
 headers = {"Authorization": f"Token {token}"}
-response = requests.post(f"{BASE_URL}/api/notes/", json={"text": "Smoke"}, headers=headers, timeout=TIMEOUT)
+response = requests.post(f"{BASE_URL}/api/notes/create/", json={"text": "Smoke"}, headers=headers, timeout=TIMEOUT)
 note_id = response.json()["id"]             # 201 -> the new note
 
 response = requests.get(f"{BASE_URL}/api/notes/{note_id}/", headers=headers, timeout=TIMEOUT)
 print(response.status_code, response.json()["text"])   # 200 Smoke
 
-response = requests.delete(f"{BASE_URL}/api/notes/{note_id}/", headers=headers, timeout=TIMEOUT)
+response = requests.delete(f"{BASE_URL}/api/notes/{note_id}/delete/", headers=headers, timeout=TIMEOUT)
 print(response.status_code)                 # 204 - no body, so do NOT call response.json() here

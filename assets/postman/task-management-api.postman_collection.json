@@ -106,13 +106,14 @@
           }
         ],
         "url": {
-          "raw": "{{base_url}}/api/tasks/",
+          "raw": "{{base_url}}/api/tasks/create/",
           "host": [
             "{{base_url}}"
           ],
           "path": [
             "api",
             "tasks",
+            "create",
             ""
           ]
         },
@@ -194,7 +195,7 @@
           }
         ],
         "url": {
-          "raw": "{{base_url}}/api/tasks/{{task_id}}/",
+          "raw": "{{base_url}}/api/tasks/{{task_id}}/update/",
           "host": [
             "{{base_url}}"
           ],
@@ -202,6 +203,7 @@
             "api",
             "tasks",
             "{{task_id}}",
+            "update",
             ""
           ]
         },
@@ -245,7 +247,7 @@
           }
         ],
         "url": {
-          "raw": "{{base_url}}/api/tasks/{{task_id}}/",
+          "raw": "{{base_url}}/api/tasks/{{task_id}}/update/",
           "host": [
             "{{base_url}}"
           ],
@@ -253,6 +255,7 @@
             "api",
             "tasks",
             "{{task_id}}",
+            "update",
             ""
           ]
         },
@@ -296,13 +299,14 @@
           }
         ],
         "url": {
-          "raw": "{{base_url}}/api/tasks/",
+          "raw": "{{base_url}}/api/tasks/create/",
           "host": [
             "{{base_url}}"
           ],
           "path": [
             "api",
             "tasks",
+            "create",
             ""
           ]
         },
@@ -430,7 +434,7 @@
           }
         ],
         "url": {
-          "raw": "{{base_url}}/api/tasks/{{task_id}}/",
+          "raw": "{{base_url}}/api/tasks/{{task_id}}/update/",
           "host": [
             "{{base_url}}"
           ],
@@ -438,6 +442,7 @@
             "api",
             "tasks",
             "{{task_id}}",
+            "update",
             ""
           ]
         },
@@ -476,7 +481,7 @@
           }
         ],
         "url": {
-          "raw": "{{base_url}}/api/tasks/{{task_id}}/",
+          "raw": "{{base_url}}/api/tasks/{{task_id}}/delete/",
           "host": [
             "{{base_url}}"
           ],
@@ -484,6 +489,7 @@
             "api",
             "tasks",
             "{{task_id}}",
+            "delete",
             ""
           ]
         },
@@ -513,7 +519,7 @@
           }
         ],
         "url": {
-          "raw": "{{base_url}}/api/tasks/{{task_id}}/",
+          "raw": "{{base_url}}/api/tasks/{{task_id}}/delete/",
           "host": [
             "{{base_url}}"
           ],
@@ -521,6 +527,7 @@
             "api",
             "tasks",
             "{{task_id}}",
+            "delete",
             ""
           ]
         },

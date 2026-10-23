@@ -25,10 +25,12 @@ Take a short break between blocks. The day ends with the **exit check** at the b
 
 | Time | Topic |
 |---|---|
-| 10 min | The finished project first: request → Django → DRF → ORM → database → JSON + status code |
-| 10 min | HTTP verbs on the Task resource: GET reads, POST creates, PUT/PATCH change, DELETE removes; the URL names the resource, the verb names the action |
-| 10 min | Django structure: the **project** (`config/`) holds global configuration, the **app** (`tasks/`) owns behavior, DRF adds API tools on top |
-| 25 min | Live demo: a model → `makemigrations` → `migrate` → admin → a few ORM queries in the shell |
+| 10 min | Client and server: who asks, who answers; one real HTTP request and response read line by line (method, URL, headers, body, status code, JSON) |
+| 5 min | What is a web framework? The work every web app repeats (routing, parsing requests, talking to the database, building responses, security), and what Django and DRF do for you |
+| 5 min | The finished project first: request → Django → DRF → ORM → database → JSON + status code; HTTP verbs on the Task resource |
+| 5 min | Django structure: the **project** (`config/`) holds global configuration, the **app** (`tasks/`) owns behavior, DRF adds API tools on top |
+| 15 min | Databases: tables, rows and columns; primary keys; foreign keys and relationships; SQL vs the ORM; why migrations exist |
+| 15 min | Live demo: a model → `makemigrations` → `migrate` → the table in DB Browser → admin → a few ORM queries in the shell |
 | 5 min | Reproducibility: virtual environment, `requirements.txt`, `.gitignore`, secrets outside Git |
 
 ## Your materials for today

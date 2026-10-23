@@ -1,5 +1,5 @@
 """
-Day 3 worked example - enabling DRF token authentication (two files shown together).
+Day 4 worked example - enabling DRF token authentication (two files shown together).
 """
 
 # ---------------------------------------------------------------- config/settings.py

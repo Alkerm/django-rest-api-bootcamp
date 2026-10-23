@@ -1,15 +1,22 @@
 """
-Day 2 exercise - Task 2: the router generates the URLs for each viewset.
+Day 2 exercise - Task 4: plain path() routing, one URL per view function.
+
+    path(<url pattern>, <view function>, name=<url name>)
+
+These routes are mounted under /api/ in config/urls.py (GIVEN), so "books/" becomes /api/books/.
 """
-from rest_framework.routers import DefaultRouter
+from django.urls import path
 
-from .views import AuthorViewSet, BookViewSet
+from . import views
 
-router = DefaultRouter()
-router.register("authors", AuthorViewSet, basename="author")  # GIVEN
-
-# TODO [Day 2 · Task 2b]: Register BookViewSet under the prefix "books" with basename="book".
-# HINT: days/day-02/hints.md#task-2
-# YOUR CODE HERE
-
-urlpatterns = router.urls
+urlpatterns = [
+    path("authors/", views.list_authors, name="author-list"),  # GIVEN
+    # TODO [Day 2 · Task 4]: Add one path() per book view, with exactly these URLs and names:
+    #   books/                    views.list_books    name="book-list"
+    #   books/create/             views.create_book   name="book-create"
+    #   books/<int:pk>/           views.get_book      name="book-detail"
+    #   books/<int:pk>/update/    views.update_book   name="book-update"
+    #   books/<int:pk>/delete/    views.delete_book   name="book-delete"
+    # HINT: days/day-02/hints.md#task-4  |  Example: days/day-02/example/urls.py
+    # YOUR CODE HERE
+]

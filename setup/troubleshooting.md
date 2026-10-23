@@ -26,7 +26,7 @@ fails.
 | `no such table: ...` | migrations not applied | `python manage.py migrate` |
 | `You are trying to add a non-nullable field ...` | a required field was added to a table that already has rows | add a `default`, or (exercise only) delete `db.sqlite3` + the new migration and repeat |
 | `NOT NULL constraint failed: tasks_task.<field>` (e.g. `due_date`) right after copying a checkpoint | your Day 1 model differed from the field table, so your database was built from a different migration than the checkpoint's | delete `db.sqlite3`, run `python manage.py migrate`, recreate your users with `createsuperuser` + the admin (2 minutes) |
-| `NOT NULL constraint failed: tasks_task.owner_id` | the owner is not set on create | `perform_create` → `serializer.save(owner=self.request.user)` |
+| `NOT NULL constraint failed: tasks_task.owner_id` | the owner is not set on create | Day 2: `Task.objects.create(..., owner=request.user)`; from Day 3: `serializer.save(owner=request.user)` |
 | `RuntimeError: Model class rest_framework.authtoken.models.Token doesn't declare an explicit app_label` | `obtain_auth_token` imported before `rest_framework.authtoken` is installed | add `rest_framework.authtoken` to `INSTALLED_APPS`, then `migrate` |
 | `ImproperlyConfigured: Field name 'x' is not valid for model ...` | a name in `fields` is not a model field and is not declared on the serializer | fix the spelling, or declare the extra field |
 | `DisallowedHost` / browser shows *Bad Request (400)* | host not in `ALLOWED_HOSTS` | check the `ALLOWED_HOSTS` environment variable |
@@ -39,7 +39,7 @@ fails.
 | `401 Invalid token.` | expired/wrong token or wrong prefix | get a new token; the header is `Token <key>` (word, space, key) |
 | `403 Authentication credentials were not provided.` | `SessionAuthentication` is listed before `TokenAuthentication` | put `TokenAuthentication` first |
 | `404 Not Found` | wrong URL, missing trailing slash, wrong id, or the object belongs to another user | check `base_url`, the route, the trailing `/`, the id, and which user's token you use |
-| `405 Method Not Allowed` | the method is not allowed on that URL (e.g. `PUT` on the list URL) | use the detail URL `/api/tasks/{id}/` |
+| `405 Method Not Allowed` | the method is not allowed on that URL (each URL accepts only its own methods) | `POST` → `/api/tasks/create/`, `PUT`/`PATCH` → `/api/tasks/{id}/update/`, `DELETE` → `/api/tasks/{id}/delete/` |
 | `415 Unsupported Media Type` | body not sent as JSON | Body → **raw** → **JSON** |
 
 ## Deployment problems (Render + Neon)

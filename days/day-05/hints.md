@@ -123,13 +123,13 @@ environment variable *names* only, and your smoke-test result).
 <details><summary>Level 2: who it is for</summary>
 
 Write for a classmate who has never seen your project. Each `_TODO_` section needs real commands or examples that
-**work when copied**. The test: swap repositories with a partner, follow only the README, and note every place where
+**work when copied**. The check: swap repositories with a partner, follow only the README, and note every place where
 they got stuck.
 </details>
 
 <details><summary>Level 3: checklist from the program brief</summary>
 
-The README must cover: setup, environment variables, migrations, test command, authentication, endpoint examples,
+The README must cover: setup, environment variables, migrations, authentication, endpoint examples,
 deployed URL (Day 5), and project decisions.
 </details>
 

@@ -2,121 +2,187 @@
 
 Open the hints **one level at a time**. Level 3 is close to the answer.
 
-**Exercise:** [Task 1](#task-1) · [Task 2 (stretch)](#task-2)
-**Project:** [P2 tests](#p2) · [P3 settings](#p3) · [P4 .env.example](#p4) · [P5 requirements](#p5)
+**Exercise:** [Task 1](#task-1) · [Task 2](#task-2) · [Task 3](#task-3)
+**Project:** [P1](#p1) · [P2](#p2) · [P3](#p3) · [P4](#p4) · [P5](#p5) · [P6](#p6) · [P7](#p7) · [P8](#p8)
 
 ---
 
 ## Exercise
 
 <a id="task-1"></a>
-### Task 1: Writing the tests
+### Task 1: Token authentication
 
 <details><summary>Level 1: nudge</summary>
 
-Copy the shape of the complete example test: (optional) `self.use_token(...)` → **one** request → assertions.
-The table in the exercise README tells you the request and the expected result of every test.
-See [`example/test_notes_api.py`](example/test_notes_api.py).
+Three separate edits, all shown in [`example/settings_and_urls.py`](example/settings_and_urls.py):
+the app in `INSTALLED_APPS`, the authentication classes in `REST_FRAMEWORK`, and the login URL (import + path).
+Run `python manage.py migrate` after the first edit.
 </details>
 
-<details><summary>Level 2: building blocks</summary>
-
-```python
-self.use_token(self.alice_token)                                   # act as alice
-response = self.client.get(url)
-response = self.client.post(url, {"book": self.book_2.id}, format="json")
-response = self.client.patch(url, {"status": "FINISHED"}, format="json")
-response = self.client.delete(url)
-
-self.assertEqual(response.status_code, status.HTTP_201_CREATED)   # 200 OK, 204 NO_CONTENT, 400 BAD_REQUEST, 404 NOT_FOUND
-self.assertIn("target_date", response.data)                        # error reported for this field
-self.alice_item.refresh_from_db()                                  # re-read before checking the database
-self.assertTrue(ReadingListItem.objects.filter(id=...).exists())
-```
-</details>
-
-<details><summary>Level 3: one test written out</summary>
-
-```python
-def test_other_users_item_returns_404(self):
-    self.use_token(self.bob_token)
-    response = self.client.get(self.alice_item_url)
-    self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-```
-</details>
-
-<details><summary>Common errors</summary>
+<details><summary>Level 2: common errors</summary>
 
 | Symptom | Cause |
 |---|---|
-| test still shows as `skipped` | the `self.skipTest(...)` line is still there: delete it (fine for STRETCH tests you skip on purpose) |
-| `KeyError: 'token'` | the login failed: check the password used in `setUp` |
-| `401` where you expected `200` | you forgot `self.use_token(...)` in this test (each test starts logged out) |
-| `AssertionError: 'READING' != 'FINISHED'` after a PATCH | call `refresh_from_db()` before reading the object |
-| `IntegrityError: UNIQUE constraint failed` | you created a book with an ISBN that `setUp` already uses |
+| `RuntimeError: Model class rest_framework.authtoken.models.Token doesn't declare an explicit app_label` | you imported `obtain_auth_token` before adding `rest_framework.authtoken` to `INSTALLED_APPS` |
+| `no such table: authtoken_token` | you did not run `migrate` after adding the app |
+| `403` instead of `401` without a token | `SessionAuthentication` is listed **before** `TokenAuthentication` |
+| `401 Invalid token.` | header typo: it must be exactly `Authorization: Token <key>` (word "Token", one space) |
+| `400 Unable to log in with provided credentials.` | wrong username/password: they are case-sensitive |
 </details>
 
 <a id="task-2"></a>
-### Task 2 (stretch): Break it on purpose
+### Task 2: Ownership
 
-<details><summary>Level 1</summary>
+<details><summary>Level 1: nudge</summary>
 
-Look for lines starting with `FAIL:` in the output. Each gives the test name. The `AssertionError: X != Y` line
-shows what the API returned (X) vs. what the test expected (Y).
+Three small edits, all about `request.user` (the user the token belongs to):
+- **2a** the list: filter instead of `.all()`.
+- **2b** the helper that finds ONE item: add the user to the lookup.
+- **2c** create: pass the user to `save()`, exactly like the owner in your project.
+
+See `list_notes`, `get_own_note` and `create_note` in [`example/views.py`](example/views.py).
+</details>
+
+<details><summary>Level 2: almost the answer</summary>
+
+```python
+items = ReadingListItem.objects.filter(user=___).select_related("book")      # 2a
+
+return get_object_or_404(ReadingListItem, pk=pk, user=___)                     # 2b
+
+serializer.save(user=___)                                                      # 2c
+```
+</details>
+
+<details><summary>Why 404 and not 403?</summary>
+
+`get_own_item()` looks the item up with **both** the id and the user. Bob has no item with id 1, so for bob it does
+not exist → 404. The API reveals nothing about other users' data. And because get, update and delete all use the same
+helper, one fix protects all three.
+</details>
+
+<a id="task-3"></a>
+### Task 3: Validation
+
+<details><summary>Level 1: nudge</summary>
+
+DRF calls `validate_<field_name>(self, value)` automatically for each field. Raise
+`serializers.ValidationError("message")` to reject, and `return value` to accept.
+See [`example/serializers.py`](example/serializers.py).
+</details>
+
+<details><summary>Level 2: bigger hint</summary>
+
+- "Today": `timezone.localdate()` (already imported). Dates compare with `<`.
+- `value` may be `None` (no target date): check `value is not None` first.
+- The current user inside a serializer: `self.context["request"].user`.
+- `self.instance` is `None` on create and the existing item on update.
+</details>
+
+<details><summary>Level 3: almost the answer</summary>
+
+```python
+def validate_target_date(self, value):
+    if value is not None and value < timezone.localdate():
+        raise serializers.ValidationError("Target date cannot be in the past.")
+    return value
+
+def validate_book(self, value):
+    user = self.context["request"].user
+    duplicates = ReadingListItem.objects.filter(user=user, book=value)
+    if self.instance is not None:
+        duplicates = duplicates.exclude(pk=___)
+    if duplicates.___():
+        raise serializers.ValidationError("This book is already on your reading list.")
+    return value
+```
 </details>
 
 ---
 
 ## Project
 
+<a id="p1"></a>
+### P1: `rest_framework.authtoken`
+
+<details><summary>Level 1</summary>
+
+One string in `INSTALLED_APPS`, then `python manage.py migrate`: you should see `Applying authtoken...`.
+</details>
+
 <a id="p2"></a>
-### P2: The project tests (`tasks/tests.py`)
+### P2: Authentication classes
 
-<details><summary>Level 1: nudge</summary>
-
-`setUp` gives you `self.alice`, `self.bob`, their tokens, one task each (`self.alice_task`, `self.bob_task`), and the
-URLs. `self.authenticate(token)` logs in for the current test. Each TODO says what to send and what to assert.
-</details>
-
-<details><summary>Level 2: the three tests built together with the instructor</summary>
+<details><summary>Level 1</summary>
 
 ```python
-def test_create_assigns_owner_from_token(self):
-    self.authenticate(self.alice_token)
-    response = self.client.post(self.list_url, {"title": "New task", "owner": self.bob.id}, format="json")
-    self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-    self.assertEqual(response.data["owner"], "alice")
-    self.assertEqual(Task.objects.get(id=response.data["id"]).owner, self.alice)
-
-def test_cannot_retrieve_another_users_task(self):
-    self.authenticate(self.alice_token)
-    response = self.client.get(self.bob_detail_url)
-    self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+"DEFAULT_AUTHENTICATION_CLASSES": [
+    "rest_framework.authentication.TokenAuthentication",
+    "rest_framework.authentication.___",
+],
 ```
-</details>
-
-<details><summary>Level 3: dates in tests</summary>
-
-```python
-tomorrow = timezone.localdate() + timedelta(days=1)
-yesterday = timezone.localdate() - timedelta(days=1)
-payload = {"title": "Late", "due_date": yesterday.isoformat()}   # "2026-10-27"
-```
+Token **first**: anonymous requests then get `401` as required by the API contract.
 </details>
 
 <a id="p3"></a>
-### P3: Settings from the environment
+### P3: Token endpoint
+
+<details><summary>Level 1</summary>
+
+Part 1 is an import, part 2 is a `path(...)` line. Both are shown in
+[`example/settings_and_urls.py`](example/settings_and_urls.py). The URL name must be `api-token`.
+</details>
+
+<details><summary>Test it</summary>
+
+Postman: `POST {{base_url}}/api/auth/token/`, Body → raw → JSON `{"username": "alice", "password": "..."}` → `200`
+`{"token": "..."}`. Save it in the `token` environment variable (see `setup/postman.md`).
+</details>
+
+<a id="p4"></a>
+### P4: Only my tasks in the list
+
+<details><summary>Level 1</summary>
+
+Delete the `tasks = Task.objects.all()` stub and filter by the owner instead. See `list_notes` in
+[`example/views.py`](example/views.py).
+</details>
+
+<details><summary>Level 2</summary>
+
+```python
+tasks = Task.objects.filter(owner=___)
+```
+</details>
+
+<a id="p5"></a>
+### P5: `get_own_task`
+
+<details><summary>Level 1</summary>
+
+`get_task`, `update_task` and `delete_task` already call `get_own_task()`. Today it finds **any** task by id. Add the
+owner to the lookup, and another user's task becomes a 404 everywhere at once.
+</details>
+
+<details><summary>Level 2</summary>
+
+```python
+return get_object_or_404(Task, pk=pk, owner=___)
+```
+</details>
+
+<a id="p6"></a>
+### P6: Settings from the environment
 
 <details><summary>Level 1</summary>
 
 Three lines with `os.getenv(name, default)`: see [`example/settings_env.py`](example/settings_env.py). Use the
 project's default `"development-only-key"` for `SECRET_KEY`.
-Delete the three stub lines below `# YOUR CODE HERE`. After the change, `python manage.py runserver` and
-`python manage.py test` must still work **without** setting any variable.
+Delete the three stub lines below `# YOUR CODE HERE`. After the change, `python manage.py runserver` must still work **without** setting any variable.
 </details>
 
-<a id="p4"></a>
-### P4: `.env.example`
+<a id="p7"></a>
+### P7: `.env.example`
 
 <details><summary>Level 1</summary>
 
@@ -130,8 +196,8 @@ ALLOWED_HOSTS=your-app-name.onrender.com
 Placeholders only. Check that `.env` (the real one, if you create it) is in `.gitignore`.
 </details>
 
-<a id="p5"></a>
-### P5: Deployment packages
+<a id="p8"></a>
+### P8: Deployment packages
 
 <details><summary>Level 1</summary>
 

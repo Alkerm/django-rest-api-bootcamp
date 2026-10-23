@@ -2,58 +2,91 @@
 
 Open the hints **one level at a time**. Level 3 is close to the answer.
 
-**Exercise:** [Task 1](#task-1) · [Task 2](#task-2) · [Task 3](#task-3)
-**Project:** [P1](#p1) · [P2](#p2) · [P3](#p3) · [P4](#p4) · [P5](#p5) · [P6](#p6)
+**Exercise:** [Task 1](#task-1) · [Task 2](#task-2) · [Task 3](#task-3) · [Task 4 (stretch)](#task-4)
+**Project:** [P1](#p1) · [P2](#p2) · [P3](#p3) · [P4](#p4) · [P5](#p5) · [P6](#p6) · [P7 (stretch)](#p7)
 
 ---
 
 ## Exercise
 
 <a id="task-1"></a>
-### Task 1: Token authentication
+### Task 1: `BookSerializer`
 
 <details><summary>Level 1: nudge</summary>
 
-Three separate edits, all shown in [`example/settings_and_urls.py`](example/settings_and_urls.py):
-the app in `INSTALLED_APPS`, the authentication classes in `REST_FRAMEWORK`, and the login URL (import + path).
-Run `python manage.py migrate` after the first edit.
+`AuthorSerializer` right above is complete. `BookSerializer` has the same `Meta` shape, plus one extra field
+declared **above** `class Meta`. Compare `AuthorSerializer` with yesterday's `author_to_dict`: `fields` is the list of
+keys you used to type by hand.
 </details>
 
-<details><summary>Level 2: common errors</summary>
+<details><summary>Level 2: bigger hint</summary>
 
-| Symptom | Cause |
-|---|---|
-| `RuntimeError: Model class rest_framework.authtoken.models.Token doesn't declare an explicit app_label` | you imported `obtain_auth_token` before adding `rest_framework.authtoken` to `INSTALLED_APPS` |
-| `no such table: authtoken_token` | you did not run `migrate` after adding the app |
-| `403` instead of `401` without a token | `SessionAuthentication` is listed **before** `TokenAuthentication` |
-| `401 Invalid token.` | header typo: it must be exactly `Authorization: Token <key>` (word "Token", one space) |
-| `400 Unable to log in with provided credentials.` | wrong username/password: they are case-sensitive |
+- A value that comes from a related object: `serializers.ReadOnlyField(source="relation.attribute")`
+- Every name you want in the JSON must appear in `fields`, **including** the extra field you declared.
+- `read_only_fields` lists fields the client cannot set.
+- See [`example/serializers.py`](example/serializers.py) (`director_name`).
 </details>
 
-<a id="task-2"></a>
-### Task 2: Ownership
-
-<details><summary>Level 1: nudge</summary>
-
-Replace the class attribute `queryset = ...all()` with a **method** `get_queryset(self)` that filters by the user of
-the current request. Add `perform_create` exactly like you did yesterday in the project.
-</details>
-
-<details><summary>Level 2: almost the answer</summary>
+<details><summary>Level 3: almost the answer</summary>
 
 ```python
-def get_queryset(self):
-    return ReadingListItem.objects.filter(user=___)
+author_name = serializers.ReadOnlyField(source="author.___")
 
-def perform_create(self, serializer):
-    serializer.save(user=___)
+class Meta:
+    model = Book
+    fields = ["id", "title", "isbn", "published_year", "available_copies", "author", "author_name", "created_at"]
+    read_only_fields = [___, ___]
 ```
 </details>
 
-<details><summary>Why 404 and not 403?</summary>
+<details><summary>Common errors</summary>
 
-`retrieve`, `update` and `destroy` look the object up **inside** `get_queryset()`. Bob's queryset does not contain
-alice's item, so for bob it does not exist → 404. The API reveals nothing about other users' data.
+| Symptom | Cause |
+|---|---|
+| `ImproperlyConfigured: Field name 'author_name' is not valid` | `author_name` is in `fields` but not declared above `Meta` |
+| `author_name` is missing from the JSON | declared, but not listed in `fields` |
+</details>
+
+<a id="task-2"></a>
+### Task 2: The views with the serializer
+
+<details><summary>Level 1: nudge</summary>
+
+`list_authors` is the pattern for reading. For writing, every view follows three lines: build the serializer,
+`is_valid()`, then `errors` (400) or `save()` (201/200). See [`example/views.py`](example/views.py). Delete the
+`return Response(status=status.HTTP_501_NOT_IMPLEMENTED)` placeholder in each view.
+</details>
+
+<details><summary>Level 2: bigger hint</summary>
+
+| You pass | The serializer does |
+|---|---|
+| `BookSerializer(book)` | object → `.data` (one dict) |
+| `BookSerializer(books, many=True)` | queryset → `.data` (a list) |
+| `BookSerializer(data=request.data)` | validate input → `save()` **creates** |
+| `BookSerializer(book, data=request.data, partial=...)` | validate input → `save()` **updates** `book` |
+</details>
+
+<details><summary>Level 3: almost the answer</summary>
+
+```python
+serializer = BookSerializer(data=request.data)
+if not serializer.is_valid():
+    return Response(serializer.___, status=status.HTTP_400_BAD_REQUEST)
+serializer.save()
+return Response(serializer.___, status=status.HTTP_201_CREATED)
+```
+For `update_book`: `partial=request.method == "PATCH"`.
+</details>
+
+<details><summary>Common errors</summary>
+
+| Symptom | Cause |
+|---|---|
+| `AssertionError: You must call .is_valid() before accessing .data` (or `.save()`) | call `is_valid()` first |
+| PATCH with one field returns 400 | `partial` is missing or `False` for PATCH |
+| PUT creates a new book instead of changing it | the existing `book` was not passed as the first argument |
+| `501 Not Implemented` | the placeholder line is still at the top of the view |
 </details>
 
 <a id="task-3"></a>
@@ -61,35 +94,59 @@ alice's item, so for bob it does not exist → 404. The API reveals nothing abou
 
 <details><summary>Level 1: nudge</summary>
 
-DRF calls `validate_<field_name>(self, value)` automatically for each field. Raise
-`serializers.ValidationError("message")` to reject, and `return value` to accept.
+Two different tools:
+- **3a** changes the *text* of an error DRF already produces: `extra_kwargs` inside `class Meta`, with
+  `error_messages` for the field.
+- **3b** adds a *new rule*: a method named `validate_<field_name>(self, value)` on the serializer (not inside `Meta`).
 See [`example/serializers.py`](example/serializers.py).
 </details>
 
-<details><summary>Level 2: bigger hint</summary>
-
-- "Today": `timezone.localdate()` (already imported). Dates compare with `<`.
-- `value` may be `None` (no target date): check `value is not None` first.
-- The current user inside a serializer: `self.context["request"].user`.
-- `self.instance` is `None` on create and the existing item on update.
-</details>
-
-<details><summary>Level 3: almost the answer</summary>
+<details><summary>Level 2: almost the answer</summary>
 
 ```python
-def validate_target_date(self, value):
-    if value is not None and value < timezone.localdate():
-        raise serializers.ValidationError("Target date cannot be in the past.")
-    return value
+class Meta:
+    ...
+    extra_kwargs = {"title": {"error_messages": {"blank": "Title cannot be blank."}}}
 
-def validate_book(self, value):
-    user = self.context["request"].user
-    duplicates = ReadingListItem.objects.filter(user=user, book=value)
-    if self.instance is not None:
-        duplicates = duplicates.exclude(pk=___)
-    if duplicates.___():
-        raise serializers.ValidationError("This book is already on your reading list.")
+def validate_published_year(self, value):
+    if value > timezone.localdate().___:
+        raise serializers.ValidationError("Published year cannot be in the future.")
     return value
+```
+`timezone` is already imported at the top of the file.
+</details>
+
+<details><summary>Common errors</summary>
+
+| Symptom | Cause |
+|---|---|
+| The rule never runs | the method name must be exactly `validate_published_year`, and it must be indented inside `BookSerializer`, not inside `Meta` |
+| This year is rejected too | use `>` (later than this year), not `>=` |
+| Everything returns 400 now | you forgot `return value` at the end of the method |
+</details>
+
+<a id="task-4"></a>
+### Task 4 (stretch): Object-level rule
+
+<details><summary>Level 1: nudge</summary>
+
+`validate(self, attrs)` runs after every field passed. `attrs` is a dict of the validated fields. On PATCH a field
+may be missing, so take it from `self.instance` (the book being edited). When editing, exclude the book itself from
+the duplicate search. See `validate` in [`example/serializers.py`](example/serializers.py).
+</details>
+
+<details><summary>Level 2: almost the answer</summary>
+
+```python
+def validate(self, attrs):
+    title = attrs.get("title", self.instance.title if self.instance else None)
+    author = attrs.get("author", self.instance.author if self.instance else None)
+    same = Book.objects.filter(title__iexact=title, author=author)
+    if self.instance is not None:
+        same = same.exclude(pk=___)
+    if same.exists():
+        raise serializers.ValidationError("This author already has a book with this title.")
+    return ___
 ```
 </details>
 
@@ -98,73 +155,102 @@ def validate_book(self, value):
 ## Project
 
 <a id="p1"></a>
-### P1: `rest_framework.authtoken`
+### P1: `TaskSerializer` fields
 
 <details><summary>Level 1</summary>
 
-One string in `INSTALLED_APPS`, then `python manage.py migrate`: you should see `Applying authtoken...`.
-</details>
-
-<a id="p2"></a>
-### P2: Authentication classes
-
-<details><summary>Level 1</summary>
-
-```python
-"DEFAULT_AUTHENTICATION_CLASSES": [
-    "rest_framework.authentication.TokenAuthentication",
-    "rest_framework.authentication.___",
-],
-```
-Token **first**: anonymous requests then get `401` as required by the API contract.
-</details>
-
-<a id="p3"></a>
-### P3: Token endpoint
-
-<details><summary>Level 1</summary>
-
-Part 1 is an import, part 2 is a `path(...)` line. Both are shown in
-[`example/settings_and_urls.py`](example/settings_and_urls.py). The URL name must be `api-token`: the Day 4 tests use it.
-</details>
-
-<details><summary>Test it</summary>
-
-Postman: `POST {{base_url}}/api/auth/token/`, Body → raw → JSON `{"username": "alice", "password": "..."}` → `200`
-`{"token": "..."}`. Save it in the `token` environment variable (see `setup/postman.md`).
-</details>
-
-<a id="p4"></a>
-### P4: `get_queryset`
-
-<details><summary>Level 1</summary>
-
-Delete the `queryset = Task.objects.all()` stub and write a method that returns only the tasks whose `owner` is the
-current user. See [`example/views.py`](example/views.py).
+`fields` is the list of keys from yesterday's `task_to_dict`, in the same order. The 4 fields the server controls go in
+`read_only_fields`. The `owner` is one of them: the client must never choose it.
 </details>
 
 <details><summary>Level 2</summary>
 
 ```python
-def get_queryset(self):
-    return Task.objects.filter(owner=___)
+fields = ["id", "title", "description", "status", "due_date", "owner", "created_at", "updated_at"]
+read_only_fields = ["id", "owner", ___, ___]
 ```
 </details>
 
-<a id="p5"></a>
-### P5 (stretch): `IsOwner`
+<a id="p2"></a>
+### P2: `list_tasks` + `get_task`
 
 <details><summary>Level 1</summary>
 
-`has_object_permission` receives the task as `obj`. Compare its owner with `request.user` and return the result
-(`True` or `False`). See [`example/permissions.py`](example/permissions.py).
+Replace `task_to_dict(...)` with `TaskSerializer(...).data` (and `many=True` for the list). Delete `task_to_dict`
+from your own code if you still have it: nothing uses it any more.
+</details>
+
+<a id="p3"></a>
+### P3: `create_task`
+
+<details><summary>Level 1</summary>
+
+The exercise's `create_book`, with one difference: the owner is a server-side value, so it goes into `save()`:
+`serializer.save(owner=request.user)`. `owner` is read-only, so a value in the body is ignored.
+</details>
+
+<details><summary>Error: <code>NOT NULL constraint failed: tasks_task.owner_id</code></summary>
+
+`serializer.save()` was called without `owner=request.user`.
+</details>
+
+<a id="p4"></a>
+### P4: `update_task`
+
+<details><summary>Level 1</summary>
+
+The exercise's `update_book`: `TaskSerializer(task, data=request.data, partial=request.method == "PATCH")`.
+</details>
+
+<a id="p5"></a>
+### P5: Title error messages
+
+<details><summary>Level 1</summary>
+
+`extra_kwargs` sets options for fields that `ModelSerializer` generates. The option you need is `error_messages`, a
+dictionary from error code (`"required"`, `"blank"`) to text.
+</details>
+
+<details><summary>Level 2</summary>
+
+```python
+extra_kwargs = {
+    "title": {
+        "error_messages": {
+            "required": "Title is required.",
+            "blank": "___",
+        }
+    }
+}
+```
+It goes **inside** `class Meta`. See `extra_kwargs` in [`example/serializers.py`](example/serializers.py).
 </details>
 
 <a id="p6"></a>
-### P6 (stretch): Owner as username (Day 2 review)
+### P6: Due date not in the past (on create)
 
 <details><summary>Level 1</summary>
 
-Same technique as `author_name` in the Day 2 exercise: a `ReadOnlyField` with a `source` that follows the relation.
-Declare it **above** `class Meta` and keep the name `owner`.
+Write `validate_due_date(self, value)`. Three conditions must all be true to reject: it is a create
+(`self.instance is None`), a date was given (`value is not None`), and it is before `timezone.localdate()`.
+`validate_release_date` in [`example/serializers.py`](example/serializers.py) is the same idea.
+</details>
+
+<details><summary>Level 2</summary>
+
+```python
+def validate_due_date(self, value):
+    if self.instance is None and value is not None and value < ___:
+        raise serializers.ValidationError("Due date cannot be earlier than today.")
+    return ___
+```
+</details>
+
+<a id="p7"></a>
+### P7 (stretch): Owner as username
+
+<details><summary>Level 1</summary>
+
+Declare the field above `class Meta`, like `added_by` in [`example/serializers.py`](example/serializers.py):
+`owner = serializers.ReadOnlyField(source="owner.___")`. It stays read-only, so P3 still sets it from `request.user`.
 </details>

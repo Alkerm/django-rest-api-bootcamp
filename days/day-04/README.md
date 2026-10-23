@@ -1,18 +1,19 @@
-# Day 4: Testing and Configuration
+# Day 4: Security and Configuration
 
-**Wednesday, October 28, 2026** · Focus: **Quality** · [← Day 3](../day-03/README.md) · [Day 5 →](../day-05/README.md)
+**Wednesday, October 28, 2026** · Focus: **Security** · [← Day 3](../day-03/README.md) · [Day 5 →](../day-05/README.md)
 
 ## Learning outcome
 
-By the end of the session, you can verify API behavior with automated tests, read a failing test to find a bug, and move configuration and secrets into environment variables.
+By the end of the session, you can secure the API with tokens, isolate each user's data in every function view, and
+move secrets and environment-specific settings out of the code so the project is ready to deploy.
 
 ## Session flow (about 3 hours)
 
 | Block | Time | What happens | Material |
 |---|---|---|---|
 | 1. Explanation + live demo | ~60 min | the instructor explains and builds in front of you | [`slides.md`](slides.md) · [`example/`](example/) |
-| 2. Exercise | ~60 min | Test the reading-list API: 4 required tests. **Core** tasks first, **stretch** only if time is left | [`exercise/README.md`](exercise/README.md) |
-| 3. Project milestone | ~60 min | apply the same concept to **your** Task Management API | [`project-milestone.md`](project-milestone.md) |
+| 2. Exercise | ~60 min | Personal reading list: token auth, then ownership in every view. **Core** tasks first, **stretch** only if time is left | [`exercise/README.md`](exercise/README.md) |
+| 3. Project milestone | ~60 min | apply the same concept to **your** Task Management API, then prepare its configuration for Day 5 | [`project-milestone.md`](project-milestone.md) |
 
 Take a short break between blocks. The day ends with the **exit check** at the bottom of the milestone page.
 
@@ -23,11 +24,11 @@ Take a short break between blocks. The day ends with the **exit check** at the b
 
 | Time | Topic |
 |---|---|
-| 10 min | A test as an executable promise: arrange known data, perform one action, assert the response and the database effect |
-| 10 min | `APITestCase`, `setUp`, test isolation, tokens in tests; positive tests and failure tests |
-| 20 min | Live demo: a 401 test and a cross-user test; break the app on purpose and read the failure; fix the app, not the test |
-| 15 min | Configuration: why `DEBUG`, `SECRET_KEY` and hosts come from environment variables; `.env.example`; deployment packages |
-| 5 min | Preview of Day 5 and the optional homework (accounts, deployment guide) |
+| 10 min | Authentication (who is calling?) vs authorization (what may they do?); 401 vs 403 vs 404 in this program |
+| 10 min | DRF tokens: the login endpoint, the `Authorization: Token <key>` header, why the token is a password; Postman with `base_url` and `token` |
+| 20 min | Attack-and-fix demo with two users: bob reads alice's tasks → filter every query by `request.user` → bob gets 404; one `get_own_task()` helper for get/update/delete; owner set on `save()` |
+| 15 min | Configuration: why `DEBUG`, `SECRET_KEY` and hosts come from environment variables; `.env.example`; deployment packages in `requirements.txt` |
+| 5 min | Preview of Day 5 (deployment) and the optional homework |
 
 ## Your materials for today
 

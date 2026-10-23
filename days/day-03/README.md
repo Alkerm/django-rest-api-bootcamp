@@ -1,17 +1,19 @@
-# Day 3: Authentication, Ownership, and Permissions
+# Day 3: Serialization and Validation
 
-**Tuesday, October 27, 2026** · Focus: **Security** · [← Day 2](../day-02/README.md) · [Day 4 →](../day-04/README.md)
+**Tuesday, October 27, 2026** · Focus: **Serialization** · [← Day 2](../day-02/README.md) · [Day 4 →](../day-04/README.md)
 
 ## Learning outcome
 
-By the end of the session, you can secure the API with tokens, isolate each user's data, and enforce ownership at query and object level.
+By the end of the session, you can replace hand-written conversion code with a `ModelSerializer`, use it in function
+views to validate input and save data, tell PUT and PATCH apart with `partial`, and reject invalid input with clear
+field-level errors.
 
 ## Session flow (about 3 hours)
 
 | Block | Time | What happens | Material |
 |---|---|---|---|
 | 1. Explanation + live demo | ~60 min | the instructor explains and builds in front of you | [`slides.md`](slides.md) · [`example/`](example/) |
-| 2. Exercise | ~60 min | Personal reading list: token auth, then `get_queryset` + `perform_create`. **Core** tasks first, **stretch** only if time is left | [`exercise/README.md`](exercise/README.md) |
+| 2. Exercise | ~60 min | Book API: `BookSerializer`, the five views rewritten with it, two validation rules. **Core** tasks first, **stretch** only if time is left | [`exercise/README.md`](exercise/README.md) |
 | 3. Project milestone | ~60 min | apply the same concept to **your** Task Management API | [`project-milestone.md`](project-milestone.md) |
 
 Take a short break between blocks. The day ends with the **exit check** at the bottom of the milestone page.
@@ -23,11 +25,11 @@ Take a short break between blocks. The day ends with the **exit check** at the b
 
 | Time | Topic |
 |---|---|
-| 10 min | Authentication (who is calling?) vs authorization (what may they do?); 401 vs 403 vs 404 in this program |
-| 10 min | DRF tokens: the login endpoint, the `Authorization: Token <key>` header, why the token is a password |
-| 10 min | Postman: an environment with `base_url` and `token`, sending the header |
-| 20 min | Attack-and-fix demo with two users: bob reads alice's tasks → `get_queryset()` → bob gets 404; owner set in `perform_create` |
-| 10 min | Defense in depth: read-only owner, `IsOwner` object permission |
+| 10 min | Yesterday's pain: show a bad `status` being saved and a bad date crashing with 500. What we need: one place for "object ⇄ JSON" and "is this input valid?" |
+| 15 min | The serializer as translator (model ⇄ JSON) and gatekeeper: `ModelSerializer`, `fields`, `read_only_fields`, a related field with `source=`; try it in `python manage.py shell` |
+| 15 min | Serializers in function views: `many=True`, `data=`, `is_valid()`, `serializer.errors`, `save(owner=...)`, `partial` for PATCH; one POST traced end to end |
+| 15 min | Validation: built-in rules, clearer messages with `extra_kwargs`, your own rule with `validate_<field>`, `self.instance` (create vs update), object-level `validate()` |
+| 5 min | Live demo in the browsable API: the same five URLs, now with 400s and field errors |
 
 ## Your materials for today
 

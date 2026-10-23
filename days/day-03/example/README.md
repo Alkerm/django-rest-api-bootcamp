@@ -1,34 +1,52 @@
-# Day 3 Worked Example: Personal Notes API
+# Day 3 Worked Example: Movies API with a Serializer
 
-Read-only example files for a "personal notes" API in which every user only sees their own notes.
+Read-only example files (Movies domain, models from [`../../day-01/example/models.py`](../../day-01/example/models.py),
+URLs unchanged from [`../../day-02/example/urls.py`](../../day-02/example/urls.py)).
 
 | File | Shows |
 |---|---|
-| [`settings_and_urls.py`](settings_and_urls.py) | `rest_framework.authtoken`, authentication classes (and why their order matters), the token endpoint |
-| [`views.py`](views.py) | `get_queryset()` filtered by `request.user`, `perform_create()` setting the owner |
-| [`permissions.py`](permissions.py) | object-level permissions (`has_object_permission`) |
-| [`serializers.py`](serializers.py) | built-in, field-level (`validate_<field>`), and object-level (`validate`) validation; `self.instance` and `self.context["request"]` |
+| [`serializers.py`](serializers.py) | `ModelSerializer`, `fields`, `read_only_fields`, a read-only related field with `source=`, the three validation levels: `extra_kwargs` messages, `validate_<field>` (with `self.instance`), `validate(attrs)` |
+| [`views.py`](views.py) | Day 2's five function views rewritten with the serializer: `many=True`, `data=`, `is_valid()`, `serializer.errors`, `save()`, `partial=` |
 
-## Authentication vs authorization
+## Day 2 vs Day 3
 
-| Question | Mechanism | Fails with |
+| Job | Day 2 (by hand) | Day 3 (serializer) |
 |---|---|---|
-| **Who** are you? (authentication) | `Authorization: Token <key>` header → `TokenAuthentication` | **401 Unauthorized**: no or invalid credentials |
-| **May** you do this? (authorization) | permission classes (`IsAuthenticated`, `IsAuthor`, …) | **403 Forbidden**: identified, but not allowed |
-| Does it exist **for you**? | `get_queryset()` filtered by user | **404 Not Found**: another user's object is invisible |
+| object → JSON | `movie_to_dict(movie)` | `MovieSerializer(movie).data` |
+| many objects → JSON | `[movie_to_dict(m) for m in movies]` | `MovieSerializer(movies, many=True).data` |
+| check the input | one `if` per rule, in every view | `serializer.is_valid()`: every rule, declared once |
+| error format | built by hand | `serializer.errors` → `{"field": ["message"]}` |
+| save | `Movie.objects.create(title=..., genre=..., ...)` | `serializer.save(added_by=request.user)` |
+| PUT vs PATCH | same code for both | `partial=False` (PUT: all fields required) / `partial=True` (PATCH) |
 
-In this program another user's object returns **404, not 403**. With 403 the API would confirm that the id exists;
-404 reveals nothing.
+## One POST request, step by step
 
-## Defense in depth: four layers
+```text
+POST /api/movies/create/  {"title": "Dune", "imdb_code": "tt1160419", "director": 1}
+  │
+  ├─ urls.py         → create_movie(request)
+  ├─ serializer      → is_valid()?  runs built-in rules → validate_<field> → validate(attrs)
+  │                    no → 400 + serializer.errors      (nothing saved)
+  │                    yes ↓
+  ├─ save()          → serializer.save(added_by=request.user)  → INSERT row
+  └─ Response        → 201 Created + serializer.data (including id, director_name and created_at)
+```
 
-1. `IsAuthenticated`: anonymous requests are rejected (401).
-2. `get_queryset()`: lists and lookups only ever contain the caller's rows (404 for others).
-3. Object permission (`IsAuthor`): a second check in case a future view forgets layer 2.
-4. `perform_create()` + read-only owner field: a client can never choose or change the owner.
+## Three levels of validation
 
-## Try the token flow with Postman
+| Level | Where | Example | Error appears under |
+|---|---|---|---|
+| 1. Built-in | the model field (no code) | `title` missing, `genre` not a choice, duplicate `imdb_code`, unknown `director` id | the field name |
+| 1b. Custom text for a built-in rule | `extra_kwargs` in `Meta` | `"Title cannot be blank."` | the field name |
+| 2. Field-level | `def validate_release_date(self, value)` | no future release date (on create only: `self.instance is None`) | `release_date` |
+| 3. Object-level | `def validate(self, attrs)` | a documentary needs a release date | `non_field_errors` |
 
-1. `POST {{base_url}}/api/auth/token/` with body `{"username": "alice", "password": "..."}` → copy `token`.
-2. Any protected request → tab **Headers** → `Authorization` = `Token <paste>` (note the word `Token` and the space).
-3. Remove the header → 401. Use bob's token on alice's note → 404.
+## PUT vs PATCH
+
+Stored movie: `{"title": "Dune", "genre": "DRAMA", "imdb_code": "tt1160419", "director": 1}`
+
+| Request | Result |
+|---|---|
+| `PATCH {"genre": "COMEDY"}` | 200: only `genre` changes |
+| `PUT {"genre": "COMEDY"}` | **400**: `title`, `imdb_code`, `director` are required, because PUT means "here is the whole new object" |
+| `PUT {"title": "Dune", "genre": "COMEDY", "imdb_code": "tt1160419", "director": 1}` | 200 |

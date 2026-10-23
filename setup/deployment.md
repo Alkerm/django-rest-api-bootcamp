@@ -18,7 +18,7 @@ Your repository on GitHub contains (Day 4 + Day 5 TODOs):
 - [ ] `.python-version` containing `3.13`
 - [ ] settings: `SECRET_KEY`, `DEBUG`, `ALLOWED_HOSTS`, `CSRF_TRUSTED_ORIGINS` from the environment; `DATABASE_URL`
   switch; WhiteNoise; `STATIC_ROOT`
-- [ ] `python manage.py test` passes and `python manage.py collectstatic --noinput` succeeds
+- [ ] `python manage.py check` passes and `python manage.py collectstatic --noinput` succeeds
 - [ ] `.env` and `db.sqlite3` are **not** in Git (`git status` is clean after `git add .`)
 
 ## 2. Neon database

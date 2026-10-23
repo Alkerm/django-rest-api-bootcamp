@@ -1,43 +1,49 @@
-# Day 4 Worked Example: Testing and Configuration
+# Day 4 Worked Example: Personal Notes API + Configuration
+
+Read-only example files for a "personal notes" API in which every user only sees their own notes, plus a short
+example of settings read from environment variables.
 
 | File | Shows |
 |---|---|
-| [`test_notes_api.py`](test_notes_api.py) | `APITestCase`, `setUp`, tokens in tests, success / failure / validation / authentication tests, checking the database with `refresh_from_db()` |
+| [`settings_and_urls.py`](settings_and_urls.py) | `rest_framework.authtoken`, authentication classes (and why their order matters), the token endpoint |
+| [`views.py`](views.py) | function views that filter every query by `request.user`, `get_own_note()` (another user's note → 404), `save(author=request.user)` |
+| [`serializers.py`](serializers.py) | a read-only `author` field; `context={"request": request}` so a validator can see the current user |
 | [`settings_env.py`](settings_env.py) | reading strings, booleans, integers and lists from environment variables |
 
-## Reading a failing test
+## Authentication vs authorization
 
-```text
-FAIL: test_other_user_cannot_edit_note (notes.tests.NoteAPITests.test_other_user_cannot_edit_note)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File ".../notes/tests.py", line 41, in test_other_user_cannot_edit_note
-    self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-AssertionError: 200 != 404
-```
+| Question | Mechanism | Fails with |
+|---|---|---|
+| **Who** are you? (authentication) | `Authorization: Token <key>` header → `TokenAuthentication` | **401 Unauthorized**: no or invalid credentials |
+| **May** you do this? (authorization) | permission classes (`IsAuthenticated`, …) | **403 Forbidden**: identified, but not allowed |
+| Does it exist **for you**? | the query is filtered by `request.user` | **404 Not Found**: another user's object is invisible |
 
-Read it from the bottom up:
+In this program another user's object returns **404, not 403**. With 403 the API would confirm that the id exists;
+404 reveals nothing.
 
-1. **`AssertionError: 200 != 404`**: the API returned 200, but the test expected 404.
-2. **line 41**: which assertion failed.
-3. **the test name**: which behavior is broken ("other user cannot edit note").
+## Defense in depth: three layers
 
-Conclusion: the application lets another user edit the note, which is a security bug. **Fix the application**
-(here: `get_queryset()`), never weaken the test's expectation.
+1. `IsAuthenticated`: anonymous requests are rejected (401) before the view runs.
+2. Every query contains the owner: `Note.objects.filter(author=request.user)` for lists,
+   `get_object_or_404(Note, pk=pk, author=request.user)` for one object. Write that lookup **once**, in a helper
+   (`get_own_note`), and use it in every view, so no view can forget it.
+3. `save(author=request.user)` + a read-only author field: a client can never choose or change the owner.
 
-`ERROR` (instead of `FAIL`) means the test crashed before its assertion, e.g. a typo, a missing URL name, or an
-exception in the view. Read the last line of the traceback first.
+## Try the token flow with Postman
 
-## Commands
+1. `POST {{base_url}}/api/auth/token/` with body `{"username": "alice", "password": "..."}` → copy `token`.
+2. Any protected request → tab **Headers** → `Authorization` = `Token <paste>` (note the word `Token` and the space).
+3. Remove the header → 401. Use bob's token on alice's note → 404.
 
-```bash
-python manage.py test                       # all tests
-python manage.py test -v 2                  # list every test with ok / FAIL / ERROR / skipped
-python manage.py test tasks.tests.TaskAPITests.test_delete_own_task     # one test
-```
+## Configuration belongs in the environment
 
-## What makes a test "meaningful"?
+The same code runs on your laptop and on Render; only the **configuration** differs. Values that change between
+environments, or are secret, are read from environment variables (see [`settings_env.py`](settings_env.py)):
 
-- It checks the **status code** *and* the important part of the **body** or **database**.
-- It covers **both** directions: allowed work succeeds, forbidden or invalid work fails **and changes nothing**.
-- It does not depend on other tests or on your local `db.sqlite3` (data comes from `setUp`).
+| Setting | Laptop | Production |
+|---|---|---|
+| `SECRET_KEY` | a development default is fine | a long random value, **never** in Git |
+| `DEBUG` | `True` | `False` (otherwise error pages leak code and settings) |
+| `ALLOWED_HOSTS` | `127.0.0.1,localhost` | `my-app.onrender.com` |
+
+`.env.example` documents every variable with **placeholder** values and is committed. Real values are never committed.

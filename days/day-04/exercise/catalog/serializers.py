@@ -1,5 +1,5 @@
 """
-Day 3 exercise - Task 3: validation rules for the reading list.
+Day 4 exercise - Task 3: validation rules for the reading list.
 """
 from django.utils import timezone
 from rest_framework import serializers
@@ -35,16 +35,18 @@ class ReadingListItemSerializer(serializers.ModelSerializer):
         # The (user, book) uniqueness is checked in validate_book() below - that gives a clear field error.
         validators = []
 
-    def validate_target_date(self, value):
-        if value is not None and value < timezone.localdate():
-            raise serializers.ValidationError("Target date cannot be in the past.")
-        return value
+    # TODO [Day 4 · Task 3a · STRETCH (optional)]: Reject a target_date in the past.
+    #   - Method name: validate_target_date(self, value)
+    #   - None (no date) is allowed. Today is allowed. Yesterday is not.
+    #   - "Today" = timezone.localdate()
+    #   - Error message: "Target date cannot be in the past."
+    # HINT: days/day-04/hints.md#task-3  |  Example: days/day-04/example/serializers.py
+    # YOUR CODE HERE
 
-    def validate_book(self, value):
-        user = self.context["request"].user
-        duplicates = ReadingListItem.objects.filter(user=user, book=value)
-        if self.instance is not None:
-            duplicates = duplicates.exclude(pk=self.instance.pk)
-        if duplicates.exists():
-            raise serializers.ValidationError("This book is already on your reading list.")
-        return value
+    # TODO [Day 4 · Task 3b · STRETCH (optional)]: Reject a book that is ALREADY on the current user's reading list.
+    #   - Method name: validate_book(self, value)          (value is a Book instance)
+    #   - The current user: self.context["request"].user   (DRF passes the request to the serializer)
+    #   - When UPDATING (self.instance is not None), exclude the item being edited: .exclude(pk=self.instance.pk)
+    #   - Error message: "This book is already on your reading list."
+    # HINT: days/day-04/hints.md#task-3
+    # YOUR CODE HERE

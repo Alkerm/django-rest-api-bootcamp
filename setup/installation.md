@@ -10,8 +10,8 @@ One consistent, zero-cost environment for everyone. Complete **every** step and 
 
 | Work | Tool | Used for |
 |---|---|---|
-| Code | **Python 3.13** + **VS Code** | write, run, debug, and test Django code |
-| Web API | **Django 5.2 LTS** + **Django REST Framework 3.16** | models, serializers, endpoints, auth, tests |
+| Code | **Python 3.13** + **VS Code** | write, run, and debug Django code |
+| Web API | **Django 5.2 LTS** + **Django REST Framework 3.16** | models, endpoints, serializers, auth |
 | Local data | **SQLite** + **DB Browser for SQLite** | simple local database and visual inspection |
 | API requests | **Postman Desktop** | send requests, tokens, and JSON bodies; save collections |
 | Source | **Git** + **GitHub Free** | version history, submission, deployment source |

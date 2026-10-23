@@ -1,22 +1,17 @@
-# Day 3 Project Milestone: Authentication, Ownership, Permissions
+# Day 3 Project Milestone: Serialization and Validation
 
-**Project increment:** token login endpoint, protected routes, automatic owner, per-user isolation, cross-user
-protection. (Validation was added on Day 2.)
-**Exit check:** user A cannot view or modify user B's tasks, and requests without a token get `401`.
+**Project increment:** `TaskSerializer`, the five views rewritten with it, and the validation rules.
+**Exit check:** all CRUD operations still work, and invalid input returns `400` with clear field-level errors.
 
 ## Where to start
 
-**Everyone does the same thing each morning:** copy today's checkpoint over your project. It contains everything up
-to yesterday already solved, plus today's TODOs, so you never have to merge files by hand. Your Git history, your
-`.venv` and your database (users and tasks) are kept.
-
-Open a terminal in the folder that contains **both** `django-rest-api-bootcamp` and `task-management-api`:
+Copy today's checkpoint over your project, exactly like yesterday:
 
 ```powershell
 # Windows PowerShell
-git -C django-rest-api-bootcamp pull       # only when the instructor announces an update
+git -C django-rest-api-bootcamp pull
 cd task-management-api
-git add -A; git commit -m "End of Day 2"                       # save your own work first
+git add -A; git commit -m "End of Day 2"
 Copy-Item -Path ..\django-rest-api-bootcamp\project\checkpoints\day-03\* -Destination . -Recurse -Force
 .venv\Scripts\Activate.ps1
 python manage.py migrate
@@ -24,7 +19,7 @@ python manage.py migrate
 
 ```bash
 # macOS
-git -C django-rest-api-bootcamp pull       # only when the instructor announces an update
+git -C django-rest-api-bootcamp pull
 cd task-management-api
 git add -A && git commit -m "End of Day 2"
 cp -R ../django-rest-api-bootcamp/project/checkpoints/day-03/. .
@@ -32,54 +27,57 @@ source .venv/bin/activate
 python manage.py migrate
 ```
 
-> Curious how your Day 2 code compares with the reference? Run `git diff` before your next commit: the differences
-> are a free code review. `nothing to commit` after `git commit` is fine.
+The checkpoint adds a new file, `tasks/serializers.py`, and replaces `task_to_dict` in `tasks/views.py`. The URLs do
+not change.
 
 ## TODOs
 
 | TODO | File | What | Hint |
 |---|---|---|---|
-| P1 | `config/settings.py` | add `rest_framework.authtoken`, then `migrate` | [hints#p1](hints.md#p1) |
-| P2 | `config/settings.py` | `DEFAULT_AUTHENTICATION_CLASSES`: Token first, then Session | [hints#p2](hints.md#p2) |
-| P3 | `config/urls.py` | import `obtain_auth_token`, add `api/auth/token/` (`name="api-token"`) | [hints#p3](hints.md#p3) |
-| P4 | `tasks/views.py` | `get_queryset()` → only the caller's tasks | [hints#p4](hints.md#p4) |
-| P5 *(stretch)* | `tasks/permissions.py` | `IsOwner.has_object_permission`, a second safety layer | [hints#p5](hints.md#p5) |
-| P6 *(stretch, Day 2 review)* | `tasks/serializers.py` | show `owner` as the username | [hints#p6](hints.md#p6) |
+| P1 | `tasks/serializers.py` | `fields` (the 8 from `task_to_dict`) and `read_only_fields` (`id`, `owner`, `created_at`, `updated_at`) | [hints#p1](hints.md#p1) |
+| P2 | `tasks/views.py` | `list_tasks` and `get_task` return `TaskSerializer(...).data` | [hints#p2](hints.md#p2) |
+| P3 | `tasks/views.py` | `create_task`: `is_valid()` → 400, or `save(owner=request.user)` → 201 | [hints#p3](hints.md#p3) |
+| P4 | `tasks/views.py` | `update_task`: `partial` for PATCH, 400 on invalid input | [hints#p4](hints.md#p4) |
+| P5 | `tasks/serializers.py` | clear title errors: `Title is required.` / `Title cannot be blank.` | [hints#p5](hints.md#p5) |
+| P6 | `tasks/serializers.py` | `validate_due_date`: not before today, **on create only** | [hints#p6](hints.md#p6) |
+| P7 *(stretch)* | `tasks/serializers.py` | show `owner` as the username instead of the id | [hints#p7](hints.md#p7) |
 
-**Core = P1-P4.** P5 and P6 are optional: the API is already secure and correct without them. Do them only after the
-two-user check below passes.
+## Try it
 
-## The two-user security check (record the results)
+```bash
+python manage.py runserver
+```
 
-Use Postman (see [`setup/postman.md`](../../setup/postman.md)) with the two users you created on Day 1.
-Make sure **each** user owns at least one task (use the admin if needed).
+Log in at http://127.0.0.1:8000/api-auth/login/ as `alice`, then:
 
-| # | Request | Expected |
-|---|---|---|
-| 1 | `POST /api/auth/token/` alice's credentials | `200` + token |
-| 2 | `POST /api/auth/token/` wrong password | `400` |
-| 3 | `GET /api/tasks/` **without** token | `401` |
-| 4 | alice: `GET /api/tasks/` | `200`, only alice's tasks (`"owner"` shows alice's id, or `"alice"` with P6) |
-| 5 | alice: `POST /api/tasks/` `{"title": "Mine", "owner": <bob's id>}` | `201`, owner is alice (not bob's id) |
-| 6 | bob: `GET /api/tasks/{alice's task id}/` | `404` |
-| 7 | bob: `PATCH /api/tasks/{alice's task id}/` `{"title": "x"}` | `404`, alice's task unchanged |
-| 8 | bob: `DELETE /api/tasks/{alice's task id}/` | `404`, task still exists |
+| # | Request | Body | Expected |
+|---|---|---|---|
+| 1 | `GET /api/tasks/` | none | `200`, the same JSON shape as yesterday |
+| 2 | `POST /api/tasks/create/` | `{"title": "Prepare slides", "owner": 999}` | `201`, owner = alice (999 ignored) |
+| 3 | `POST /api/tasks/create/` | `{"title": "   "}` | `400` `{"title": ["Title cannot be blank."]}` |
+| 4 | `POST /api/tasks/create/` | `{"description": "no title"}` | `400` `{"title": ["Title is required."]}` |
+| 5 | `POST /api/tasks/create/` | `{"title": "X", "status": "FINISHED"}` | `400`, error on `status` (built-in, no code needed) |
+| 6 | `POST /api/tasks/create/` | `{"title": "X", "due_date": "2020-01-01"}` | `400` `{"due_date": ["Due date cannot be earlier than today."]}` |
+| 7 | `POST /api/tasks/create/` | `{"title": "X", "due_date": "tomorrow"}` | `400`, error on `due_date` (yesterday: 500) |
+| 8 | `PUT /api/tasks/{id}/update/` | `{"status": "DONE"}` | `400`: PUT needs the title |
+| 9 | `PATCH /api/tasks/{id}/update/` | `{"status": "DONE"}` | `200`, only status changed |
+| 10 | `DELETE /api/tasks/{id}/delete/` | none | `204` |
 
-Save evidence (screenshots or copied responses, **without tokens**) in your notes. You will automate all of this
-tomorrow.
+> **Known gap, fixed tomorrow:** every logged-in user still sees **all** users' tasks. Day 4 adds token
+> authentication and per-user isolation.
 
 ## Commit
 
 ```bash
 git add .
-git commit -m "Day 3: token auth, ownership, permissions"
+git commit -m "Day 3: TaskSerializer and validation"
 git push
 ```
 
 ## Exit check
 
-- [ ] Valid credentials return a token; protected routes reject requests without one (`401`).
-- [ ] Authenticated creation ignores any client-supplied owner.
-- [ ] Each user's list contains only their own records.
-- [ ] Cross-user retrieve/update/delete is blocked (`404`) without leaking data.
-- [ ] The two-user check is recorded and the commit is pushed.
+- [ ] No view builds a dict by hand; every view uses `TaskSerializer`.
+- [ ] `owner`, `id`, `created_at`, `updated_at` are read-only; the owner is set by the server.
+- [ ] Blank or missing title, invalid status, and a past due date on create return `400` with field errors.
+- [ ] PUT without a title returns `400`; PATCH with one field returns `200`.
+- [ ] All ten checks above pass and the commit is pushed.

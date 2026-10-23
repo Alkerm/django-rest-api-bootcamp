@@ -25,10 +25,9 @@ source ../../../.venv/bin/activate            # macOS
 
 python manage.py migrate                      # creates db.sqlite3 (the default database)
 python manage.py loaddata sample_data         # -> Installed 14 object(s) from 1 fixture(s)
-python manage.py test                         # -> Ran 9 tests ... OK  (the finished Day 4 tests)
 ```
 
-> **Database state: pre-filled with the Day 3 sample data** (demo users `alice` / `alice-pass-2026` and `bob` /
+> **Database state: pre-filled with the Day 4 sample data** (demo users `alice` / `alice-pass-2026` and `bob` /
 > `bob-pass-2026`, 6 books, 3 reading-list items). The API is the finished reading-list API. Today you change
 > **configuration only**: no views or serializers.
 
@@ -70,7 +69,7 @@ and run `python manage.py migrate`: the same tables are created in PostgreSQL. *
 
 **Acceptance criteria**
 - [ ] With `DATABASE_URL` set → Django uses that database. Without it → `db.sqlite3`.
-- [ ] `python manage.py test` still passes (tests always use a temporary database).
+- [ ] `python manage.py runserver` still works with and without the variable.
 
 ---
 
@@ -116,10 +115,10 @@ python smoke_test.py
 |---|---|---|---|
 | 1 | `GET /api/reading-list/` (no token) | `401` | none |
 | 2 | `POST /api/auth/token/` for alice and for bob | `200` + `token` each | token rows created if missing |
-| 3 | alice: `POST /api/reading-list/` `{"book": 2}` | `201`, `"user": "alice"` | new reading-list row (alice, book 2) |
+| 3 | alice: `POST /api/reading-list/create/` `{"book": 2}` | `201`, `"user": "alice"` | new reading-list row (alice, book 2) |
 | 4 | alice: `GET /api/reading-list/{new id}/` | `200` | none |
 | 5 | bob: `GET /api/reading-list/{new id}/` | `404` | none |
-| 6 | alice: `DELETE /api/reading-list/{new id}/` | `204` | the new row is removed |
+| 6 | alice: `DELETE /api/reading-list/{new id}/delete/` | `204` | the new row is removed |
 | 7 | alice: `GET /api/reading-list/{new id}/` | `404` | none: the database is back to its starting state |
 
 **Expected output**
@@ -148,5 +147,5 @@ Close the terminal (or remove `DEBUG`, `SECRET_KEY`, `DATABASE_URL`) and delete 
 ## Done? Check yourself
 
 - [ ] I can explain why production data cannot live in SQLite on Render (the server's disk is not persistent).
-- [ ] I can explain the difference between automated tests (`manage.py test`) and a smoke test.
+- [ ] I can explain what a smoke test proves (and what it does not) about a live deployment.
 - [ ] Now deploy your project: [`../project-milestone.md`](../project-milestone.md)

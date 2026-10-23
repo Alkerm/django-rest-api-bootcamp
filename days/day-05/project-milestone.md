@@ -18,8 +18,7 @@ final README, and the live demonstration.
 
 Open a terminal in the folder that contains **both** `django-rest-api-bootcamp` and `task-management-api`.
 
-**Finished Day 4?** Copy **only these three files**, so your own tests (written yesterday) and any README sections you already filled in stay
-yours:
+**Finished Day 4?** Copy **only these three files**, so any README sections you already filled in stay yours:
 
 ```powershell
 # Windows PowerShell
@@ -43,8 +42,8 @@ source .venv/bin/activate
 ```
 
 **Behind?** Copy the **whole** checkpoint instead (same command as on Days 2-4, with `day-05`), then
-`python -m pip install -r requirements.txt` and `python manage.py migrate`. This also replaces `README.md` and
-`tasks/tests.py` with the reference versions: review them, and make the README your own before you submit.
+`python -m pip install -r requirements.txt` and `python manage.py migrate`. This also replaces `README.md` with the
+reference template: make it your own before you submit.
 
 ## 1. Prepare the code (local) · hour 2
 
@@ -59,7 +58,7 @@ WhiteNoise, static files, `CSRF_TRUSTED_ORIGINS` and a production-safe `DEBUG` d
 Check locally, then push:
 
 ```bash
-python manage.py test                       # all green
+python manage.py check                      # System check identified no issues
 python manage.py collectstatic --noinput    # succeeds
 git add . && git commit -m "Day 5: production settings" && git push
 ```
@@ -101,7 +100,6 @@ demo. Have these ready to paste:
 |---|---|
 | GitHub repository URL (accessible to reviewers) | [submission form](https://forms.gle/SjbXGzfP1zYCdjfN8) |
 | Public HTTPS deployment URL | [submission form](https://forms.gle/SjbXGzfP1zYCdjfN8) + README |
-| Passing test output (≥ 8 tests) | copy the `python manage.py test` output into the form |
 | Smoke-test output (10/10) | copy the terminal output into the form (no tokens or passwords in it) |
 | Completed Definition of Done checklist | tick every item in the form ([`project/project-brief.md`](../../project/project-brief.md#definition-of-done)) |
 
@@ -128,9 +126,9 @@ For each step: **state the claim → perform the request → point at the proof*
 - [ ] Token authentication and all CRUD operations work in production.
 - [ ] Two-user isolation and validation checks pass against the live URL.
 - [ ] A created record survives a restart or redeploy.
-- [ ] Automated tests pass, and the README contains setup, tests, authentication, endpoint examples, the live URL and
+- [ ] The README contains setup, environment variables, authentication, endpoint examples, the live URL and
   deployment instructions, so a new reviewer can set the project up from a fresh clone.
-- [ ] The submission includes repository URL, deployment URL, test evidence, and the completed checklist.
+- [ ] The submission includes repository URL, deployment URL, smoke-test evidence, and the completed checklist.
 - [ ] The live demo completes without instructor code changes.
 
 Optional improvements start **only** after every box above is checked (see the optional extensions in the

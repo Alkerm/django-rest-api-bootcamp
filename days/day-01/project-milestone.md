@@ -68,7 +68,7 @@ python manage.py createsuperuser
 python manage.py runserver                # http://127.0.0.1:8000/admin/
 ```
 
-In the admin, create **two users** (e.g. `alice`, `bob`; remember the passwords, you need them on Day 3) and
+In the admin, create **two users** (e.g. `alice`, `bob`; remember the passwords, you need them on Day 4) and
 **at least 3 tasks** with different owners and statuses. Stop the server (Ctrl+C), start it again: the tasks are still
 there.
 

@@ -1,52 +1,57 @@
 """
-Day 3 exercise - Task 3: validation rules for the reading list.
+Day 3 exercise - Task 1 (BookSerializer) and Task 3 (validation).
+
+A serializer is a TRANSLATOR (model <-> JSON) and a GATEKEEPER (rejects invalid input before saving).
+It replaces yesterday's book_to_dict() AND the hand-written REQUIRED_FIELDS checks.
 """
 from django.utils import timezone
 from rest_framework import serializers
 
-from .models import Book, ReadingListItem
+from .models import Author, Book
+
+
+class AuthorSerializer(serializers.ModelSerializer):
+    """GIVEN - the complete pattern. Compare it with yesterday's author_to_dict()."""
+
+    class Meta:
+        model = Author
+        fields = ["id", "name", "country"]
+        read_only_fields = ["id"]
 
 
 class BookSerializer(serializers.ModelSerializer):
-    """GIVEN - read-only book catalog."""
+    """
+    JSON shape (8 fields, in this order):
+        id, title, isbn, published_year, available_copies, author, author_name, created_at
 
-    author_name = serializers.ReadOnlyField(source="author.name")
+    - author       -> writable: the client sends the author's id, e.g. 2
+    - author_name  -> READ-ONLY, not a column: comes from book.author.name
+    - id, created_at -> read-only: the server sets them
+    """
+
+    # TODO [Day 3 · Task 1a]: Declare author_name as a read-only field whose value comes from book.author.name.
+    # HINT: days/day-03/hints.md#task-1  |  Example: days/day-03/example/serializers.py (director_name)
+    # YOUR CODE HERE
 
     class Meta:
         model = Book
-        fields = ["id", "title", "isbn", "published_year", "available_copies", "author", "author_name"]
+        # TODO [Day 3 · Task 1b]: List the 8 fields (in the order above) and mark id and created_at as read-only.
+        # HINT: days/day-03/hints.md#task-1
+        # YOUR CODE HERE - replace the placeholder line below
+        fields = ["id"]
+        # TODO [Day 3 · Task 3a]: Give a blank title this exact message: "Title cannot be blank."
+        #   (DRF already rejects a blank title; you only change the TEXT, with extra_kwargs.)
+        # HINT: days/day-03/hints.md#task-3
+        # YOUR CODE HERE
 
-
-class ReadingListItemSerializer(serializers.ModelSerializer):
-    """
-    GIVEN - fields and read-only parts. JSON shape:
-        {"id": 1, "user": "alice", "book": 1, "book_title": "Clean Code",
-         "status": "READING", "target_date": "2026-12-31", "notes": "Chapter 3 next", "created_at": "..."}
-    `user` is read-only: the view sets it from the token (Task 2).
-    """
-
-    user = serializers.ReadOnlyField(source="user.username")
-    book_title = serializers.ReadOnlyField(source="book.title")
-
-    class Meta:
-        model = ReadingListItem
-        fields = ["id", "user", "book", "book_title", "status", "target_date", "notes", "created_at"]
-        read_only_fields = ["id", "created_at"]
-        # The (user, book) uniqueness is checked in validate_book() below - that gives a clear field error.
-        validators = []
-
-    # TODO [Day 3 · Task 3a · STRETCH (optional)]: Reject a target_date in the past.
-    #   - Method name: validate_target_date(self, value)
-    #   - None (no date) is allowed. Today is allowed. Yesterday is not.
-    #   - "Today" = timezone.localdate()
-    #   - Error message: "Target date cannot be in the past."
-    # HINT: days/day-03/hints.md#task-3  |  Example: days/day-03/example/serializers.py
+    # TODO [Day 3 · Task 3b]: Reject a published_year later than the current year (this year is fine).
+    #   Message: "Published year cannot be in the future."   Tip: timezone.localdate().year
+    # HINT: days/day-03/hints.md#task-3  |  Example: days/day-03/example/serializers.py (validate_release_date)
     # YOUR CODE HERE
 
-    # TODO [Day 3 · Task 3b · STRETCH (optional)]: Reject a book that is ALREADY on the current user's reading list.
-    #   - Method name: validate_book(self, value)          (value is a Book instance)
-    #   - The current user: self.context["request"].user   (DRF passes the request to the serializer)
-    #   - When UPDATING (self.instance is not None), exclude the item being edited: .exclude(pk=self.instance.pk)
-    #   - Error message: "This book is already on your reading list."
-    # HINT: days/day-03/hints.md#task-3
+    # TODO [Day 3 · Task 4 · STRETCH (optional)]: An author cannot have two books with the same title.
+    #   Object-level rule: def validate(self, attrs). On create, title and author are in attrs; on PATCH one of
+    #   them may be missing -> fall back to self.instance. Exclude the book itself when updating.
+    #   Message (non-field error): "This author already has a book with this title."
+    # HINT: days/day-03/hints.md#task-4  |  Example: days/day-03/example/serializers.py (validate)
     # YOUR CODE HERE

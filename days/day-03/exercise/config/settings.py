@@ -1,5 +1,5 @@
 """
-Settings for the Day 3 exercise: Personal reading list (token auth, ownership, validation).
+Settings for the Day 3 exercise: Book API with serializers and validation.
 
 This exercise has its OWN database file: days/day-03/exercise/db.sqlite3 (created by `migrate`, not committed).
 """
@@ -19,10 +19,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    # TODO [Day 3 · Task 1a]: Install DRF's token app, then run  python manage.py migrate
-    #   -> you should see "Applying authtoken.0001_initial... OK" (this creates the authtoken_token table)
-    # HINT: days/day-03/hints.md#task-1
-    # YOUR CODE HERE
     "catalog",
 ]
 
@@ -73,14 +69,9 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Django REST Framework
-# Day 3: every endpoint requires an authenticated user (GIVEN below).
+# Day 3 exercise: the API is OPEN (no login) so you can focus on CRUD. Day 4 adds authentication.
 REST_FRAMEWORK = {
-    # TODO [Day 3 · Task 1b]: Add "DEFAULT_AUTHENTICATION_CLASSES" so requests are identified by
-    #   1. rest_framework.authentication.TokenAuthentication    (FIRST -> missing credentials give 401)
-    #   2. rest_framework.authentication.SessionAuthentication  (keeps the browsable API login working)
-    # HINT: days/day-03/hints.md#task-1
-    # YOUR CODE HERE
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated",
+        "rest_framework.permissions.AllowAny",
     ],
 }

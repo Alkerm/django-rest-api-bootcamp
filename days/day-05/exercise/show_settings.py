@@ -1,5 +1,5 @@
 """
-Day 4 exercise - Task 2: print the settings Django actually loaded (GIVEN - do not edit).
+Day 5 exercise - print the settings Django actually loaded (GIVEN - do not edit).
 
 Run:  python show_settings.py
 Then set environment variables in the SAME terminal and run it again (see README, Task 2).

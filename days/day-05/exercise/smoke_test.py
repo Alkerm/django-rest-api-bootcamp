@@ -59,7 +59,7 @@ def get_token(base_url, username, password):
 
 def create_item(base_url, token, book_id):
     """Add a book to the token owner's reading list. Return (status_code, response_json).
-    Request:  POST {base_url}/api/reading-list/   JSON {"book": book_id}   + auth header
+    Request:  POST {base_url}/api/reading-list/create/   JSON {"book": book_id}   + auth header
     Expected: 201  {"id": <new id>, "user": "alice", "book": 2, ...}"""
     # TODO [Day 5 · Task 3b · OPTIONAL]
     # YOUR CODE HERE - replace the placeholder line below
@@ -68,6 +68,7 @@ def create_item(base_url, token, book_id):
 
 def get_item_status(base_url, token, item_id):
     """GET one reading-list item with this token and return ONLY the status code.
+    Request:  GET {base_url}/api/reading-list/<item_id>/   + auth header
     Expected: 200 for the owner, 404 for any other user."""
     # TODO [Day 5 · Task 3c · OPTIONAL]
     # YOUR CODE HERE - replace the placeholder line below
@@ -75,7 +76,9 @@ def get_item_status(base_url, token, item_id):
 
 
 def delete_item(base_url, token, item_id):
-    """DELETE one reading-list item and return the status code.  Expected: 204"""
+    """DELETE one reading-list item and return the status code.
+    Request:  DELETE {base_url}/api/reading-list/<item_id>/delete/   + auth header
+    Expected: 204"""
     # TODO [Day 5 · Task 3d · OPTIONAL]
     # YOUR CODE HERE - replace the placeholder line below
     return None

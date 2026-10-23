@@ -1,5 +1,5 @@
 """
-Settings for the Day 4 exercise: Testing the reading-list API + configuration from environment variables.
+Settings for the Day 4 exercise: Personal reading list (token auth, ownership) + configuration from the environment.
 
 This exercise has its OWN database file: days/day-04/exercise/db.sqlite3 (created by `migrate`, not committed).
 """
@@ -8,7 +8,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# GIVEN: settings read from environment variables (you write these yourself in today's project, P3).
+# GIVEN: settings read from environment variables (you write these yourself in today's project, P6).
 SECRET_KEY = os.getenv("SECRET_KEY", "exercise-only-key")
 DEBUG = os.getenv("DEBUG", "True").lower() == "true"
 ALLOWED_HOSTS = [host.strip() for host in os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",") if host.strip()]
@@ -21,7 +21,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "rest_framework.authtoken",
+    # TODO [Day 4 · Task 1a]: Install DRF's token app, then run  python manage.py migrate
+    #   -> you should see "Applying authtoken.0001_initial... OK" (this creates the authtoken_token table)
+    # HINT: days/day-04/hints.md#task-1
+    # YOUR CODE HERE
     "catalog",
 ]
 
@@ -72,12 +75,13 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Django REST Framework
-# Every endpoint requires an authenticated user (token or browsable-API login).
+# Day 4: every endpoint requires an authenticated user (GIVEN below).
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.TokenAuthentication",
-        "rest_framework.authentication.SessionAuthentication",
-    ],
+    # TODO [Day 4 · Task 1b]: Add "DEFAULT_AUTHENTICATION_CLASSES" so requests are identified by
+    #   1. rest_framework.authentication.TokenAuthentication    (FIRST -> missing credentials give 401)
+    #   2. rest_framework.authentication.SessionAuthentication  (keeps the browsable API login working)
+    # HINT: days/day-04/hints.md#task-1
+    # YOUR CODE HERE
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],

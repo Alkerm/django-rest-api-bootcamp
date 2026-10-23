@@ -1,5 +1,5 @@
 """
-Day 3 exercise - the models are GIVEN.
+Day 4 exercise - the models are GIVEN.
 
 Table catalog_author:            id, name, country
 Table catalog_book:              id, title, isbn, published_year, available_copies, author_id, created_at
