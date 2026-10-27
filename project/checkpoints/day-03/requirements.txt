@@ -1,0 +1,3 @@
+# Exact versions tested by the instructor team (same as the bootcamp's root requirements.txt).
+Django==5.2.17
+djangorestframework==3.16.1

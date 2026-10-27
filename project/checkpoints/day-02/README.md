@@ -1,10 +1,35 @@
-# Checkpoint day-02: not released yet
+# Task Management API
 
-This checkpoint contains the solved project up to Day 1, so it is published on the **morning of Day 2**,
-when you need it. Pull the bootcamp repository when the instructor announces it:
+A personal task management REST API built with Django and Django REST Framework during the
+Tuwaiq Club at KFUPM bootcamp *Building REST APIs with Django* (Oct 25-29, 2026).
+
+> This README grows during the week. On Day 4 you will replace it with the full project README
+> (setup, environment variables, authentication, endpoint examples, deployment).
+
+## Run locally
 
 ```bash
-git -C django-rest-api-bootcamp pull
+# Windows PowerShell                     # macOS Terminal
+py -m venv .venv                         # python3 -m venv .venv
+.venv\Scripts\Activate.ps1               # source .venv/bin/activate
+
+python -m pip install -r requirements.txt
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
 ```
 
-Until then, keep working in your own `task-management-api` project.
+Open http://127.0.0.1:8000/admin/ and sign in with the superuser you created.
+
+## API (development)
+
+1. Log in through the browsable API: http://127.0.0.1:8000/api-auth/login/
+2. Open http://127.0.0.1:8000/api/tasks/
+
+| Method | Path | Purpose |
+|---|---|---|
+| GET | `/api/tasks/` | List tasks |
+| POST | `/api/tasks/create/` | Create a task (owner is set by the server) |
+| GET | `/api/tasks/{id}/` | Retrieve one task |
+| PUT / PATCH | `/api/tasks/{id}/update/` | Replace / partially update a task |
+| DELETE | `/api/tasks/{id}/delete/` | Delete a task |
