@@ -1,46 +1,49 @@
 # Day 4 Project Milestone: Security and Configuration
 
 **Project increment:** token login endpoint, protected routes, per-user isolation in every view, cross-user
-protection; settings from environment variables and the deployment packages for Day 5.
+protection, and settings read from environment variables.
 **Exit check:** user A cannot view or modify user B's tasks, requests without a token get `401`, and the project's
 configuration comes from the environment.
 
-## Where to start
+## Step 0: run these commands BEFORE you start the TODOs
 
-**This is the last copy of the bootcamp.** The `day-04` checkpoint is the **final** one: Days 1-3 solved, plus
-**every TODO for Day 4 and Day 5**. Copy it once now, and you work in the same project until you deploy: there is
-nothing to copy on Day 5. Your Git history, your `.venv` and your database (users and tasks) are kept.
+**This is the last copy of the bootcamp.** The `day-04` checkpoint is the **final** one: Days 1-3 solved, plus every
+TODO for Day 4 and Day 5. Copy it once now and keep working in the same project until the end. Your Git history, your
+`.venv` and your database (users and tasks) are kept.
 
-Open a terminal in the folder that contains **both** `django-rest-api-bootcamp` and `task-management-api`:
+Open a terminal in the folder that contains **both** `django-rest-api-bootcamp` and `task-management-api`, then run
+these lines **in this order**:
 
 ```powershell
 # Windows PowerShell
-git -C django-rest-api-bootcamp pull       # only when the instructor announces an update
-cd task-management-api
-git add -A; git commit -m "End of Day 3"                       # save your own work first
-Copy-Item -Path ..\django-rest-api-bootcamp\project\checkpoints\day-04\* -Destination . -Recurse -Force
-.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt     # the deployment packages (P8)
-python manage.py migrate
+git -C django-rest-api-bootcamp pull                     # 1. get the final checkpoint
+cd task-management-api                                   # 2. go into YOUR project
+git add -A; git commit -m "End of Day 3"                 # 3. save your own work first
+Copy-Item -Path ..\django-rest-api-bootcamp\project\checkpoints\day-04\* -Destination . -Recurse -Force   # 4. copy
+.venv\Scripts\Activate.ps1                               # 5. activate your environment
+python manage.py migrate                                 # 6. update the database
+python manage.py runserver                               # 7. check it starts, then stop it with Ctrl+C
 ```
 
 ```bash
 # macOS
-git -C django-rest-api-bootcamp pull       # only when the instructor announces an update
-cd task-management-api
-git add -A && git commit -m "End of Day 3"
-cp -R ../django-rest-api-bootcamp/project/checkpoints/day-04/. .
-source .venv/bin/activate
-python -m pip install -r requirements.txt     # the deployment packages (P8)
-python manage.py migrate
+git -C django-rest-api-bootcamp pull                     # 1. get the final checkpoint
+cd task-management-api                                   # 2. go into YOUR project
+git add -A && git commit -m "End of Day 3"               # 3. save your own work first
+cp -R ../django-rest-api-bootcamp/project/checkpoints/day-04/. .   # 4. copy
+source .venv/bin/activate                                # 5. activate your environment
+python manage.py migrate                                 # 6. update the database
+python manage.py runserver                               # 7. check it starts, then stop it with Ctrl+C
 ```
 
-> Curious how your Day 3 code compares with the reference? Run `git diff` before your next commit: the differences
-> are a free code review. `nothing to commit` after `git commit` is fine.
+**Step 7 shows `Starting development server at http://127.0.0.1:8000/`? You are ready: start with P1.**
+`nothing to commit` in step 3 is fine. If a step fails, stop and show the exact error to a mentor.
+
+**One more command later:** right after **P1** (adding `rest_framework.authtoken`), run `python manage.py migrate`
+again: it creates the token table (`Applying authtoken...`).
 
 The checkpoint also brings new files: `.env.example`, `.python-version`, `smoke_test.py`, and a **README template**
-that you complete on Day 5. The Day 5 TODOs (`TODO [Day 5 · P1-P3]`) are already in these files: leave them for the
-second half of the session.
+that you complete on Day 5 (`TODO [Day 5 · P1]` in `README.md`).
 
 ## TODOs
 
@@ -60,10 +63,8 @@ second half of the session.
 |---|---|---|---|
 | P6 | `config/settings.py` | `SECRET_KEY`, `DEBUG`, `ALLOWED_HOSTS` from environment variables | [hints#p6](hints.md#p6) |
 | P7 | `.env.example` | document the three variables with placeholders | [hints#p7](hints.md#p7) |
-| P8 | `requirements.txt` | **given**: the four deployment packages are already listed; you installed them in the copy step. Run `python -m pip check` | [hints#p8](hints.md#p8) |
 
-Do Part 1 and the two-user check first; Part 2 is short and is needed for the deployment later in the same session
-(Day 5).
+Do Part 1 and the two-user check first; Part 2 is short.
 
 ## The two-user security check (record the results)
 
@@ -81,28 +82,20 @@ Make sure **each** user owns at least one task (use the admin if needed).
 | 7 | bob: `PATCH /api/tasks/{alice's task id}/update/` `{"title": "x"}` | `404`, alice's task unchanged |
 | 8 | bob: `DELETE /api/tasks/{alice's task id}/delete/` | `404`, task still exists |
 
-Save evidence (screenshots or copied responses, **without tokens**) in your notes. On Day 5 you run the same checks
-against your live URL.
+Save evidence (screenshots or copied responses, **without tokens**) in your notes. On Day 5 the smoke test runs the same
+checks automatically.
 
 ## Configuration check
 
 ```bash
 python manage.py runserver        # still works with NO variables set (development defaults)
-python -m pip check               # "No broken requirements found."
 git status                        # .env must NOT be listed
 ```
 
-## Before Wednesday's session (strongly recommended, ~15 minutes): get ready for deployment
+## Head start on Day 5
 
-Day 4 and Day 5 share one session, so there is little time to set up accounts. Arrive with these done:
-
-1. Your **Neon** and **Render** accounts open (they were part of the readiness check).
-2. In Neon: create a project `tuwaiq-django-api` and find the connection string. **Do not paste it anywhere yet.**
-3. In Render: **New → Web Service** → you can see your `task-management-api` repository. Stop before creating it.
-4. Read [`setup/deployment.md`](../../setup/deployment.md) once end to end.
-
-The README you received today (template with `_TODO_` sections) is completed on **Day 5**. If you want a head start,
-fill in the sections you already know (setup, authentication).
+The README you received today (template with `_TODO_` sections) is completed on **Day 5**. If you have time, fill in
+the sections you already know (setup, authentication).
 
 ## Commit
 
@@ -119,5 +112,5 @@ git push
 - [ ] Authenticated creation ignores any client-supplied owner.
 - [ ] Each user's list contains only their own records.
 - [ ] Cross-user retrieve/update/delete is blocked (`404`) without leaking data.
-- [ ] Settings read secrets from the environment; `.env.example` has placeholders only; `pip check` is clean.
+- [ ] Settings read secrets from the environment; `.env.example` has placeholders only.
 - [ ] The two-user check is recorded and the commit is pushed.

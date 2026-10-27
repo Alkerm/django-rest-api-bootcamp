@@ -15,11 +15,12 @@
 > **Schedule change on Oct 27:** Monday's session was cancelled (participants' exam). Days 2-5 run as two
 > sessions, **8:00-10:00 PM**: **Tue Oct 27 = Days 2 + 3**, **Wed Oct 28 = Days 4 + 5**. The instructor covers
 > both days' slides quickly and may solve some exercise tasks live; exercises are optional; the rest of the time
-> is project work. Deployment happens on Wednesday; README + submission are due afterwards; no live demo.
+> is project work. **Deployment is cancelled**: Wednesday ends with a smoke test against the local server; README
+> + submission are due afterwards; no live demo.
 
 ## Program outcome
 
-By the end of Day 5, participants can design, build, document, and deploy a database-backed REST API using
+By the end of Day 5, participants can design, build, document, and verify a database-backed REST API using
 Django REST Framework, including token authentication, validated CRUD operations, and per-user permissions.
 
 ## The five-day journey
@@ -29,8 +30,8 @@ Django REST Framework, including token authentication, validated CRUD operations
 | [1](../days/day-01/README.md) | Sun, Oct 25 | Foundations and setup | Repository, Django/DRF project, Task model, migrations, admin data | Server runs; Task records persist |
 | [2](../days/day-02/README.md) | Tue, Oct 27 (with Day 3) | Core API: CRUD with function views | Five function views, five `path()` routes, complete CRUD endpoints | CRUD checklist passes; blank title → 400 |
 | [3](../days/day-03/README.md) | Tue, Oct 27 (with Day 2) | Serialization and validation | `TaskSerializer` in every view, validation rules | invalid input → 400 with field errors |
-| [4](../days/day-04/README.md) | Wed, Oct 28 (with Day 5) | Security and configuration | Token auth, ownership, data isolation; settings from the environment, deployment packages | Two-user security check passes |
-| [5](../days/day-05/README.md) | Wed, Oct 28 (with Day 4) | Publish and demonstrate | Production deployment, smoke test, final README, demonstration | Live URL and final evidence pass |
+| [4](../days/day-04/README.md) | Wed, Oct 28 (with Day 5) | Security and configuration | Token auth, ownership, data isolation; settings from the environment | Two-user security check passes |
+| [5](../days/day-05/README.md) | Wed, Oct 28 (with Day 4) | Finish and submit | Smoke test, final README, submission | Smoke test 10/10, submission sent |
 
 ## Daily session timing (about 3 hours)
 
@@ -109,25 +110,20 @@ Instructor explains + demos  →  days/day-0X/exercise/   →  days/day-0X/proje
 - **Instructor explains (~60 min):** authentication vs authorization; tokens in the Authorization header; Postman with
   a token; two users show why authentication alone is insufficient (attack-and-fix demo); filtering every query by
   `request.user` and one owner-scoped lookup helper; 401 vs 403 vs 404; configuration from environment variables,
-  `.env.example`, deployment packages.
+  `.env.example`.
 - **Exercise (~60 min):** personal reading list: token login, ownership in every function view (+ user-aware
   validation as stretch).
 - **Project (~60 min):** token support, token endpoint, owner-filtered list and `get_own_task`, the 8-step two-user
-  scenario; settings from the environment, `.env.example`, deployment packages in `requirements.txt`.
-- **Optional homework (~15 min):** open the Neon and Render accounts and read the deployment guide.
+  scenario; settings from the environment, `.env.example`.
 - **Completion criteria:** valid credentials return a token; no token → 401; a client-supplied owner is ignored; each
   list contains only the caller's records; cross-user access is blocked (404) without leaking data; production
-  settings read from the environment; `pip check` is clean.
+  settings read from the environment.
 
-### Day 5: Deploy, verify, and submit (Wednesday, Oct 28, second half of the session)
+### Day 5: Finish, verify, and submit (Wednesday, Oct 28, second half of the session)
 
-- **Instructor explains (~60 min):** deployment as the same app under production configuration; a live deployment of
-  the reference project; log reading by failure category; smoke tests and persistence; the evidence to submit.
-- **Guided deployment (~60 min, replaces the exercise):** the `DATABASE_URL` setting (WhiteNoise, static files and CSRF
-  origins come pre-written), Neon database, Render web service, environment variables, production users, everyone
-  step by step with the instructor.
-- **Project:** smoke test against the live URL and persistence check in the session; complete README and submission
-  after the session, by the announced deadline. No live demo this cohort: the submitted evidence replaces it.
-- **Completion criteria:** public HTTPS URL reachable with current migrations; token auth and CRUD work in production;
-  isolation and validation pass live; a record survives restart/redeploy; the smoke test passes; the README lets a new reviewer
-  set the project up from a fresh clone; the submission is complete.
+- **Deployment is cancelled for this cohort.** The deployment slides and `setup/deployment.md` stay as optional material.
+- **Instructor explains (short):** what a smoke test proves; the README as part of the product; what to submit.
+- **Project:** run `smoke_test.py` against the local server (10/10); complete the README (Day 5 · P1); submit after
+  the session, by the announced deadline.
+- **Completion criteria:** the smoke test passes locally; token auth, CRUD, isolation and validation work; the README
+  lets a new reviewer set the project up from a fresh clone; the submission is complete.

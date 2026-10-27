@@ -13,7 +13,7 @@
 **Purpose:** define the audience, learning scope, project requirements, daily milestones, and verifiable evidence of
 success for a five-day Django REST API program.
 
-**Final outcome:** by the end of Day 5, participants can **design, build, document, and deploy a
+**Final outcome:** by the end of Day 5, participants can **design, build, document, and verify a
 database-backed REST API using Django REST Framework**, including authentication, validated CRUD operations, and
 per-user permissions.
 
@@ -39,7 +39,7 @@ See [`learning-outcomes.md`](learning-outcomes.md).
 
 Starting on Day 1, each participant builds **one** API through five connected increments. Authenticated users can
 create and manage their own tasks while the system validates input and prevents access to other users' data. The
-project ends as a documented, deployed service. **No frontend is required.**
+project ends as a documented, verified service. **No frontend is required.**
 
 Full requirements, API contract, Definition of Done and rubric: [`project/project-brief.md`](../project/project-brief.md).
 
@@ -51,7 +51,7 @@ hour of exercise, and one hour of project work per day, plus optional homework.
 > **Schedule change (Oct 27):** Monday's session (Oct 26) was cancelled because most participants had an exam. The
 > remaining four days run as **two sessions of 8:00-10:00 PM**: Tuesday Oct 27 = Days 2 + 3, Wednesday Oct 28 =
 > Days 4 + 5. The slides of both days are covered quickly, exercises are **optional**, and the time goes to the
-> project. Deployment happens in the Wednesday session; README and submission are due afterwards, and the submitted
+> project. **Deployment is cancelled** (Oct 28); README and submission are due after Wednesday, and the submitted
 > evidence replaces the live demonstration.
 
 | Day | Date | Focus | Exit check |
@@ -59,8 +59,8 @@ hour of exercise, and one hour of project work per day, plus optional homework.
 | 1 | Oct 25 | Foundation | Repository is pushed. Server starts locally. Admin shows saved Task records after restart. |
 | 2 | Oct 27 (with Day 3) | Core API: CRUD with function views | All CRUD operations work locally with valid JSON and appropriate status codes. A blank title is rejected. |
 | 3 | Oct 27 (with Day 2) | Serialization and validation | Every view uses the serializer. Invalid data is rejected with field-level errors. |
-| 4 | Oct 28 (with Day 5) | Security and configuration | User A cannot view or modify User B's tasks. Requests without a token get 401. Settings come from the environment. Deployment packages are ready. |
-| 5 | Oct 28 (with Day 4) | Publish | Public HTTPS URL works, data persists, a fresh clone can be set up from the README, and all required evidence is submitted (by the announced deadline). |
+| 4 | Oct 28 (with Day 5) | Security and configuration | User A cannot view or modify User B's tasks. Requests without a token get 401. Settings come from the environment. |
+| 5 | Oct 28 (with Day 4) | Finish and submit | The smoke test passes locally, a fresh clone can be set up from the README, and all required evidence is submitted (by the announced deadline). |
 
 Detailed daily plan: [`five-day-agenda.md`](five-day-agenda.md).
 
@@ -69,8 +69,7 @@ Detailed daily plan: [`five-day-agenda.md`](five-day-agenda.md).
 - The instructor maintains a known-good **checkpoint** for the start of each day
   ([`project/checkpoints/`](../project/checkpoints/)).
 - Participants who miss an exit check start the next session from the checkpoint, preserving Day 5 completion.
-- Cloud accounts are verified in the readiness check before Day 1. On Day 5 the instructor deploys live first, then
-  everyone deploys together in a guided hour, so deployment is never left to each participant alone.
+- Deployment (Render + Neon) was cancelled for this cohort; `setup/deployment.md` remains as an optional extension.
 - Stretch features are taught only after the minimum project works and the day's exit check passes.
 
 ## 7. Final evidence of completion
@@ -78,12 +77,11 @@ Detailed daily plan: [`five-day-agenda.md`](five-day-agenda.md).
 **Submission package**
 
 - GitHub repository URL accessible to reviewers
-- Public HTTPS deployment URL
-- README with setup, usage, endpoint, and deployment instructions
-- Smoke-test output against the live URL (10/10)
+- README with setup, usage, endpoint, and smoke-test instructions
+- Smoke-test output against the local server (10/10)
 - No exposed credentials or secrets
 
-**Required evidence flow** (shown live in earlier plans; this cohort shows it through the live URL and the submission)
+**Required evidence flow** (shown live in earlier plans; this cohort shows it through the README and the submission)
 
 - Obtain a token and authenticate
 - Create and list personal tasks

@@ -8,7 +8,7 @@ every previous day is already solved, and that day's work is marked with `TODO [
 | [`../starter/`](../starter/) | generated Django project | Day 1: apps, `Task` model, `__str__`, admin |
 | [`day-02/`](day-02/) | Day 1 | Day 2: ordering, `task_to_dict`, five function views, `path()` URLs |
 | [`day-03/`](day-03/) | Days 1-2 | Day 3: `TaskSerializer`, serializer in every view, validation (+ stretch: owner as username) |
-| [`day-04/`](day-04/) **(final)** | Days 1-3 | **Day 4 + Day 5**: token auth, owner filter + `get_own_task`, env settings, `.env.example` · then `DATABASE_URL`, production variables, README (deployment packages, WhiteNoise, static files and CSRF origins given) |
+| [`day-04/`](day-04/) **(final)** | Days 1-3 | **Day 4 + Day 5**: token auth, owner filter + `get_own_task`, env settings, `.env.example` · then the README; `smoke_test.py` included |
 
 **Released one day at a time.** Each checkpoint contains the solved work of the previous days, so it is published
 in this repository on the **morning of the day it is for** (e.g. `day-03/` appears on Day 3). Until then the folder

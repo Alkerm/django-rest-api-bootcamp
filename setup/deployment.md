@@ -1,4 +1,8 @@
-# Deployment Runbook: Render + Neon (Day 5)
+# Deployment Runbook: Render + Neon (optional)
+
+> **Not used this cohort:** deployment was cancelled on Oct 28. This runbook stays as an optional extension. The
+> final project checkpoint no longer contains the production settings (`DATABASE_URL`, WhiteNoise, packages); see
+> `days/day-05/example/settings_production.py` for them.
 
 Deploy your Task Management API as a **public HTTPS** service with a **persistent PostgreSQL** database, for free.
 Run the whole sequence on Day 5. Optional Day 4 homework: open the Neon project and look at Render's *New → Web Service* page (stop before creating it).

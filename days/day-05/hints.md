@@ -89,35 +89,12 @@ The server is not running (or runs on another port). Start it in a different ter
 ## Project
 
 <a id="p1"></a>
-### P1: `DATABASE_URL`
-
-<details><summary>Level 1</summary>
-
-Keep the SQLite `DATABASES` as it is and add an `if os.getenv("DATABASE_URL"):` block below it (see
-[`example/settings_production.py`](example/settings_production.py)). Locally nothing changes; on Render, `DATABASE_URL`
-holds your Neon connection string. WhiteNoise, static files and CSRF origins are already written for you.
-</details>
-
-<a id="p2"></a>
-### P2: `.env.example`
-
-<details><summary>Level 1</summary>
-
-```text
-DATABASE_URL=postgresql://USER:PASSWORD@HOST/DBNAME?sslmode=require
-CSRF_TRUSTED_ORIGINS=https://your-app-name.onrender.com
-```
-Placeholders only. **Never** paste your real Neon string here.
-</details>
-
-<a id="p3"></a>
-### P3: Final README
+### P1: Final README
 
 <details><summary>Level 1: what goes in</summary>
 
-Fill **every** `_TODO_` section of the README that arrived with the Day 4 checkpoint, plus the two Day 5 parts: your
-real `https://...onrender.com` URL at the top, and a **Deployment** section (platform, build command, start command,
-environment variable *names* only, and your smoke-test result).
+Fill **every** `_TODO_` section of the README that arrived with the final `day-04` checkpoint, including the
+**Check it (smoke test)** section: the command and what a passing run prints.
 </details>
 
 <details><summary>Level 2: who it is for</summary>
@@ -129,12 +106,26 @@ they got stuck.
 
 <details><summary>Level 3: checklist from the program brief</summary>
 
-The README must cover: setup, environment variables, migrations, authentication, endpoint examples,
-deployed URL (Day 5), and project decisions.
+The README must cover: setup, environment variables, migrations, authentication, endpoint examples, the smoke-test
+command, and project decisions.
+</details>
+
+<a id="smoke"></a>
+### Smoke test problems
+
+<details><summary>Common failures</summary>
+
+| Output | Cause |
+|---|---|
+| `ConnectionRefusedError` / `URLError` | the server is not running: start `python manage.py runserver` in another terminal |
+| `POST /api/auth/token/ ... FAIL` | wrong password, or the user does not exist: check them in the admin |
+| `GET /api/tasks/ without token -> 401 FAIL` (got 403) | Day 4 P2: `TokenAuthentication` must come first |
+| `GET the task as bob -> 404 FAIL` | Day 4 P5: `get_own_task` does not filter by owner |
+| `POST invalid task -> 400 FAIL` | Day 3 validation (title / status / due date) |
 </details>
 
 <a id="deploy"></a>
-### Deployment problems
+### Optional: deployment problems (only if you deploy as an extension)
 
 <details><summary>Where to look first</summary>
 

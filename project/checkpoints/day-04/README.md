@@ -6,15 +6,13 @@ endpoint with token authentication, and blocks access to other users' data.
 
 Built during the Tuwaiq Club at KFUPM bootcamp *Building REST APIs with Django* (Oct 25-29, 2026).
 
-<!-- TODO [Day 5 · P3]: Complete every section marked "TODO" on Day 5, after your deployment works.
+<!-- TODO [Day 5 · P1]: Complete every section marked "TODO" on Day 5, once the API works.
      Check it: a classmate must be able to clone, set up, and use your API from this README alone.
-     HINT: days/day-05/hints.md#p3 -->
-
-**Live API:** _TODO: https://<your-app>.onrender.com_
+     HINT: days/day-05/hints.md#p1 -->
 
 ## Tech stack
 
-Python 3.13 · Django 5.2 · Django REST Framework 3.16 (token auth) · SQLite (local) · PostgreSQL on Neon (production) · Render
+Python 3.13 · Django 5.2 · Django REST Framework 3.16 (token auth) · SQLite
 
 ## Local setup
 
@@ -61,7 +59,7 @@ POST /api/tasks/create/
 Authorization: Token <token>
 Content-Type: application/json
 
-{"title": "Prepare demo", "description": "Day 5 live demo", "status": "TODO", "due_date": "2026-10-29"}
+{"title": "Prepare demo", "description": "Day 5 submission", "status": "TODO", "due_date": "2026-10-29"}
 ```
 
 Response `201 Created`:
@@ -70,7 +68,7 @@ Response `201 Created`:
 {
   "id": 7,
   "title": "Prepare demo",
-  "description": "Day 5 live demo",
+  "description": "Day 5 submission",
   "status": "TODO",
   "due_date": "2026-10-29",
   "owner": "alice",
@@ -91,9 +89,9 @@ _TODO: add examples for update (PATCH), a validation error (400), and another us
 | `due_date` | optional `YYYY-MM-DD`; cannot be earlier than today when a task is created |
 | `id`, `owner`, `created_at`, `updated_at` | read-only, set by the server |
 
-## Deployment
+## Check it (smoke test)
 
-_TODO: document the platform, build/start commands, environment variables, and how you verified the release._
+_TODO: how to run the smoke test against your local server, and what a passing run shows._
 
 ## Project decisions
 

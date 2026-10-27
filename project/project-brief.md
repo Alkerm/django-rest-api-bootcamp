@@ -2,7 +2,7 @@
 
 Each participant builds **one** API, in their **own** GitHub repository, through five connected daily increments.
 Authenticated users create and manage **only their own** tasks. The API validates input and prevents access to other
-users' data. It ends as a documented, deployed service. No frontend is required.
+users' data. It ends as a documented, verified service. No frontend is required.
 
 ## How the project folders work
 
@@ -25,13 +25,12 @@ Every TODO looks like this and points to a hint:
 
 | Area | Required for completion | Acceptance check |
 |---|---|---|
-| Data model | Task fields: `id`, `title`, `description`, `status`, `due_date`, `owner`, `created_at`, `updated_at`. Status choices: `TODO`, `IN_PROGRESS`, `DONE`. | Migrations apply successfully and data persists after restart/redeploy. |
+| Data model | Task fields: `id`, `title`, `description`, `status`, `due_date`, `owner`, `created_at`, `updated_at`. Status choices: `TODO`, `IN_PROGRESS`, `DONE`. | Migrations apply successfully and data persists after a server restart. |
 | CRUD API | Authenticated users can create, list, retrieve, fully/partially update, and delete tasks. | Every operation returns an appropriate JSON response and HTTP status code. |
 | Authentication | DRF token authentication. Tokens are issued through a login endpoint. Test users may be created through Django admin or a documented command. | Protected task endpoints reject unauthenticated requests with **401**. |
 | Ownership | The API assigns `owner` from the authenticated user. Users can list, retrieve, update, and delete only their own tasks. | A second user cannot view or modify the first user's tasks (**404**). |
 | Validation | Title is required and nonblank; status must use an allowed value; due date cannot be earlier than today when a task is created; owner is read-only. | Invalid input returns **400** with clear field-level error messages. |
-| Documentation | README includes setup, environment variables, migrations, authentication, endpoint examples, deployed URL, and project decisions. | A new reviewer can run and use the project from the README. |
-| Deployment | Public HTTPS deployment on the program-approved platform (Render + Neon PostgreSQL), with production settings and a persistent database. | The live URL supports the required demonstration flow and retains data. |
+| Documentation | README includes setup, environment variables, migrations, authentication, endpoint examples, the smoke-test command, and project decisions. | A new reviewer can run and use the project from the README. |
 | Source control | GitHub repository visible to reviewers, meaningful commit history, dependency file, sample environment file, and no committed secrets. | Repository can be cloned; `.env` is ignored; setup is reproducible. |
 
 ## Required API contract
@@ -58,8 +57,8 @@ existence is not revealed) · invalid input → `400` with `{"field": ["message"
 | 1 | repository, project, `Task` model, migrations, admin data | [day-01](../days/day-01/project-milestone.md) | `starter/` |
 | 2 | CRUD with five function views and `path()` routes (objects converted by hand) | [day-02](../days/day-02/project-milestone.md) | `checkpoints/day-02` |
 | 3 | `TaskSerializer` in every view, validation rules | [day-03](../days/day-03/project-milestone.md) | `checkpoints/day-03` |
-| 4 | token auth, ownership in every view, env configuration, deployment packages | [day-04](../days/day-04/project-milestone.md) | `checkpoints/day-04` |
-| 5 | production settings, guided deployment, smoke test, README, submission | [day-05](../days/day-05/project-milestone.md) | keep working in your project (TODOs came with `day-04`) |
+| 4 | token auth, ownership in every view, env configuration | [day-04](../days/day-04/project-milestone.md) | `checkpoints/day-04` |
+| 5 | smoke test, final README, submission (deployment cancelled for this cohort) | [day-05](../days/day-05/project-milestone.md) | keep working in your project (TODOs came with `day-04`) |
 
 <a id="optional-extensions"></a>
 ## Optional extensions and out of scope
@@ -69,6 +68,7 @@ existence is not revealed) · invalid input → `400` with `{"field": ["message"
 | Filtering, search, ordering, or pagination | Frontend, mobile application, or visual dashboard |
 | Priority, tags, categories, or completion statistics | Email verification, password reset, or social login |
 | JWT authentication or user registration | Complex roles, teams, sharing, or notifications |
+| Deployment to Render + Neon ([`setup/deployment.md`](../setup/deployment.md)) | |
 | OpenAPI documentation and Swagger UI | Microservices or production operations beyond one deployment |
 | Automated tests (`APITestCase`), CI, Docker, or throttling | Optional items as conditions for passing |
 
@@ -82,8 +82,8 @@ program completion.
 - [ ] Protected endpoints require authentication and enforce per-user ownership.
 - [ ] Required validation returns correct error responses.
 - [ ] The repository is reproducible, documented, and free of committed secrets.
-- [ ] The deployed API is publicly reachable over HTTPS and uses persistent storage.
-- [ ] The submitted evidence (live URL, README, smoke-test output) shows the required flow working. *(This cohort: replaces the live demonstration.)*
+- [ ] The smoke test passes against the participant's local server (10/10).
+- [ ] A reviewer can set the project up from the README and see the required flow working (this cohort: no live demo).
 
 ## Assessment rubric
 
@@ -92,8 +92,7 @@ program completion.
 | Core API and data model | 25% | Required fields, persistence, and complete CRUD behavior |
 | Authentication and ownership | 35% | Protected endpoints and a successful cross-user isolation check |
 | Validation and API behavior | 20% | Required rules, clear errors, and appropriate status codes |
-| Documentation and repository | 10% | Reproducible setup, useful README, clean Git history, no secrets |
-| Deployment and evidence | 10% | Working HTTPS deployment and complete submitted evidence |
+| Documentation and repository | 20% | Reproducible setup, useful README, passing smoke test, clean Git history, no secrets |
 
 **Passing rule:** every Definition of Done item is mandatory. The rubric supports consistent feedback; it does not
 allow a participant to compensate for a missing mandatory item with optional features.
@@ -104,7 +103,6 @@ Submitted after the last session (Wednesday, Oct 28) through the [submission for
 deadline the instructors announce.
 
 - GitHub repository URL accessible to reviewers
-- Public HTTPS deployment URL
-- README with setup, usage, endpoint, and deployment instructions
-- Smoke-test output against the live URL (10/10)
+- README with setup, usage, endpoint, and smoke-test instructions
+- Smoke-test output against the local server (10/10)
 - No exposed credentials or secrets

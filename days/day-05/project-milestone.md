@@ -1,23 +1,17 @@
-# Day 5 Project Milestone: Deploy, Verify, Submit
+# Day 5 Project Milestone: Finish, Verify, Submit
 
-**Project increment:** public HTTPS API with a persistent PostgreSQL database, a production smoke-test record, the
-final README, and the submitted evidence.
-**Exit check:** the public HTTPS URL works, data persists, and all required evidence is submitted.
+**Project increment:** the final README, a passing smoke test against your local server, and the submission.
+**Exit check:** the API works end to end locally, the README lets a classmate set it up from a fresh clone, and the
+submission is sent.
 
-> **Combined session (Wednesday, 8:00-10:00 PM):** Day 5 follows Day 4 in the same session. In the session you do
-> the **guided deployment** (steps 1-3) together with the instructor. Steps 4-5 (README and submission) are done
-> **after the session**, by the deadline your instructors announce. There is **no live demonstration** this cohort:
-> the submitted evidence replaces it. The Library exercise for Day 5 is optional.
-
-| When | What you do |
-|---|---|
-| In the session | Steps 1-3: `DATABASE_URL` setting, Neon, Render, production users, smoke test, persistence |
-| After the session | Steps 4-5: finish the README, submit the form (before the announced deadline) |
+> **Combined session (Wednesday, 8:00-10:00 PM):** Day 5 follows Day 4 in the same session. **Deployment is cancelled
+> for this cohort**: everything runs on your laptop. Start the README and the smoke test in the session; the
+> submission is due **after the session**, by the deadline your instructors announce.
 
 ## Where to start
 
-**Nothing to copy today.** The Day 5 TODOs (`TODO [Day 5 · P1-P3]`) are already in your project: they came with the
-final `day-04` checkpoint you copied at the start of the session. Just continue in `task-management-api`:
+**Nothing to copy today.** The Day 5 TODO (`TODO [Day 5 · P1]` in `README.md`) is already in your project: it came
+with the final `day-04` checkpoint you copied at the start of the session. Just continue in `task-management-api`:
 
 ```bash
 cd task-management-api
@@ -25,56 +19,36 @@ git add -A
 git commit -m "Day 4: token auth, ownership, environment configuration"
 ```
 
-Missed Day 4? Copy the `day-04` checkpoint first (the commands are at the top of
-[the Day 4 milestone](../day-04/project-milestone.md)), then come back here.
+Missed Day 4? Run **Step 0** of [the Day 4 milestone](../day-04/project-milestone.md) first, then come back here.
 
-## 1. Prepare the code (local) · in the session
+## 1. Verify (smoke test)
 
-| TODO | File | What | Hint |
-|---|---|---|---|
-| P1 | `config/settings.py` | use `DATABASE_URL` when it is set | [hints#p1](hints.md#p1) |
-| P2 | `.env.example` | add `DATABASE_URL` and `CSRF_TRUSTED_ORIGINS` placeholders | [hints#p2](hints.md#p2) |
+`smoke_test.py` (in your project) checks the whole API in one run: 401 without a token, login for two users,
+create, list, update, a validation error, cross-user isolation, delete.
 
-WhiteNoise, static files, `CSRF_TRUSTED_ORIGINS` and a production-safe `DEBUG` default are **already written** in the settings you copied (marked
-`GIVEN`): read them, so you know what Render needs.
-
-Check locally, then push:
+Make sure you have two users (e.g. `alice` and `bob`, created in the admin on Day 1). Then:
 
 ```bash
-python manage.py check                      # System check identified no issues
-python manage.py collectstatic --noinput    # succeeds
-git add . && git commit -m "Day 5: production settings" && git push
+python manage.py runserver
 ```
-
-## 2. Deploy · in the session
-
-Follow [`setup/deployment.md`](../../setup/deployment.md) step by step: Neon database → Render web service →
-environment variables → build → production users.
-
-Write down your public URL: `https://______________________.onrender.com`
-
-## 3. Verify (smoke test) · in the session
-
-Create two users in **production** (see the deployment guide), then:
+Keep it running, and in a **second** terminal (same folder, `.venv` active):
 
 ```bash
-python smoke_test.py --base-url https://<your-app>.onrender.com --user alice --other-user bob
+python smoke_test.py --base-url http://127.0.0.1:8000 --user alice --other-user bob
 ```
 
-Expected: `10/10 checks passed`.
+It asks for both passwords. Expected: `10/10 checks passed.` A failing line names the behavior that is broken: fix it
+in your code and run the script again. Hint: [hints#smoke](hints.md#smoke).
 
-**Persistence check:** create one task with Postman → Render **Manual Deploy → Restart service** (or redeploy) → list
-the tasks again: it is still there.
+## 2. Finish the README (P1)
 
-## 4. Finish the README (P3) · after the session
-
-Complete every `_TODO_` section of the README you received on Day 4, add the live URL at the top, and write the
-Deployment section ([hints#p3](hints.md#p3)). Commit and push. Render redeploys automatically.
+Complete every `_TODO_` section of `README.md`, including the **Check it (smoke test)** section
+([hints#p1](hints.md#p1)). Commit and push.
 
 If a classmate is free, ask them to follow your README from a fresh clone. Every place they had to guess is a
 sentence to add.
 
-## 5. Submit · after the session, before the announced deadline
+## 3. Submit · after the session, before the announced deadline
 
 Submit everything through the **[submission form](https://forms.gle/SjbXGzfP1zYCdjfN8)** once your smoke test passes and your README is
 complete. Have these ready to paste:
@@ -82,34 +56,27 @@ complete. Have these ready to paste:
 | Evidence | Where |
 |---|---|
 | GitHub repository URL (accessible to reviewers) | [submission form](https://forms.gle/SjbXGzfP1zYCdjfN8) |
-| Public HTTPS deployment URL | [submission form](https://forms.gle/SjbXGzfP1zYCdjfN8) + README |
-| Smoke-test output (10/10) | copy the terminal output into the form (no tokens or passwords in it) |
+| Smoke-test output (10/10) against your local server | copy the terminal output into the form (no tokens or passwords in it) |
 | Completed Definition of Done checklist | tick every item in the form ([`project/project-brief.md`](../../project/project-brief.md#definition-of-done)) |
 
 Typed a wrong link? Use **Edit your response** on the confirmation page, or tell your instructors.
 
-## 6. Check your evidence (replaces the live demonstration)
+Reviewers clone your repository and follow your README, so make sure all of this works **from your README alone**:
 
-There is no live demo this cohort. Reviewers use your live URL and README instead, so make sure all of this works
-**on the live URL** before you submit:
-
-1. Obtain a token and authenticate.
-2. Create and list your tasks.
-3. Update one task, then show a validation failure (`400`).
-4. Prove data isolation: the second user gets `404` for your task.
-5. Delete a task, then show that the remaining data persists (it survived a restart).
-
-Keep your Render service deployed until the reviews are finished.
+1. Set up the project and create two users.
+2. Obtain a token and authenticate.
+3. Create, list, update and delete tasks; show a validation failure (`400`).
+4. The second user gets `404` for the first user's task.
 
 ## Exit check
 
-- [ ] The public HTTPS URL is reachable and production migrations are applied.
-- [ ] Token authentication and all CRUD operations work in production.
-- [ ] Two-user isolation and validation checks pass against the live URL.
-- [ ] A created record survives a restart or redeploy.
-- [ ] The README contains setup, environment variables, authentication, endpoint examples, the live URL and
-  deployment instructions, so a new reviewer can set the project up from a fresh clone.
-- [ ] The submission includes repository URL, deployment URL, smoke-test evidence, and the completed checklist.
+- [ ] `python smoke_test.py ...` prints `10/10 checks passed` against your local server.
+- [ ] Token authentication, all CRUD operations, two-user isolation and validation work.
+- [ ] The README contains setup, environment variables, migrations, authentication, endpoint examples and the
+  smoke-test command, so a new reviewer can set the project up from a fresh clone.
+- [ ] The repository has no secrets (`.env`, `db.sqlite3` and `.venv` are not in Git).
+- [ ] The submission includes the repository URL, the smoke-test output, and the completed checklist.
 
 Optional improvements start **only** after every box above is checked (see the optional extensions in the
-[project brief](../../project/project-brief.md#optional-extensions)).
+[project brief](../../project/project-brief.md#optional-extensions)). Deploying the API to Render + Neon is one of
+them: [`setup/deployment.md`](../../setup/deployment.md) still describes it.

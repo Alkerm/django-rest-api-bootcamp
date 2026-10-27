@@ -2,7 +2,7 @@
 
 **Tuwaiq Club at KFUPM** · Modern Software & Cloud track · **October 25-29, 2026** · five hands-on days
 
-In five days you design, build, document, and deploy a **database-backed REST API** with
+In five days you design, build, document, and verify a **database-backed REST API** with
 **Django REST Framework**, including token authentication, validated CRUD operations, and per-user permissions.
 You leave with a live, portfolio-ready backend: your own **Personal Task Management API**.
 
@@ -18,21 +18,22 @@ You leave with a live, portfolio-ready backend: your own **Personal Task Managem
 ```
 
 Each topic is learned once, practiced on the **exercise**, then applied to the **project**. By Day 5 the project is
-complete and deployed.
+complete, documented and verified.
 
 | Day | Date | Focus | Exercise (Library API) | Project increment (your Task API) |
 |---|---|---|---|---|
 | [1](days/day-01/README.md) | Sun, Oct 25 | Foundation | Book model, migrations, sample data, admin | Django project, `Task` model, admin, GitHub repo |
 | [2](days/day-02/README.md) | Tue, Oct 27 · 8-10 PM (with Day 3) | Core API | Book CRUD API: one function view per operation, `path()` routes | Complete CRUD under `/api/tasks/` with function views |
 | [3](days/day-03/README.md) | Tue, Oct 27 · 8-10 PM (with Day 2) | Serialization | The same Book API with a serializer and validation rules | `TaskSerializer` in every view + validation |
-| [4](days/day-04/README.md) | Wed, Oct 28 · 8-10 PM (with Day 5) | Security | Personal reading list: tokens, ownership | Token login, per-user isolation, env config, deployment packages |
-| [5](days/day-05/README.md) | Wed, Oct 28 · 8-10 PM (with Day 4) | Publish | *guided deployment instead* (exercise optional) | Live HTTPS deployment, smoke test, README, demo |
+| [4](days/day-04/README.md) | Wed, Oct 28 · 8-10 PM (with Day 5) | Security | Personal reading list: tokens, ownership | Token login, per-user isolation, env config |
+| [5](days/day-05/README.md) | Wed, Oct 28 · 8-10 PM (with Day 4) | Finish | (exercise optional) | Smoke test, final README, submission |
 
 > **Schedule change:** Monday's session was cancelled (most participants had an exam). Days 2-5 now run in **two
 > sessions, 8:00-10:00 PM**: **Tuesday Oct 27 = Days 2 + 3** and **Wednesday Oct 28 = Days 4 + 5**. The instructors
 > go through both days' slides quickly and may solve some exercise tasks live; then you work on the **project**.
-> **All exercises are optional** (good practice for later). You deploy on Wednesday; the README and the submission
-> are due afterwards, by the deadline the instructors announce. There is no live demo this cohort.
+> **All exercises are optional** (good practice for later). **Deployment is cancelled**: on Wednesday you finish the
+> API and run the smoke test locally; the README and the submission are due afterwards, by the deadline the
+> instructors announce. There is no live demo this cohort.
 
 Original plan (still the structure of each day's folder): **about 3 hours** per day: ~1 h explanation and demo,
 ~1 h exercise, ~1 h project (on Day 5 the exercise hour is a guided deployment).
@@ -58,7 +59,7 @@ setup/
   installation.md            install + readiness check (Windows and macOS)
   troubleshooting.md         common errors + recovery plan
   postman.md                 using the Postman collection
-  deployment.md              Render + Neon runbook (Day 5)
+  deployment.md              Render + Neon runbook (optional extension; not used this cohort)
 days/day-01 … day-05/
   README.md                  outcome, session flow, topics
   slides.md                  slides (slides.pdf is added when ready)
@@ -96,7 +97,7 @@ pass                    # placeholder that keeps the file runnable until you rep
 ## Stack
 
 Python 3.13 · Django 5.2 LTS · Django REST Framework 3.16 · SQLite + DB Browser · Postman · Git + GitHub ·
-Render (free) + Neon PostgreSQL (free). Every required tool and service is **free**.
+Render (free) + Neon PostgreSQL (free) for the optional deployment. Every tool and service is **free**.
 
 ## Rules that keep everyone on track
 

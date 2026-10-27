@@ -3,7 +3,7 @@
 Open the hints **one level at a time**. Level 3 is close to the answer.
 
 **Exercise:** [Task 1](#task-1) · [Task 2](#task-2) · [Task 3](#task-3)
-**Project:** [P1](#p1) · [P2](#p2) · [P3](#p3) · [P4](#p4) · [P5](#p5) · [P6](#p6) · [P7](#p7) · [P8](#p8)
+**Project:** [P1](#p1) · [P2](#p2) · [P3](#p3) · [P4](#p4) · [P5](#p5) · [P6](#p6) · [P7](#p7)
 
 ---
 
@@ -191,31 +191,7 @@ Delete the three stub lines below `# YOUR CODE HERE`. After the change, `python 
 #   python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
 SECRET_KEY=replace-with-a-long-random-value
 DEBUG=False
-ALLOWED_HOSTS=your-app-name.onrender.com
+ALLOWED_HOSTS=your-domain.example.com
 ```
 Placeholders only. Check that `.env` (the real one, if you create it) is in `.gitignore`.
-</details>
-
-<a id="p8"></a>
-### P8: Deployment packages (given)
-
-<details><summary>Level 1</summary>
-
-The final checkpoint already lists the four deployment packages in `requirements.txt` (exact versions, tested by the
-instructor team):
-
-```text
-psycopg[binary]==3.3.6
-dj-database-url==3.1.2
-gunicorn==26.2.0
-whitenoise==6.12.0
-```
-
-You installed them in the copy step. Check that nothing is broken:
-
-```bash
-python -m pip install -r requirements.txt
-python -m pip check
-```
-Render installs exactly what this file lists, so your laptop and production run the same versions.
 </details>

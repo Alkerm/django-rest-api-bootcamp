@@ -1,7 +1,7 @@
 """
-Production smoke test for the Task Management API.
+Smoke test for the Task Management API.
 
-A short confidence check against a RUNNING server (local or deployed). It verifies:
+A short confidence check against your RUNNING server (python manage.py runserver). It verifies:
     401 without token -> token login for two users -> create -> list -> partial update
     -> validation error (400) -> cross-user isolation (404) -> delete (204) -> deleted task is gone (404)
 
@@ -10,7 +10,6 @@ Passwords are typed at the prompt (or read from SMOKE_PASSWORD / SMOKE_OTHER_PAS
 
 Usage:
     python smoke_test.py --base-url http://127.0.0.1:8000 --user alice --other-user bob
-    python smoke_test.py --base-url https://<your-app>.onrender.com --user alice --other-user bob
 """
 import argparse
 import getpass
@@ -33,7 +32,7 @@ def call(base_url, method, path, token=None, body=None):
     if token:
         request.add_header("Authorization", f"Token {token}")
     try:
-        with urllib.request.urlopen(request, timeout=90) as response:  # free Render services may need to wake up
+        with urllib.request.urlopen(request, timeout=90) as response:
             raw = response.read()
             return response.status, json.loads(raw) if raw else None
     except urllib.error.HTTPError as error:
@@ -104,7 +103,7 @@ def main():
 
     passed = sum(RESULTS)
     print(f"\n{passed}/{len(RESULTS)} checks passed.")
-    print("Persistence: create a task, restart/redeploy the service, and confirm it is still listed.")
+    print("Persistence: create a task, restart the server, and confirm it is still listed.")
     sys.exit(0 if passed == len(RESULTS) else 1)
 
 

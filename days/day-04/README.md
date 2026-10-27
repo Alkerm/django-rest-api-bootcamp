@@ -7,7 +7,7 @@
 ## Learning outcome
 
 By the end of the session, you can secure the API with tokens, isolate each user's data in every function view, and
-move secrets and environment-specific settings out of the code so the project is ready to deploy.
+move secrets and environment-specific settings out of the code.
 
 ## Session flow (about 3 hours)
 
@@ -29,8 +29,8 @@ Take a short break between blocks. The day ends with the **exit check** at the b
 | 10 min | Authentication (who is calling?) vs authorization (what may they do?); 401 vs 403 vs 404 in this program |
 | 10 min | DRF tokens: the login endpoint, the `Authorization: Token <key>` header, why the token is a password; Postman with `base_url` and `token` |
 | 20 min | Attack-and-fix demo with two users: bob reads alice's tasks → filter every query by `request.user` → bob gets 404; one `get_own_task()` helper for get/update/delete; owner set on `save()` |
-| 15 min | Configuration: why `DEBUG`, `SECRET_KEY` and hosts come from environment variables; `.env.example`; deployment packages in `requirements.txt` |
-| 5 min | Preview of Day 5 (deployment) and the optional homework |
+| 15 min | Configuration: why `DEBUG`, `SECRET_KEY` and hosts come from environment variables; `.env.example` |
+| 5 min | Preview of Day 5: finish the README, run the smoke test, submit |
 
 ## Your materials for today
 

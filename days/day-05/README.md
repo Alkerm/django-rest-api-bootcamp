@@ -1,15 +1,16 @@
-# Day 5: Deploy, Verify, and Demonstrate
+# Day 5: Finish, Verify, and Submit
 
-**Wednesday, October 28, 2026 (second half of the session)** · Focus: **Publish** · [← Day 4](../day-04/README.md) · [Project brief →](../../project/project-brief.md)
+**Wednesday, October 28, 2026 (second half of the session)** · Focus: **Finish** · [← Day 4](../day-04/README.md) · [Project brief →](../../project/project-brief.md)
 
 > **Schedule change (Monday's session was cancelled).** This day is taught **together with Day 4** in one session: **Wednesday, October 28, 8:00-10:00 PM**. The instructor goes through both days' slides quickly and may solve some exercise tasks live; then you work on the **project**. **All exercises are optional**: do them later for practice. The "Session flow" table below describes the original 3-hour day.
 >
-> **Deploy in the session, submit afterwards:** the README, the submission form and the smoke-test evidence are
-> due by the deadline your instructors announce. The live demonstration is replaced by the submitted evidence.
+> **Deployment is cancelled for this cohort.** Day 5 = finish the README, run the smoke test against your local
+> server, and submit (by the deadline your instructors announce). There is no live demo. The deployment parts of the
+> slides, `example/`, `exercise/` and `setup/deployment.md` are optional extra material.
 
 ## Learning outcome
 
-By the end of the session, you can release the API to a public HTTPS environment, verify production behavior and persistence, correct deployment issues, and demonstrate the completed system with evidence.
+By the end of the session, you can verify the whole API with a smoke test, document it so a classmate can run it from a fresh clone, and submit the completed project with evidence.
 
 ## Session flow (about 3 hours)
 
@@ -28,11 +29,10 @@ Take a short break between blocks. The day ends with the **exit check** at the b
 
 | Time | Topic |
 |---|---|
-| 10 min | Deployment = the same application under production configuration: code, dependencies, variables, database, migrations, start command |
-| 25 min | Live demo: deploy the reference project on Render + Neon, following `setup/deployment.md` |
-| 10 min | Reading logs as evidence: configuration, dependencies, startup, host settings, or database connectivity? |
-| 10 min | Smoke tests and persistence; the README as part of the product |
-| 5 min | The evidence to submit: live URL, README, smoke-test output (no live demo this cohort) |
+| 10 min | Smoke tests: one script that proves the whole API works (run it live against the local server) |
+| 10 min | The README as part of the product: what a reviewer needs to set up and use the API |
+| 5 min | What to submit and the deadline |
+| optional | Deployment (Render + Neon): the original Day 5 slides and `setup/deployment.md`, cancelled for this cohort |
 
 ## Your materials for today
 

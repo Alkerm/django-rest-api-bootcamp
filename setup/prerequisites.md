@@ -35,8 +35,8 @@ If you miss an answer you can still join, but review HTTP methods and JSON befor
 | Laptop | Windows 10/11 64-bit or a supported macOS release; **8 GB RAM** and **5 GB** free disk recommended; administrator rights to install software |
 | Internet | reliable connection and a modern browser |
 | GitHub account | required **before Day 1**, with two-factor authentication enabled |
-| Neon account (free) | required **before Day 1** (used on Day 5) |
-| Render account (free) | required **before Day 1**, connected to your GitHub account (used on Day 5) |
+| Neon account (free) | optional this cohort (deployment cancelled) |
+| Render account (free) | optional this cohort (deployment cancelled) |
 | Postman | the desktop app is required; a free account is recommended to save collections |
 | Email + phone | access to your account email and two-factor codes during the sessions |
 
