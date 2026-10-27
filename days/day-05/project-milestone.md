@@ -1,18 +1,18 @@
-# Day 5 Project Milestone: Deploy, Verify, Demonstrate
+# Day 5 Project Milestone: Deploy, Verify, Submit
 
 **Project increment:** public HTTPS API with a persistent PostgreSQL database, a production smoke-test record, the
-final README, and the live demonstration.
-**Exit check:** the public HTTPS URL works, data persists, all required evidence is submitted, and the live demo passes.
+final README, and the submitted evidence.
+**Exit check:** the public HTTPS URL works, data persists, and all required evidence is submitted.
 
-> **Today has no exercise hour.** After the explanation, the second hour is a **guided deployment**: everyone does
-> steps 1-2 below together with the instructor. The third hour is for verifying, finishing the README, submitting and
-> demonstrating (steps 3-6). The Library exercise for Day 5 is optional homework.
+> **Combined session (Wednesday, 8:00-10:00 PM):** Day 5 follows Day 4 in the same session. In the session you do
+> the **guided deployment** (steps 1-3) together with the instructor. Steps 4-5 (README and submission) are done
+> **after the session**, by the deadline your instructors announce. There is **no live demonstration** this cohort:
+> the submitted evidence replaces it. The Library exercise for Day 5 is optional.
 
-| Hour | What you do |
+| When | What you do |
 |---|---|
-| 1 | Explanation + the instructor deploys the reference project live |
-| 2 | **Guided deployment:** steps 1-2 (`DATABASE_URL` setting, Neon, Render, production users) |
-| 3 | Steps 3-6: smoke test, persistence, README, submission, live demo at a review station |
+| In the session | Steps 1-3: `DATABASE_URL` setting, Neon, Render, production users, smoke test, persistence |
+| After the session | Steps 4-5: finish the README, submit the form (before the announced deadline) |
 
 ## Where to start
 
@@ -45,7 +45,7 @@ source .venv/bin/activate
 `python -m pip install -r requirements.txt` and `python manage.py migrate`. This also replaces `README.md` with the
 reference template: make it your own before you submit.
 
-## 1. Prepare the code (local) · hour 2
+## 1. Prepare the code (local) · in the session
 
 | TODO | File | What | Hint |
 |---|---|---|---|
@@ -63,14 +63,14 @@ python manage.py collectstatic --noinput    # succeeds
 git add . && git commit -m "Day 5: production settings" && git push
 ```
 
-## 2. Deploy · hour 2
+## 2. Deploy · in the session
 
 Follow [`setup/deployment.md`](../../setup/deployment.md) step by step: Neon database → Render web service →
 environment variables → build → production users.
 
 Write down your public URL: `https://______________________.onrender.com`
 
-## 3. Verify (smoke test) · hour 3
+## 3. Verify (smoke test) · in the session
 
 Create two users in **production** (see the deployment guide), then:
 
@@ -83,7 +83,7 @@ Expected: `10/10 checks passed`.
 **Persistence check:** create one task with Postman → Render **Manual Deploy → Restart service** (or redeploy) → list
 the tasks again: it is still there.
 
-## 4. Finish the README (P3) · hour 3
+## 4. Finish the README (P3) · after the session
 
 Complete every `_TODO_` section of the README you received on Day 4, add the live URL at the top, and write the
 Deployment section ([hints#p3](hints.md#p3)). Commit and push. Render redeploys automatically.
@@ -91,10 +91,10 @@ Deployment section ([hints#p3](hints.md#p3)). Commit and push. Render redeploys 
 If a classmate is free, ask them to follow your README from a fresh clone. Every place they had to guess is a
 sentence to add.
 
-## 5. Submit
+## 5. Submit · after the session, before the announced deadline
 
-Submit everything through the **[submission form](https://forms.gle/SjbXGzfP1zYCdjfN8)** as soon as your smoke test passes, **before** your live
-demo. Have these ready to paste:
+Submit everything through the **[submission form](https://forms.gle/SjbXGzfP1zYCdjfN8)** once your smoke test passes and your README is
+complete. Have these ready to paste:
 
 | Evidence | Where |
 |---|---|
@@ -103,14 +103,12 @@ demo. Have these ready to paste:
 | Smoke-test output (10/10) | copy the terminal output into the form (no tokens or passwords in it) |
 | Completed Definition of Done checklist | tick every item in the form ([`project/project-brief.md`](../../project/project-brief.md#definition-of-done)) |
 
-Typed a wrong link? Use **Edit your response** on the confirmation page, or tell a reviewer at your station.
+Typed a wrong link? Use **Edit your response** on the confirmation page, or tell your instructors.
 
-## 6. Live demonstration (~5 minutes, at one of the 2-3 review stations)
+## 6. Check your evidence (replaces the live demonstration)
 
-Join the queue of any free station as soon as your smoke test passes; the stations run in parallel, so do not wait
-until the end of the session.
-
-Wake the service up a minute before. Then show, **on the live URL**:
+There is no live demo this cohort. Reviewers use your live URL and README instead, so make sure all of this works
+**on the live URL** before you submit:
 
 1. Obtain a token and authenticate.
 2. Create and list your tasks.
@@ -118,7 +116,7 @@ Wake the service up a minute before. Then show, **on the live URL**:
 4. Prove data isolation: the second user gets `404` for your task.
 5. Delete a task, then show that the remaining data persists (it survived a restart).
 
-For each step: **state the claim → perform the request → point at the proof** (status code + body).
+Keep your Render service deployed until the reviews are finished.
 
 ## Exit check
 
@@ -129,7 +127,6 @@ For each step: **state the claim → perform the request → point at the proof*
 - [ ] The README contains setup, environment variables, authentication, endpoint examples, the live URL and
   deployment instructions, so a new reviewer can set the project up from a fresh clone.
 - [ ] The submission includes repository URL, deployment URL, smoke-test evidence, and the completed checklist.
-- [ ] The live demo completes without instructor code changes.
 
 Optional improvements start **only** after every box above is checked (see the optional extensions in the
 [project brief](../../project/project-brief.md#optional-extensions)).

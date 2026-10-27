@@ -1,6 +1,11 @@
 # Day 5: Deploy, Verify, and Demonstrate
 
-**Thursday, October 29, 2026** · Focus: **Publish** · [← Day 4](../day-04/README.md) · [Project brief →](../../project/project-brief.md)
+**Wednesday, October 28, 2026 (second half of the session)** · Focus: **Publish** · [← Day 4](../day-04/README.md) · [Project brief →](../../project/project-brief.md)
+
+> **Schedule change (Monday's session was cancelled).** This day is taught **together with Day 4** in one session: **Wednesday, October 28, 8:00-10:00 PM**. The instructor goes through both days' slides quickly and may solve some exercise tasks live; then you work on the **project**. **All exercises are optional**: do them later for practice. The "Session flow" table below describes the original 3-hour day.
+>
+> **Deploy in the session, submit afterwards:** the README, the submission form and the smoke-test evidence are
+> due by the deadline your instructors announce. The live demonstration is replaced by the submitted evidence.
 
 ## Learning outcome
 
@@ -12,7 +17,7 @@ By the end of the session, you can release the API to a public HTTPS environment
 |---|---|---|---|
 | 1. Explanation + live demo | ~60 min | the instructor explains and builds in front of you | [`slides.md`](slides.md) · [`example/`](example/) |
 | 2. Guided deployment | ~60 min | Everyone deploys their own project together, step by step (milestone steps 1-2). The Library exercise is optional homework today | [`project-milestone.md`](project-milestone.md) |
-| 3. Project milestone | ~60 min | verify, finish the README, submit, live demo at a review station | [`project-milestone.md`](project-milestone.md) |
+| 3. Project milestone | ~60 min | verify in the session; finish the README and submit afterwards | [`project-milestone.md`](project-milestone.md) |
 
 Take a short break between blocks. The day ends with the **exit check** at the bottom of the milestone page.
 
@@ -27,7 +32,7 @@ Take a short break between blocks. The day ends with the **exit check** at the b
 | 25 min | Live demo: deploy the reference project on Render + Neon, following `setup/deployment.md` |
 | 10 min | Reading logs as evidence: configuration, dependencies, startup, host settings, or database connectivity? |
 | 10 min | Smoke tests and persistence; the README as part of the product |
-| 5 min | The 5-minute live demo: state the claim → act on the live system → point at the proof |
+| 5 min | The evidence to submit: live URL, README, smoke-test output (no live demo this cohort) |
 
 ## Your materials for today
 

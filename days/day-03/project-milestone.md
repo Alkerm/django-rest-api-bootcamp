@@ -5,7 +5,8 @@
 
 ## Where to start
 
-Copy today's checkpoint over your project, exactly like yesterday:
+**Combined session (Tuesday):** copy this checkpoint as soon as you finish the Day 2 TODOs, or when the instructor
+moves on to Day 3, whichever comes first. It replaces your Day 2 files with the solved version:
 
 ```powershell
 # Windows PowerShell
@@ -58,12 +59,12 @@ Log in at http://127.0.0.1:8000/api-auth/login/ as `alice`, then:
 | 4 | `POST /api/tasks/create/` | `{"description": "no title"}` | `400` `{"title": ["Title is required."]}` |
 | 5 | `POST /api/tasks/create/` | `{"title": "X", "status": "FINISHED"}` | `400`, error on `status` (built-in, no code needed) |
 | 6 | `POST /api/tasks/create/` | `{"title": "X", "due_date": "2020-01-01"}` | `400` `{"due_date": ["Due date cannot be earlier than today."]}` |
-| 7 | `POST /api/tasks/create/` | `{"title": "X", "due_date": "tomorrow"}` | `400`, error on `due_date` (yesterday: 500) |
+| 7 | `POST /api/tasks/create/` | `{"title": "X", "due_date": "tomorrow"}` | `400`, error on `due_date` (Day 2: 500) |
 | 8 | `PUT /api/tasks/{id}/update/` | `{"status": "DONE"}` | `400`: PUT needs the title |
 | 9 | `PATCH /api/tasks/{id}/update/` | `{"status": "DONE"}` | `200`, only status changed |
 | 10 | `DELETE /api/tasks/{id}/delete/` | none | `204` |
 
-> **Known gap, fixed tomorrow:** every logged-in user still sees **all** users' tasks. Day 4 adds token
+> **Known gap, fixed on Day 4:** every logged-in user still sees **all** users' tasks. Day 4 adds token
 > authentication and per-user isolation.
 
 ## Commit

@@ -4,7 +4,7 @@ By the end of the program, participants can:
 
 | # | Outcome | Taught on | Practised in | Verified by |
 |---|---|---|---|---|
-| 1 | Explain the client-server model, what a web framework does, and how HTTP methods, URLs, JSON, status codes, and request-response cycles work | Day 1-2 | every exercise | CRUD checklist (Day 2), live demo |
+| 1 | Explain the client-server model, what a web framework does, and how HTTP methods, URLs, JSON, status codes, and request-response cycles work | Day 1-2 | every exercise | CRUD checklist (Day 2), submitted evidence |
 | 2 | Explain tables, rows, keys and relationships, and model them with the Django ORM, migrations, and database-backed persistence | Day 1 | Day 1 exercise, Task model | Day 1 exit check |
 | 3 | Build CRUD endpoints with function views (`@api_view`) and `path()` routing | Day 2 | Day 2 exercise, project | Day 2 exit check |
 | 4 | Convert and validate data with serializers, with clear field-level errors | Day 3 | Day 3 exercise, project | Day 3 exit check |

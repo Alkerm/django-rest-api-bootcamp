@@ -11,6 +11,11 @@
 > request/response example, "what is a web framework" and more time on databases; Day 2 builds CRUD with one
 > function view per operation and `path()` routing (no serializers); Day 3 is serialization + validation; Day 4 is
 > security (moved from Day 3) + configuration; automated testing is no longer taught.
+>
+> **Schedule change on Oct 27:** Monday's session was cancelled (participants' exam). Days 2-5 run as two
+> sessions, **8:00-10:00 PM**: **Tue Oct 27 = Days 2 + 3**, **Wed Oct 28 = Days 4 + 5**. The instructor covers
+> both days' slides quickly and may solve some exercise tasks live; exercises are optional; the rest of the time
+> is project work. Deployment happens on Wednesday; README + submission are due afterwards; no live demo.
 
 ## Program outcome
 
@@ -22,10 +27,10 @@ Django REST Framework, including token authentication, validated CRUD operations
 | Day | Date | Focus | Project increment | Daily proof |
 |---|---|---|---|---|
 | [1](../days/day-01/README.md) | Sun, Oct 25 | Foundations and setup | Repository, Django/DRF project, Task model, migrations, admin data | Server runs; Task records persist |
-| [2](../days/day-02/README.md) | Mon, Oct 26 | Core API: CRUD with function views | Five function views, five `path()` routes, complete CRUD endpoints | CRUD checklist passes; blank title → 400 |
-| [3](../days/day-03/README.md) | Tue, Oct 27 | Serialization and validation | `TaskSerializer` in every view, validation rules | invalid input → 400 with field errors |
-| [4](../days/day-04/README.md) | Wed, Oct 28 | Security and configuration | Token auth, ownership, data isolation; settings from the environment, deployment packages | Two-user security check passes |
-| [5](../days/day-05/README.md) | Thu, Oct 29 | Publish and demonstrate | Production deployment, smoke test, final README, demonstration | Live URL and final evidence pass |
+| [2](../days/day-02/README.md) | Tue, Oct 27 (with Day 3) | Core API: CRUD with function views | Five function views, five `path()` routes, complete CRUD endpoints | CRUD checklist passes; blank title → 400 |
+| [3](../days/day-03/README.md) | Tue, Oct 27 (with Day 2) | Serialization and validation | `TaskSerializer` in every view, validation rules | invalid input → 400 with field errors |
+| [4](../days/day-04/README.md) | Wed, Oct 28 (with Day 5) | Security and configuration | Token auth, ownership, data isolation; settings from the environment, deployment packages | Two-user security check passes |
+| [5](../days/day-05/README.md) | Wed, Oct 28 (with Day 4) | Publish and demonstrate | Production deployment, smoke test, final README, demonstration | Live URL and final evidence pass |
 
 ## Daily session timing (about 3 hours)
 
@@ -33,7 +38,7 @@ Django REST Framework, including token authentication, validated CRUD operations
 |---|---|---|---|
 | 1. Explanation + live demo | ~60 min | instructor | instructor (includes a live deployment) |
 | 2. Practice | ~60 min | **exercise** (Library API, core tasks first) | **guided deployment** of each participant's project |
-| 3. Project | ~60 min | **project milestone** (Task API) | verify, README, submit, live demo |
+| 3. Project | ~60 min | **project milestone** (Task API) | verify, README, submit |
 
 Short breaks between blocks. Every exercise marks tasks as **core** or **stretch**; the project milestone is what is
 assessed, so stretch tasks never block anyone.
@@ -73,7 +78,7 @@ Instructor explains + demos  →  days/day-0X/exercise/   →  days/day-0X/proje
   pending migrations; Task fields and status choices match the scope; admin creates, updates, and persists Task
   records with owners; the repository is pushed with no secrets or environment folder.
 
-### Day 2: Core API, CRUD with function views (Monday, Oct 26)
+### Day 2: Core API, CRUD with function views (Tuesday, Oct 27, first half of the session)
 
 - **Instructor explains (~60 min):** a function view (`@api_view`, `request.data`, `Response`, status codes); turning
   a model object into a dict by hand; `path()` routing with `<int:pk>` and URL names; the CRUD contract with one URL
@@ -86,7 +91,7 @@ Instructor explains + demos  →  days/day-0X/exercise/   →  days/day-0X/proje
   200, unknown id → 404; PUT/PATCH change only the intended fields; DELETE → 204; owner is server-assigned; blank
   title → 400.
 
-### Day 3: Serialization and validation (Tuesday, Oct 27)
+### Day 3: Serialization and validation (Tuesday, Oct 27, second half of the session)
 
 - **Instructor explains (~60 min):** the serializer as translator and gatekeeper; `ModelSerializer`, `fields`,
   `read_only_fields`, related fields with `source=`; serializers inside function views (`many=True`, `is_valid()`,
@@ -99,7 +104,7 @@ Instructor explains + demos  →  days/day-0X/exercise/   →  days/day-0X/proje
 - **Completion criteria:** no view builds a dict by hand; read-only fields are protected; blank or missing title,
   invalid status, and a past creation due date → 400 with field errors; PUT without a title → 400, PATCH → 200.
 
-### Day 4: Security and configuration (Wednesday, Oct 28)
+### Day 4: Security and configuration (Wednesday, Oct 28, first half of the session)
 
 - **Instructor explains (~60 min):** authentication vs authorization; tokens in the Authorization header; Postman with
   a token; two users show why authentication alone is insufficient (attack-and-fix demo); filtering every query by
@@ -114,15 +119,15 @@ Instructor explains + demos  →  days/day-0X/exercise/   →  days/day-0X/proje
   list contains only the caller's records; cross-user access is blocked (404) without leaking data; production
   settings read from the environment; `pip check` is clean.
 
-### Day 5: Deploy, verify, and demonstrate (Thursday, Oct 29)
+### Day 5: Deploy, verify, and submit (Wednesday, Oct 28, second half of the session)
 
 - **Instructor explains (~60 min):** deployment as the same app under production configuration; a live deployment of
-  the reference project; log reading by failure category; smoke tests and persistence; the 5-minute demo.
+  the reference project; log reading by failure category; smoke tests and persistence; the evidence to submit.
 - **Guided deployment (~60 min, replaces the exercise):** the `DATABASE_URL` setting (WhiteNoise, static files and CSRF
   origins come pre-written), Neon database, Render web service, environment variables, production users, everyone
   step by step with the instructor.
-- **Project (~60 min):** smoke test against the live URL, persistence check, complete README, submission, and the live
-  demo at one of 2-3 parallel review stations as soon as each participant is ready.
+- **Project:** smoke test against the live URL and persistence check in the session; complete README and submission
+  after the session, by the announced deadline. No live demo this cohort: the submitted evidence replaces it.
 - **Completion criteria:** public HTTPS URL reachable with current migrations; token auth and CRUD work in production;
   isolation and validation pass live; a record survives restart/redeploy; the smoke test passes; the README lets a new reviewer
-  set the project up from a fresh clone; the submission is complete; the demo runs without instructor code changes.
+  set the project up from a fresh clone; the submission is complete.

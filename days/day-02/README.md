@@ -1,6 +1,8 @@
 # Day 2: Core API: CRUD with Function Views
 
-**Monday, October 26, 2026** · Focus: **Core API** · [← Day 1](../day-01/README.md) · [Day 3 →](../day-03/README.md)
+**Tuesday, October 27, 2026 (first half of the session)** · Focus: **Core API** · [← Day 1](../day-01/README.md) · [Day 3 →](../day-03/README.md)
+
+> **Schedule change (Monday's session was cancelled).** This day is taught **together with Day 3** in one session: **Tuesday, October 27, 8:00-10:00 PM**. The instructor goes through both days' slides quickly and may solve some exercise tasks live; then you work on the **project**. **All exercises are optional**: do them later for practice. The "Session flow" table below describes the original 3-hour day.
 
 ## Learning outcome
 
@@ -29,7 +31,7 @@ Take a short break between blocks. The day ends with the **exit check** at the b
 | 15 min | A function view: `@api_view([...])`, `request.method`, `request.data`, `Response(data, status=...)`; turning a model object into a dict by hand |
 | 10 min | Routing with `path()`: one URL per view, the `<int:pk>` converter, URL names, `include()` under `api/` |
 | 15 min | The CRUD contract: list, create, retrieve, update (PUT vs PATCH), delete; status codes 200 / 201 / 204 / 400 / 404 / 405; `get_object_or_404` |
-| 10 min | Live demo in the browsable API: every endpoint, a 404, a 405, and a bad input that slips through (tomorrow's motivation for serializers) |
+| 10 min | Live demo in the browsable API: every endpoint, a 404, a 405, and a bad input that slips through (Day 3's motivation for serializers) |
 
 ## Your materials for today
 

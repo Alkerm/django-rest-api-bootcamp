@@ -9,7 +9,7 @@ users' data. It ends as a documented, deployed service. No frontend is required.
 | Folder | What it is | When to use it |
 |---|---|---|
 | [`starter/`](starter/) | the Day 1 starting point: a generated Django project with Day 1 TODOs | copy it once on Day 1 into your own `task-management-api` folder |
-| [`checkpoints/day-02`](checkpoints/day-02) … [`day-05`](checkpoints/day-05) | the start of each day: **all previous days solved** + that day's TODOs (each one is published on the morning of its day) | copy the whole folder over your project each morning (Day 5: only 3 files if you are on track) |
+| [`checkpoints/day-02`](checkpoints/day-02) … [`day-05`](checkpoints/day-05) | the start of each day: **all previous days solved** + that day's TODOs (each one is published on the morning of its day) | copy the whole folder over your project at the start of each day (Day 5: only 3 files if you are on track) |
 | [`reference-solution/`](reference-solution/) | the complete project (instructor repository) | after the program |
 
 Every TODO looks like this and points to a hint:
@@ -83,7 +83,7 @@ program completion.
 - [ ] Required validation returns correct error responses.
 - [ ] The repository is reproducible, documented, and free of committed secrets.
 - [ ] The deployed API is publicly reachable over HTTPS and uses persistent storage.
-- [ ] The participant completes the required live demonstration without instructor code changes.
+- [ ] The submitted evidence (live URL, README, smoke-test output) shows the required flow working. *(This cohort: replaces the live demonstration.)*
 
 ## Assessment rubric
 
@@ -93,14 +93,15 @@ program completion.
 | Authentication and ownership | 35% | Protected endpoints and a successful cross-user isolation check |
 | Validation and API behavior | 20% | Required rules, clear errors, and appropriate status codes |
 | Documentation and repository | 10% | Reproducible setup, useful README, clean Git history, no secrets |
-| Deployment and demonstration | 10% | Working HTTPS deployment and complete live demonstration |
+| Deployment and evidence | 10% | Working HTTPS deployment and complete submitted evidence |
 
 **Passing rule:** every Definition of Done item is mandatory. The rubric supports consistent feedback; it does not
 allow a participant to compensate for a missing mandatory item with optional features.
 
 ## Submission package
 
-Submitted on Day 5 through the [submission form](https://forms.gle/SjbXGzfP1zYCdjfN8).
+Submitted after the last session (Wednesday, Oct 28) through the [submission form](https://forms.gle/SjbXGzfP1zYCdjfN8), by the
+deadline the instructors announce.
 
 - GitHub repository URL accessible to reviewers
 - Public HTTPS deployment URL

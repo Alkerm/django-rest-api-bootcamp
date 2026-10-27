@@ -48,13 +48,19 @@ Full requirements, API contract, Definition of Done and rubric: [`project/projec
 Delivery baseline: five guided sessions of about three hours (~15 contact hours): about one hour of explanation, one
 hour of exercise, and one hour of project work per day, plus optional homework.
 
+> **Schedule change (Oct 27):** Monday's session (Oct 26) was cancelled because most participants had an exam. The
+> remaining four days run as **two sessions of 8:00-10:00 PM**: Tuesday Oct 27 = Days 2 + 3, Wednesday Oct 28 =
+> Days 4 + 5. The slides of both days are covered quickly, exercises are **optional**, and the time goes to the
+> project. Deployment happens in the Wednesday session; README and submission are due afterwards, and the submitted
+> evidence replaces the live demonstration.
+
 | Day | Date | Focus | Exit check |
 |---|---|---|---|
 | 1 | Oct 25 | Foundation | Repository is pushed. Server starts locally. Admin shows saved Task records after restart. |
-| 2 | Oct 26 | Core API: CRUD with function views | All CRUD operations work locally with valid JSON and appropriate status codes. A blank title is rejected. |
-| 3 | Oct 27 | Serialization and validation | Every view uses the serializer. Invalid data is rejected with field-level errors. |
-| 4 | Oct 28 | Security and configuration | User A cannot view or modify User B's tasks. Requests without a token get 401. Settings come from the environment. Deployment packages are ready. |
-| 5 | Oct 29 | Publish and demonstrate | Public HTTPS URL works, data persists, a fresh clone can be set up from the README, all required evidence is submitted, and the live demo passes. |
+| 2 | Oct 27 (with Day 3) | Core API: CRUD with function views | All CRUD operations work locally with valid JSON and appropriate status codes. A blank title is rejected. |
+| 3 | Oct 27 (with Day 2) | Serialization and validation | Every view uses the serializer. Invalid data is rejected with field-level errors. |
+| 4 | Oct 28 (with Day 5) | Security and configuration | User A cannot view or modify User B's tasks. Requests without a token get 401. Settings come from the environment. Deployment packages are ready. |
+| 5 | Oct 28 (with Day 4) | Publish | Public HTTPS URL works, data persists, a fresh clone can be set up from the README, and all required evidence is submitted (by the announced deadline). |
 
 Detailed daily plan: [`five-day-agenda.md`](five-day-agenda.md).
 
@@ -77,7 +83,7 @@ Detailed daily plan: [`five-day-agenda.md`](five-day-agenda.md).
 - Smoke-test output against the live URL (10/10)
 - No exposed credentials or secrets
 
-**Required live demonstration**
+**Required evidence flow** (shown live in earlier plans; this cohort shows it through the live URL and the submission)
 
 - Obtain a token and authenticate
 - Create and list personal tasks

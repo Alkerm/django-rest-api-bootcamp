@@ -23,13 +23,19 @@ complete and deployed.
 | Day | Date | Focus | Exercise (Library API) | Project increment (your Task API) |
 |---|---|---|---|---|
 | [1](days/day-01/README.md) | Sun, Oct 25 | Foundation | Book model, migrations, sample data, admin | Django project, `Task` model, admin, GitHub repo |
-| [2](days/day-02/README.md) | Mon, Oct 26 | Core API | Book CRUD API: one function view per operation, `path()` routes | Complete CRUD under `/api/tasks/` with function views |
-| [3](days/day-03/README.md) | Tue, Oct 27 | Serialization | The same Book API with a serializer and validation rules | `TaskSerializer` in every view + validation |
-| [4](days/day-04/README.md) | Wed, Oct 28 | Security | Personal reading list: tokens, ownership | Token login, per-user isolation, env config, deployment packages |
-| [5](days/day-05/README.md) | Thu, Oct 29 | Publish | *guided deployment instead* (exercise optional) | Live HTTPS deployment, smoke test, README, demo |
+| [2](days/day-02/README.md) | Tue, Oct 27 · 8-10 PM (with Day 3) | Core API | Book CRUD API: one function view per operation, `path()` routes | Complete CRUD under `/api/tasks/` with function views |
+| [3](days/day-03/README.md) | Tue, Oct 27 · 8-10 PM (with Day 2) | Serialization | The same Book API with a serializer and validation rules | `TaskSerializer` in every view + validation |
+| [4](days/day-04/README.md) | Wed, Oct 28 · 8-10 PM (with Day 5) | Security | Personal reading list: tokens, ownership | Token login, per-user isolation, env config, deployment packages |
+| [5](days/day-05/README.md) | Wed, Oct 28 · 8-10 PM (with Day 4) | Publish | *guided deployment instead* (exercise optional) | Live HTTPS deployment, smoke test, README, demo |
 
-Daily session: **about 3 hours**: ~1 h explanation and demo, ~1 h exercise, ~1 h project (on Day 5 the exercise
-hour is a guided deployment).
+> **Schedule change:** Monday's session was cancelled (most participants had an exam). Days 2-5 now run in **two
+> sessions, 8:00-10:00 PM**: **Tuesday Oct 27 = Days 2 + 3** and **Wednesday Oct 28 = Days 4 + 5**. The instructors
+> go through both days' slides quickly and may solve some exercise tasks live; then you work on the **project**.
+> **All exercises are optional** (good practice for later). You deploy on Wednesday; the README and the submission
+> are due afterwards, by the deadline the instructors announce. There is no live demo this cohort.
+
+Original plan (still the structure of each day's folder): **about 3 hours** per day: ~1 h explanation and demo,
+~1 h exercise, ~1 h project (on Day 5 the exercise hour is a guided deployment).
 
 ## Start here
 

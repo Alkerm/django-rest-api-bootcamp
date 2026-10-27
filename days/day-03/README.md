@@ -1,6 +1,8 @@
 # Day 3: Serialization and Validation
 
-**Tuesday, October 27, 2026** · Focus: **Serialization** · [← Day 2](../day-02/README.md) · [Day 4 →](../day-04/README.md)
+**Tuesday, October 27, 2026 (second half of the session)** · Focus: **Serialization** · [← Day 2](../day-02/README.md) · [Day 4 →](../day-04/README.md)
+
+> **Schedule change (Monday's session was cancelled).** This day is taught **together with Day 2** in one session: **Tuesday, October 27, 8:00-10:00 PM**. The instructor goes through both days' slides quickly and may solve some exercise tasks live; then you work on the **project**. **All exercises are optional**: do them later for practice. The "Session flow" table below describes the original 3-hour day.
 
 ## Learning outcome
 

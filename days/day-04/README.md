@@ -1,6 +1,8 @@
 # Day 4: Security and Configuration
 
-**Wednesday, October 28, 2026** · Focus: **Security** · [← Day 3](../day-03/README.md) · [Day 5 →](../day-05/README.md)
+**Wednesday, October 28, 2026 (first half of the session)** · Focus: **Security** · [← Day 3](../day-03/README.md) · [Day 5 →](../day-05/README.md)
+
+> **Schedule change (Monday's session was cancelled).** This day is taught **together with Day 5** in one session: **Wednesday, October 28, 8:00-10:00 PM**. The instructor goes through both days' slides quickly and may solve some exercise tasks live; then you work on the **project**. **All exercises are optional**: do them later for practice. The "Session flow" table below describes the original 3-hour day.
 
 ## Learning outcome
 

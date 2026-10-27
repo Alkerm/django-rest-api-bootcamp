@@ -59,7 +59,8 @@ on Day 5.
 | P7 | `.env.example` | document the three variables with placeholders | [hints#p7](hints.md#p7) |
 | P8 | `requirements.txt` | add `psycopg[binary]`, `dj-database-url`, `gunicorn`, `whitenoise`, then `python -m pip install -r requirements.txt` | [hints#p8](hints.md#p8) |
 
-Do Part 1 and the two-user check first; Part 2 is short and is needed for tomorrow's deployment.
+Do Part 1 and the two-user check first; Part 2 is short and is needed for the deployment later in the same session
+(Day 5).
 
 ## The two-user security check (record the results)
 
@@ -88,9 +89,9 @@ python -m pip check               # "No broken requirements found."
 git status                        # .env must NOT be listed
 ```
 
-## Homework (optional, ~15 minutes): get ready for Day 5
+## Before Wednesday's session (strongly recommended, ~15 minutes): get ready for deployment
 
-Day 5 is deployment day. Arriving with these done makes it much smoother:
+Day 4 and Day 5 share one session, so there is little time to set up accounts. Arrive with these done:
 
 1. Your **Neon** and **Render** accounts open (they were part of the readiness check).
 2. In Neon: create a project `tuwaiq-django-api` and find the connection string. **Do not paste it anywhere yet.**

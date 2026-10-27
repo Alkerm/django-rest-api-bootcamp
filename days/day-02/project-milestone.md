@@ -5,6 +5,10 @@ and the owner set by the server.
 **Exit check:** all CRUD operations work locally with valid JSON and the right status codes; a blank title returns
 `400`.
 
+> **Combined session (Tuesday):** today you do the Day 2 TODOs, then continue with
+> [Day 3](../day-03/project-milestone.md) in the same session. Not finished with Day 2 when the instructor moves on?
+> That is fine: the `day-03` checkpoint has Day 2 already solved.
+
 ## Where to start
 
 **Everyone does the same thing each morning:** copy today's checkpoint over your project. It contains everything up
