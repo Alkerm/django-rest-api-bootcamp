@@ -1,0 +1,2 @@
+# Keep the same (LF) line endings on Windows and macOS - this also avoids Git's CRLF warnings on Windows
+* text=auto eol=lf
