@@ -9,7 +9,7 @@ users' data. It ends as a documented, deployed service. No frontend is required.
 | Folder | What it is | When to use it |
 |---|---|---|
 | [`starter/`](starter/) | the Day 1 starting point: a generated Django project with Day 1 TODOs | copy it once on Day 1 into your own `task-management-api` folder |
-| [`checkpoints/day-02`](checkpoints/day-02) … [`day-05`](checkpoints/day-05) | the start of each day: **all previous days solved** + that day's TODOs (each one is published on the morning of its day) | copy the whole folder over your project at the start of each day (Day 5: only 3 files if you are on track) |
+| [`checkpoints/day-02`](checkpoints/day-02) … [`day-04`](checkpoints/day-04) | the start of each day: **all previous days solved** + that day's TODOs (`day-04` is final: it also holds the Day 5 TODOs) | copy the whole folder over your project at the start of Days 2, 3 and 4; nothing to copy on Day 5 |
 | [`reference-solution/`](reference-solution/) | the complete project (instructor repository) | after the program |
 
 Every TODO looks like this and points to a hint:
@@ -59,7 +59,7 @@ existence is not revealed) · invalid input → `400` with `{"field": ["message"
 | 2 | CRUD with five function views and `path()` routes (objects converted by hand) | [day-02](../days/day-02/project-milestone.md) | `checkpoints/day-02` |
 | 3 | `TaskSerializer` in every view, validation rules | [day-03](../days/day-03/project-milestone.md) | `checkpoints/day-03` |
 | 4 | token auth, ownership in every view, env configuration, deployment packages | [day-04](../days/day-04/project-milestone.md) | `checkpoints/day-04` |
-| 5 | production settings, guided deployment, smoke test, README, demo | [day-05](../days/day-05/project-milestone.md) | `checkpoints/day-05` |
+| 5 | production settings, guided deployment, smoke test, README, submission | [day-05](../days/day-05/project-milestone.md) | keep working in your project (TODOs came with `day-04`) |
 
 <a id="optional-extensions"></a>
 ## Optional extensions and out of scope

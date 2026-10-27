@@ -7,9 +7,9 @@ configuration comes from the environment.
 
 ## Where to start
 
-**Everyone does the same thing each morning:** copy today's checkpoint over your project. It contains everything up
-to yesterday already solved, plus today's TODOs, so you never have to merge files by hand. Your Git history, your
-`.venv` and your database (users and tasks) are kept.
+**This is the last copy of the bootcamp.** The `day-04` checkpoint is the **final** one: Days 1-3 solved, plus
+**every TODO for Day 4 and Day 5**. Copy it once now, and you work in the same project until you deploy: there is
+nothing to copy on Day 5. Your Git history, your `.venv` and your database (users and tasks) are kept.
 
 Open a terminal in the folder that contains **both** `django-rest-api-bootcamp` and `task-management-api`:
 
@@ -20,6 +20,7 @@ cd task-management-api
 git add -A; git commit -m "End of Day 3"                       # save your own work first
 Copy-Item -Path ..\django-rest-api-bootcamp\project\checkpoints\day-04\* -Destination . -Recurse -Force
 .venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt     # the deployment packages (P8)
 python manage.py migrate
 ```
 
@@ -30,14 +31,16 @@ cd task-management-api
 git add -A && git commit -m "End of Day 3"
 cp -R ../django-rest-api-bootcamp/project/checkpoints/day-04/. .
 source .venv/bin/activate
+python -m pip install -r requirements.txt     # the deployment packages (P8)
 python manage.py migrate
 ```
 
 > Curious how your Day 3 code compares with the reference? Run `git diff` before your next commit: the differences
 > are a free code review. `nothing to commit` after `git commit` is fine.
 
-The checkpoint also brings new files: `.env.example`, `.python-version`, and a **README template** that you complete
-on Day 5.
+The checkpoint also brings new files: `.env.example`, `.python-version`, `smoke_test.py`, and a **README template**
+that you complete on Day 5. The Day 5 TODOs (`TODO [Day 5 · P1-P3]`) are already in these files: leave them for the
+second half of the session.
 
 ## TODOs
 
@@ -57,7 +60,7 @@ on Day 5.
 |---|---|---|---|
 | P6 | `config/settings.py` | `SECRET_KEY`, `DEBUG`, `ALLOWED_HOSTS` from environment variables | [hints#p6](hints.md#p6) |
 | P7 | `.env.example` | document the three variables with placeholders | [hints#p7](hints.md#p7) |
-| P8 | `requirements.txt` | add `psycopg[binary]`, `dj-database-url`, `gunicorn`, `whitenoise`, then `python -m pip install -r requirements.txt` | [hints#p8](hints.md#p8) |
+| P8 | `requirements.txt` | **given**: the four deployment packages are already listed; you installed them in the copy step. Run `python -m pip check` | [hints#p8](hints.md#p8) |
 
 Do Part 1 and the two-user check first; Part 2 is short and is needed for the deployment later in the same session
 (Day 5).

@@ -16,34 +16,17 @@ final README, and the submitted evidence.
 
 ## Where to start
 
-Open a terminal in the folder that contains **both** `django-rest-api-bootcamp` and `task-management-api`.
-
-**Finished Day 4?** Copy **only these three files**, so any README sections you already filled in stay yours:
-
-```powershell
-# Windows PowerShell
-git -C django-rest-api-bootcamp pull       # only when the instructor announces an update
-cd task-management-api
-git add -A; git commit -m "End of Day 4"
-$cp = "..\django-rest-api-bootcamp\project\checkpoints\day-05"
-Copy-Item "$cp\config\settings.py" config\ -Force
-Copy-Item "$cp\.env.example", "$cp\smoke_test.py" . -Force
-.venv\Scripts\Activate.ps1
-```
+**Nothing to copy today.** The Day 5 TODOs (`TODO [Day 5 · P1-P3]`) are already in your project: they came with the
+final `day-04` checkpoint you copied at the start of the session. Just continue in `task-management-api`:
 
 ```bash
-# macOS
-git -C django-rest-api-bootcamp pull       # only when the instructor announces an update
 cd task-management-api
-git add -A && git commit -m "End of Day 4"
-cp ../django-rest-api-bootcamp/project/checkpoints/day-05/config/settings.py config/
-cp ../django-rest-api-bootcamp/project/checkpoints/day-05/{.env.example,smoke_test.py} .
-source .venv/bin/activate
+git add -A
+git commit -m "Day 4: token auth, ownership, environment configuration"
 ```
 
-**Behind?** Copy the **whole** checkpoint instead (same command as on Days 2-4, with `day-05`), then
-`python -m pip install -r requirements.txt` and `python manage.py migrate`. This also replaces `README.md` with the
-reference template: make it your own before you submit.
+Missed Day 4? Copy the `day-04` checkpoint first (the commands are at the top of
+[the Day 4 milestone](../day-04/project-milestone.md)), then come back here.
 
 ## 1. Prepare the code (local) · in the session
 

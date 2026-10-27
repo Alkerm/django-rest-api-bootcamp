@@ -197,11 +197,12 @@ Placeholders only. Check that `.env` (the real one, if you create it) is in `.gi
 </details>
 
 <a id="p8"></a>
-### P8: Deployment packages
+### P8: Deployment packages (given)
 
 <details><summary>Level 1</summary>
 
-Add these four lines to the end of `requirements.txt` (exact versions, tested by the instructor team):
+The final checkpoint already lists the four deployment packages in `requirements.txt` (exact versions, tested by the
+instructor team):
 
 ```text
 psycopg[binary]==3.3.6
@@ -210,7 +211,7 @@ gunicorn==26.2.0
 whitenoise==6.12.0
 ```
 
-Then install and check:
+You installed them in the copy step. Check that nothing is broken:
 
 ```bash
 python -m pip install -r requirements.txt
