@@ -21,8 +21,8 @@ class Task(models.Model):
     )
     due_date = models.DateField(null=True, blank=True)
     owner = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
+        settings.AUTH_USER_MODEL, # Django built in user model
+        on_delete=models.CASCADE, # when we delete owner, task also gets deleted
         related_name="tasks",
     )
     created_at = models.DateTimeField(auto_now_add=True)
