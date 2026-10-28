@@ -11,7 +11,6 @@ from django.urls import include, path
 urlpatterns = [
     path("admin/", admin.site.urls),
     # TODO [P10]: Connect the tasks app's routes under "api/"
-    #   and DRF's login/logout views under "api-auth/".
     # HINT: HINTS.md#p10
     # YOUR CODE HERE
 ]
